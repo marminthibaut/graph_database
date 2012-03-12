@@ -13,3 +13,4 @@ Travail réalisé par :
 - Namrata Patel
 - [Clément Sipieter](http://clement-sipieter.fr)
 
+6cda5cb08a8c149a26988720f9737472e63c6081
