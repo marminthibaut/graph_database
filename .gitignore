@@ -28,9 +28,9 @@ local.properties
 *.class
 
 # Package Files #
-*.jar
-*.war
-*.ear
+# *.jar
+# *.war
+# *.ear
 
 #temporary files
 *~
