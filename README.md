@@ -13,3 +13,8 @@ Travail réalisé par :
 - Namrata Patel
 - [Clément Sipieter](http://clement-sipieter.fr)
 
+---
+Versions
+========
+
+- *0.1* Version initiale, Mars 2012
