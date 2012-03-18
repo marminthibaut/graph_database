@@ -1,10 +1,11 @@
+package gd.example;
+
+import gd.util.*;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.*;
-
-import test.*;
-import util.*;
 
 /**
  * Classe d'exemple d'utilisation d'Hibernate et de log4j
@@ -12,24 +13,24 @@ import util.*;
  * @author thibaut
  * 
  */
-public class Run {
-	
-	//private static final Logger logger = Logger.getLogger(Run.class);
-	private static final Logger logger = Logger.getLogger("test");
+public class RunTest {
+
+	// private static final Logger logger = Logger.getLogger(RunTest.class);
+	private static final Logger logger = Logger.getLogger("gd.example");
 
 	/**
 	 * @param args
 	 * @throws HibernateException
 	 */
 	public static void main(String[] args) throws HibernateException {
-		
-		logger.debug("Execution de la méthode de test");
+
+		logger.debug("Execution de la méthode de gd.example");
 
 		Session s = HibernateUtil.currentSession();
 
-		//addExample(s);
+		// addExample(s);
 		showExample(s);
-		
+
 		HibernateUtil.closeSession();
 
 	}

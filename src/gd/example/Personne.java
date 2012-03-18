@@ -1,11 +1,28 @@
-package test;
+package gd.example;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * POJO entity
+ * 
+ * @author thibaut
+ * 
+ */
 public class Personne implements Serializable {
-	
-	public Personne() {}
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1620089226222021068L;
+
+	/**
+	 * Constructeur standard sans paramètre
+	 */
+	public Personne() {
+	}
+
+	@SuppressWarnings("javadoc")
 	public Personne(Integer id) {
 		super();
 		this.id = id;

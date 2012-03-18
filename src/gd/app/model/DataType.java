@@ -1,4 +1,4 @@
-package model;
+package gd.app.model;
 
 /**
  * Types bruts disponibles.
@@ -10,11 +10,11 @@ public enum DataType {
 	/**
 	 * Type de données Texte
 	 */
-	TEXT, 
+	TEXT,
 	/**
-	 * Type de données Entier 
+	 * Type de données Entier
 	 */
-	INT, 
+	INT,
 	/**
 	 * Type de données Chaine de caractère
 	 */
@@ -28,7 +28,7 @@ public enum DataType {
 	 */
 	DOUBLE,
 	/**
-	 * Type de données Booléen 
+	 * Type de données Booléen
 	 */
 	BOOLEAN
 }

@@ -1,4 +1,4 @@
-package model;
+package gd.app.model;
 
 import java.util.Set;
 

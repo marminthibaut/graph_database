@@ -1,4 +1,4 @@
-package util;
+package gd.util;
 
 import java.net.URL;
 
@@ -32,8 +32,13 @@ public class HibernateUtil {
 		}
 	}
 
-	public static final ThreadLocal session = new ThreadLocal();
+	@SuppressWarnings("javadoc")
+	public static final ThreadLocal<Session> session = new ThreadLocal<Session>();
 
+	/**
+	 * @return Current Session
+	 * @throws HibernateException
+	 */
 	public static Session currentSession() throws HibernateException {
 		Session s = (Session) session.get();
 		// Ouvre une nouvelle Session, si ce Thread n'en a aucune
@@ -44,6 +49,9 @@ public class HibernateUtil {
 		return s;
 	}
 
+	/**
+	 * @throws HibernateException
+	 */
 	public static void closeSession() throws HibernateException {
 		Session s = (Session) session.get();
 		session.set(null);

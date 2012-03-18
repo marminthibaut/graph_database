@@ -1,4 +1,4 @@
-package model;
+package gd.app.model;
 
 /**
  * Type des contraintes d'intégrité sur les attributs.
