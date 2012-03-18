@@ -1,29 +1,74 @@
+import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 
 import test.*;
-import bdd.*;
+import util.*;
 
+/**
+ * Classe d'exemple d'utilisation d'Hibernate et de log4j
+ * 
+ * @author thibaut
+ * 
+ */
 public class Run {
+	
+	//private static final Logger logger = Logger.getLogger(Run.class);
+	private static final Logger logger = Logger.getLogger("test");
 
 	/**
 	 * @param args
-	 * @throws HibernateException 
+	 * @throws HibernateException
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws HibernateException {
 		
+		logger.debug("Execution de la méthode de test");
+
 		Session s = HibernateUtil.currentSession();
-		Transaction tx = s.beginTransaction();
-		
-		Personne p = new Personne();
-		p.setId(new Integer(0));
-		p.setNom("Marmin");
-		p.setPrenom("Thibaut");
-		
-		s.save(p);
-		tx.commit();
+
+		//addExample(s);
+		showExample(s);
 		
 		HibernateUtil.closeSession();
 
 	}
 
+	/**
+	 * Exemple d'ajout d'un utilisateur (Jean-Claude Dusse id=0)
+	 * 
+	 * @param s
+	 */
+	public static void addExample(Session s) {
+		logger.debug("Méthode addExample");
+		Transaction tx = s.beginTransaction();
+
+		Personne personne = new Personne();
+		personne.setNom("Jean-Claude");
+		personne.setPrenom("Dusse");
+		logger.debug("Méthode addExample -> save()");
+		s.save(personne);
+
+		logger.debug("Méthode addExample --> commit()");
+		tx.commit();
+	}
+
+	/**
+	 * Exemple d'affichage des Personnes
+	 * 
+	 * @param s
+	 */
+	public static void showExample(Session s) {
+		logger.debug("Méthode showExample");
+		Query q = s.createQuery("from Personne");
+
+		List<?> list = q.list();
+
+		logger.debug("Méthode showExample --> affichage");
+		for (Object p : list) {
+			if (p instanceof Personne) {
+				System.out.println(p);
+			}
+		}
+	}
 }

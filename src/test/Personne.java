@@ -1,21 +1,24 @@
 package test;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import org.hibernate.*;
 
-@Entity
-public class Personne {
+import java.io.Serializable;
 
-	@Id
-	@GeneratedValue
-	Integer id;
-	String nom;
-	String prenom;
+public class Personne implements Serializable {
+	
+	public Personne() {}
+
+	public Personne(Integer id) {
+		super();
+		this.id = id;
+	}
+
+	private Integer id;
+	private String nom;
+	private String prenom;
 
 	/**
 	 * @return the id
 	 */
+
 	public Integer getId() {
 		return id;
 	}
