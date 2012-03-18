@@ -1,8 +1,14 @@
 package test;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import org.hibernate.*;
 
+@Entity
 public class Personne {
 
+	@Id
+	@GeneratedValue
 	Integer id;
 	String nom;
 	String prenom;
