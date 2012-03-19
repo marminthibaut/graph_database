@@ -22,7 +22,7 @@ public class HibernateUtil {
 	static {
 		try {
 			// URL du fichier de configuration Hibernate
-			URL url = HibernateUtil.class.getResource("hibernate.cfg.xml");
+			URL url = HibernateUtil.class.getResource("PSQL.hibernate.cfg.xml");
 			// Crée la SessionFactory
 			sessionFactory = new Configuration().configure(url)
 					.buildSessionFactory();

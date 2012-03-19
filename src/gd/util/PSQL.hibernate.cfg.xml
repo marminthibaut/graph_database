@@ -10,6 +10,9 @@
         <property name="hibernate.connection.password">test</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         
-        <mapping resource="gd/example/Personne.hbm.xml"/>
+        <mapping resource="gd/example/PSQL.Personne.hbm.xml"/>
+        <mapping resource="gd/app/model/PSQL.Table.hbm.xml"/>
+        <mapping resource="gd/app/model/PSQL.Column.hbm.xml"/>
+        <mapping resource="gd/app/model/PSQL.Constraint.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

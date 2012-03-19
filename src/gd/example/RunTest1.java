@@ -1,5 +1,6 @@
 package gd.example;
 
+import gd.app.model.Table;
 import gd.util.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class RunTest1 {
 		Session s = HibernateUtil.currentSession();
 
 		// addExample(s);
-		showExample(s);
+		showExample2(s);
 
 		HibernateUtil.closeSession();
 
@@ -73,5 +74,26 @@ public class RunTest1 {
 				System.out.println(p);
 			}
 		}
+	}
+	
+	/**
+	 * Exemple d'affichage des Personnes
+	 * 
+	 * @param s
+	 */
+	public static void showExample2(Session s) {
+		logger.debug("Méthode showExample2");
+		Criteria q = s.createCriteria(Table.class);
+
+		List<?> list = q.list();
+
+		logger.debug("Méthode showExample2 --> affichage");
+
+		for (Object p : list) {
+			if (p instanceof Table) {
+				System.out.println(p);
+			}
+		}
+		
 	}
 }
