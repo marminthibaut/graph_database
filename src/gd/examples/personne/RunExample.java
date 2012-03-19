@@ -71,7 +71,7 @@ public class RunExample {
 		logger.debug("Méthode showExample --> affichage");
 		for (Object p : list) {
 			if (p instanceof Personne) {
-				System.out.println(p);
+				logger.debug(p);
 			}
 		}
 	}

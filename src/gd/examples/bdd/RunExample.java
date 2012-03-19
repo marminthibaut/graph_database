@@ -50,7 +50,7 @@ public class RunExample {
 
 		for (Object p : list) {
 			if (p instanceof Table) {
-				System.out.println(p);
+				logger.debug(p);
 			}
 		}
 
