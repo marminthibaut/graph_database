@@ -15,9 +15,9 @@ import org.hibernate.*;
  * @author thibaut
  * 
  */
-public class RunTest {
+public class RunExample {
 
-	private static final Logger logger = Logger.getLogger(RunTest.class);
+	private static final Logger logger = Logger.getLogger(RunExample.class);
 
 	/**
 	 * @param args
