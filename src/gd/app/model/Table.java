@@ -12,7 +12,7 @@ import java.util.Set;
 public class Table {
 
 	private String name;
-	private String schema;
+	private String catalog;
 
 	private Set<Column> columns;
 	private Set<Constraint> constraints;
@@ -30,14 +30,14 @@ public class Table {
 	/**
 	 * @return Nom du Schéma
 	 */
-	public String getSchema() {
-		return schema;
+	public String getCatalog() {
+		return catalog;
 	}
 
 	/**
 	 * @return Attributs de la table
 	 */
-	public Set<Column> getAttributes() {
+	public Set<Column> getColumns() {
 		return columns;
 	}
 
@@ -57,18 +57,18 @@ public class Table {
 	}
 
 	/**
-	 * @param schema
+	 * @param catalog
 	 *            Nom de schéma
 	 */
-	public void setSchema(String schema) {
-		this.schema = schema;
+	public void setCatalog(String catalog) {
+		this.catalog = catalog;
 	}
 
 	/**
 	 * @param columns
 	 *            Liste d'attributs
 	 */
-	public void setAttributes(Set<Column> columns) {
+	public void setColumns(Set<Column> columns) {
 		this.columns = columns;
 	}
 
@@ -78,7 +78,7 @@ public class Table {
 	 */
 	public void setConstraints(Set<Constraint> constraints) {
 		this.constraints = constraints;
-	};
+	}
 
 	@Override
 	public int hashCode() {
@@ -103,7 +103,7 @@ public class Table {
 	@Override
 	public String toString() {
 		return "Table [" + (name != null ? "name=" + name + ", " : "")
-				+ (schema != null ? "schema=" + schema + ", " : "")
+				+ (catalog != null ? "catalog=" + catalog + ", " : "")
 				+ (columns != null ? "columns=" + columns + ", " : "")
 				+ (constraints != null ? "constraints=" + constraints : "")
 				+ "]";

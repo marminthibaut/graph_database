@@ -11,8 +11,8 @@ import java.util.Set;
 public class Column {
 
 	private String name;
-	private DataType type;
-	private float precision;
+	private String type;
+	// private float precision;
 	private Table table;
 
 	private Set<Constraint> restrictors;
@@ -30,16 +30,16 @@ public class Column {
 	/**
 	 * @return Type de l'attribut
 	 */
-	public DataType getType() {
+	public String getType() {
 		return type;
 	}
 
 	/**
 	 * @return Précision du type de l'attribut
 	 */
-	public float getPrecision() {
-		return precision;
-	}
+	/*
+	 * public float getPrecision() { return precision; }
+	 */
 
 	/**
 	 * @return Table mère de l'attribut
@@ -51,6 +51,7 @@ public class Column {
 	/**
 	 * @return Ensemble de contraintes affectées sur l'attribut
 	 */
+
 	public Set<Constraint> getRestrictors() {
 		return restrictors;
 	}
@@ -67,7 +68,7 @@ public class Column {
 	 * @param type
 	 *            Type d'attribut
 	 */
-	public void setType(DataType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -75,9 +76,9 @@ public class Column {
 	 * @param precision
 	 *            Précision de l'attribut
 	 */
-	public void setPrecision(float precision) {
-		this.precision = precision;
-	}
+	/*
+	 * public void setPrecision(float precision) { this.precision = precision; }
+	 */
 
 	/**
 	 * @param table
@@ -91,6 +92,7 @@ public class Column {
 	 * @param restrictors
 	 *            Ensemble de contraintes
 	 */
+
 	public void setRestrictors(Set<Constraint> restrictors) {
 		this.restrictors = restrictors;
 	}
@@ -115,13 +117,20 @@ public class Column {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Column [" + (name != null ? "name=" + name + ", " : "")
-				+ (type != null ? "type=" + type + ", " : "") + "precision="
-				+ precision + ", "
-				+ (table != null ? "table=" + table + ", " : "")
+		return "Column ["
+				+ (name != null ? "name=" + name + ", " : "")
+				+ (type != null ? "type=" + type + ", " : "") // + "precision="
+				// + precision + ", "
+				// + (table != null ? "table=" + table + ", " : "")
 				+ (restrictors != null ? "restrictors=" + restrictors : "")
 				+ "]";
-	};
+	}
+
 }

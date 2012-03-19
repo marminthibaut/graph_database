@@ -9,13 +9,13 @@ import java.util.Set;
  * @version 0.1
  * 
  */
-public abstract class Constraint {
+public class Constraint {
 
 	private String name;
-	private ConstraintType type;
-	private Table table;
+	private String type;
+	private Column column;
 
-	private Constraint references;
+	//private Constraint references;
 
 	private Set<Column> attributeRestrictorsMirror;
 
@@ -32,23 +32,23 @@ public abstract class Constraint {
 	/**
 	 * @return Type de la contrainte
 	 */
-	public ConstraintType getType() {
+	public String getType() {
 		return type;
 	}
 
 	/**
-	 * @return Table propriétaire propriétaire de la contrainte
+	 * @return Colonne propriétaire propriétaire de la contrainte
 	 */
-	public Table getTable() {
-		return table;
+	public Column getColumn() {
+		return column;
 	}
 
 	/**
 	 * @return Contrainte référencée par la contrainte de type 'FOREIGN_KEY'
 	 */
-	public Constraint getReferences() {
+	/*public Constraint getReferences() {
 		return references;
-	}
+	}*/
 
 	/**
 	 * @return Ensemble des attributs sur lesquels s'applique la contrainte
@@ -69,16 +69,16 @@ public abstract class Constraint {
 	 * @param type
 	 *            Type de contrainte
 	 */
-	public void setType(ConstraintType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
 	/**
-	 * @param table
-	 *            Table propriétaire
+	 * @param column
+	 *            Colonne propriétaire
 	 */
-	public void setTable(Table table) {
-		this.table = table;
+	public void setColumn(Column column) {
+		this.column = column;
 	}
 
 	/**
@@ -86,9 +86,9 @@ public abstract class Constraint {
 	 *            Contrainte à référencer (en cas de contrainte de type
 	 *            'FOREIGN_KEY')
 	 */
-	public void setReferences(Constraint references) {
+	/*public void setReferences(Constraint references) {
 		this.references = references;
-	}
+	}*/
 
 	/**
 	 * @param attributeRestrictorsMirror
@@ -124,11 +124,12 @@ public abstract class Constraint {
 		return "Constraint ["
 				+ (name != null ? "name=" + name + ", " : "")
 				+ (type != null ? "type=" + type + ", " : "")
-				+ (table != null ? "table=" + table + ", " : "")
-				+ (references != null ? "references=" + references + ", " : "")
-				+ (attributeRestrictorsMirror != null ? "attributeRestrictorsMirror="
-						+ attributeRestrictorsMirror
-						: "") + "]";
+		//		+ (column != null ? "column=" + column + ", " : "")
+		//		+ (references != null ? "references=" + references + ", " : "")
+		//		+ (attributeRestrictorsMirror != null ? "attributeRestrictorsMirror="
+		//				+ attributeRestrictorsMirror
+		//				: "") 
+				+ "]";
 	};
 
 }
