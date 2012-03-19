@@ -15,7 +15,7 @@ public class Constraint {
 	private String type;
 	private Column column;
 
-	//private Constraint references;
+	// private Constraint references;
 
 	private Set<Column> attributeRestrictorsMirror;
 
@@ -46,9 +46,9 @@ public class Constraint {
 	/**
 	 * @return Contrainte référencée par la contrainte de type 'FOREIGN_KEY'
 	 */
-	/*public Constraint getReferences() {
-		return references;
-	}*/
+	/*
+	 * public Constraint getReferences() { return references; }
+	 */
 
 	/**
 	 * @return Ensemble des attributs sur lesquels s'applique la contrainte
@@ -86,9 +86,10 @@ public class Constraint {
 	 *            Contrainte à référencer (en cas de contrainte de type
 	 *            'FOREIGN_KEY')
 	 */
-	/*public void setReferences(Constraint references) {
-		this.references = references;
-	}*/
+	/*
+	 * public void setReferences(Constraint references) { this.references =
+	 * references; }
+	 */
 
 	/**
 	 * @param attributeRestrictorsMirror
@@ -121,14 +122,15 @@ public class Constraint {
 
 	@Override
 	public String toString() {
-		return "Constraint ["
-				+ (name != null ? "name=" + name + ", " : "")
+		return "Constraint [" + (name != null ? "name=" + name + ", " : "")
 				+ (type != null ? "type=" + type + ", " : "")
-		//		+ (column != null ? "column=" + column + ", " : "")
-		//		+ (references != null ? "references=" + references + ", " : "")
-		//		+ (attributeRestrictorsMirror != null ? "attributeRestrictorsMirror="
-		//				+ attributeRestrictorsMirror
-		//				: "") 
+				// + (column != null ? "column=" + column + ", " : "")
+				// + (references != null ? "references=" + references + ", " :
+				// "")
+				// + (attributeRestrictorsMirror != null ?
+				// "attributeRestrictorsMirror="
+				// + attributeRestrictorsMirror
+				// : "")
 				+ "]";
 	};
 

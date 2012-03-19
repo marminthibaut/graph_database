@@ -110,8 +110,9 @@ public class Personne implements Serializable {
 		this.rue = rue;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
