@@ -1,6 +1,5 @@
-package gd.example;
+package gd.examples.personne;
 
-import gd.app.model.Table;
 import gd.util.*;
 
 import java.util.List;
@@ -14,10 +13,10 @@ import org.hibernate.*;
  * @author thibaut
  * 
  */
-public class RunTest1 {
+public class RunTest {
 
-	// private static final Logger logger = Logger.getLogger(RunTest1.class);
-	private static final Logger logger = Logger.getLogger("gd.example");
+	// private static final Logger logger = Logger.getLogger(RunTest.class);
+	private static final Logger logger = Logger.getLogger("gd.examples.personne");
 
 	/**
 	 * @param args
@@ -25,12 +24,12 @@ public class RunTest1 {
 	 */
 	public static void main(String[] args) throws HibernateException {
 
-		logger.debug("Execution de la méthode de gd.example");
+		logger.debug("Execution de la méthode de gd.examples.personne");
 
 		Session s = HibernateUtil.currentSession();
 
 		// addExample(s);
-		showExample2(s);
+		showExample(s);
 
 		HibernateUtil.closeSession();
 
@@ -74,26 +73,5 @@ public class RunTest1 {
 				System.out.println(p);
 			}
 		}
-	}
-	
-	/**
-	 * Exemple d'affichage des Personnes
-	 * 
-	 * @param s
-	 */
-	public static void showExample2(Session s) {
-		logger.debug("Méthode showExample2");
-		Criteria q = s.createCriteria(Table.class);
-
-		List<?> list = q.list();
-
-		logger.debug("Méthode showExample2 --> affichage");
-
-		for (Object p : list) {
-			if (p instanceof Table) {
-				System.out.println(p);
-			}
-		}
-		
 	}
 }

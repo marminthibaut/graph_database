@@ -1,4 +1,4 @@
-package gd.example;
+package gd.examples.personne;
 
 import java.io.Serializable;
 
