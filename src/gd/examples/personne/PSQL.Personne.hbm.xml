@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18 mars 2012 17:59:29 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-	<class name="gd.example.Personne">
+	<class name="gd.examples.personne.Personne">
 		<subselect>
 			select p.id as id, p.nom as nom, p.prenom as prenom,
 			a.numero as numero, a.rue as rue

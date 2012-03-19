@@ -1,4 +1,4 @@
-package gd.util;
+package gd.hibernate.util;
 
 import java.net.URL;
 

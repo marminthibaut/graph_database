@@ -1,6 +1,6 @@
 package gd.examples.personne;
 
-import gd.util.*;
+import gd.hibernate.util.*;
 
 import java.util.List;
 
@@ -15,8 +15,7 @@ import org.hibernate.*;
  */
 public class RunTest {
 
-	// private static final Logger logger = Logger.getLogger(RunTest.class);
-	private static final Logger logger = Logger.getLogger("gd.examples.personne");
+	private static final Logger logger = Logger.getLogger(RunTest.class);
 
 	/**
 	 * @param args

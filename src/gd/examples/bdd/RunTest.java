@@ -1,7 +1,7 @@
 package gd.examples.bdd;
 
 import gd.app.model.Table;
-import gd.util.*;
+import gd.hibernate.util.*;
 
 import java.util.List;
 
