@@ -9,6 +9,9 @@ import org.hibernate.*;
 
 /**
  * Classe d'exemple d'utilisation d'Hibernate et de log4j
+ * Requiere la creation de deux tables : 
+ * Personne(id integer, nom varchar, prenom varchar)
+ * Adresse(id_personne integer, numero integer, rue varchar)
  * 
  * @author thibaut
  * 
