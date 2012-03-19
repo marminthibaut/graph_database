@@ -13,9 +13,9 @@ import org.hibernate.*;
  * @author thibaut
  * 
  */
-public class RunTest {
+public class RunTest1 {
 
-	// private static final Logger logger = Logger.getLogger(RunTest.class);
+	// private static final Logger logger = Logger.getLogger(RunTest1.class);
 	private static final Logger logger = Logger.getLogger("gd.example");
 
 	/**
@@ -44,9 +44,11 @@ public class RunTest {
 		logger.debug("Méthode addExample");
 		Transaction tx = s.beginTransaction();
 
-		Personne personne = new Personne();
-		personne.setNom("Jean-Claude");
+		Personne personne = new Personne(2);
+		personne.setNom("René");
 		personne.setPrenom("Dusse");
+		personne.setNumero(34);
+		personne.setRue("machine");
 		logger.debug("Méthode addExample -> save()");
 		s.save(personne);
 

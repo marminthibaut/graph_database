@@ -31,6 +31,8 @@ public class Personne implements Serializable {
 	private Integer id;
 	private String nom;
 	private String prenom;
+	private Integer numero;
+	private String rue;
 
 	/**
 	 * @return the id
@@ -52,6 +54,20 @@ public class Personne implements Serializable {
 	 */
 	public String getPrenom() {
 		return prenom;
+	}
+
+	/**
+	 * @return the numero
+	 */
+	public Integer getNumero() {
+		return numero;
+	}
+
+	/**
+	 * @return the rue
+	 */
+	public String getRue() {
+		return rue;
 	}
 
 	/**
@@ -78,16 +94,33 @@ public class Personne implements Serializable {
 		this.prenom = prenom;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @param numero
+	 *            the numero to set
+	 */
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	/**
+	 * @param rue
+	 *            the rue to set
+	 */
+	public void setRue(String rue) {
+		this.rue = rue;
+	}
+
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Personne [" + (id != null ? "id=" + id + ", " : "")
 				+ (nom != null ? "nom=" + nom + ", " : "")
-				+ (prenom != null ? "prenom=" + prenom : "") + "]";
+				+ (prenom != null ? "prenom=" + prenom + ", " : "")
+				+ (numero != null ? "numero=" + numero + ", " : "")
+				+ (rue != null ? "rue=" + rue : "") + "]";
 	}
 
 	/*
@@ -97,7 +130,7 @@ public class Personne implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return id.hashCode() + 10;
+		return id;
 	}
 
 	/*
