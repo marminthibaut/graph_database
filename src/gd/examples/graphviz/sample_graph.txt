@@ -1,4 +1,17 @@
- graph mon_graphe {
-     a -- b -- c;
-     b -- d;
- }
+digraph mon_graphe {
+   graph [bgcolor=white];
+   Tpersonne[shape=box, label="personne", color=black, fontcolor="#ffffff", style=filled];
+   Cpersonneprenom [shape=none, color=white, fontcolor=black, label="prenom\n{character varying}", fontsize=10];
+   Cpersonneprenom -> Tpersonne [arrowsize=0, len=1.2];
+   Cpersonneid [shape=none, color=white, fontcolor=black, label="id\n{integer}", fontsize=10];
+   Cpersonneid -> Tpersonne [arrowhead="ediamond", len=1.2];
+   Cpersonnenom [shape=none, color=white, fontcolor=black, label="nom\n{character varying}", fontsize=10];
+   Cpersonnenom -> Tpersonne [arrowsize=0, len=1.2];
+   Tadresse[shape=box, label="adresse", color=black, fontcolor="#ffffff", style=filled];
+   Cadresserue [shape=none, color=white, fontcolor=black, label="rue\n{character varying}", fontsize=10];
+   Cadresserue -> Tadresse [arrowsize=0, len=1.2];
+   Cadresseid_personne [shape=none, color=white, fontcolor=black, label="id_personne\n{integer}", fontsize=10];
+   Cadresseid_personne -> Tadresse [arrowhead="ediamond", len=1.2];
+   Cadressenumero [shape=none, color=white, fontcolor=black, label="numero\n{integer}", fontsize=10];
+   Cadressenumero -> Tadresse [arrowsize=0, len=1.2];
+}
