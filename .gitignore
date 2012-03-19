@@ -34,3 +34,6 @@ local.properties
 
 #temporary files
 *~
+
+#log files
+*.log
