@@ -21,18 +21,18 @@ public class RunExample {
 
 	/**
 	 * @param args
-	 * @throws HibernateException
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws HibernateException {
+	public static void main(String[] args) throws Exception {
 
 		logger.debug("Execution de la méthode de gd.examples.personne");
 
-		Session s = HibernateUtil.currentSession();
+		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
 
 		// addExample(s);
 		showExample(s);
 
-		HibernateUtil.closeSession();
+		HibernateUtil.closeSession(SGBD.POSTGRESQL);
 
 	}
 

@@ -11,8 +11,8 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         
         <mapping resource="gd/examples/personne/PSQL.Personne.hbm.xml"/>
-        <mapping resource="gd/app/model/PSQL.Table.hbm.xml"/>
-        <mapping resource="gd/app/model/PSQL.Column.hbm.xml"/>
-        <mapping resource="gd/app/model/PSQL.Constraint.hbm.xml"/>
+        <mapping resource="gd/hibernate/conf/postgresql/Table.hbm.xml"/>
+        <mapping resource="gd/hibernate/conf/postgresql/Column.hbm.xml"/>
+        <mapping resource="gd/hibernate/conf/postgresql/Constraint.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
