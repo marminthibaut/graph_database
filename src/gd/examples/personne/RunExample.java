@@ -21,7 +21,7 @@ public class RunExample {
 
 	/**
 	 * @param args
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
 
@@ -30,13 +30,13 @@ public class RunExample {
 		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
 
 		showExample(s);
-		
+
 		s = HibernateUtil.currentSession(SGBD.ORACLE);
 
 		showExample(s);
-		
+
 		HibernateUtil.closeSession();
-		
+
 		s = HibernateUtil.currentSession(SGBD.MYSQL);
 
 		showExample(s);

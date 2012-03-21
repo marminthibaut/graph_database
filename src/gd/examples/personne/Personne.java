@@ -15,7 +15,7 @@ public class Personne implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1620089226222021068L;
-	
+
 	private Integer id;
 	private String nom;
 	private String prenom;

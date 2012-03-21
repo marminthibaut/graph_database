@@ -59,11 +59,15 @@ public class HibernateUtil {
 			String url = confsUrls.get(type);
 
 			if (url == null)
-				throw new FileNotFoundException("Type de SGBD "+type.toString().toLowerCase()+" non disponible");
+				throw new FileNotFoundException("Type de SGBD "
+						+ type.toString().toLowerCase() + " non disponible");
 
 			File f = new File(url);
 			if (!f.exists())
-				throw new FileNotFoundException("Fichier de configuration du SGBD "+type.toString().toLowerCase()+"non disponible");
+				throw new FileNotFoundException(
+						"Fichier de configuration du SGBD "
+								+ type.toString().toLowerCase()
+								+ "non disponible");
 
 			sessionFactory = new Configuration().configure(f)
 					.buildSessionFactory();
