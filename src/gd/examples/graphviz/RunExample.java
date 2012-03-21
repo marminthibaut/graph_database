@@ -33,7 +33,7 @@ public class RunExample {
 		String neato = ToNeato.convertToNeato(liste);
 		logger.debug("Graphviz code : \n" + neato);
 		
-		HibernateUtil.closeSession(SGBD.POSTGRESQL);
+		HibernateUtil.closeSession();
 	}
 
 }

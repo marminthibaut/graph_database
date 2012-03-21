@@ -1,8 +1,7 @@
 package gd.hibernate.util;
 
-import gd.examples.personne.RunExample;
-
-import java.net.URL;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,91 +20,111 @@ import org.hibernate.cfg.*;
  * 
  */
 public class HibernateUtil {
-	
-	private static final Logger logger = Logger.getLogger(RunExample.class);
 
-	private static final Map<SGBD, SessionFactory> sessionFactory = new HashMap<SGBD, SessionFactory>();
+	private static final Logger logger = Logger.getLogger(HibernateUtil.class);
+	private static SessionFactory sessionFactory = null;
+	private static SGBD currentSGBD = null;
+	private static final Map<SGBD, String> confsUrls = new HashMap<SGBD, String>();
 
 	static {
+		for (SGBD type : SGBD.values()) {
+			String url = System.getProperty("user.dir")
+					+ "/bin/gd/hibernate/conf/" + type.toString().toLowerCase()
+					+ "/hibernate.cfg.xml";
+			logger.debug("Chargement du fichier de configuration "
+					+ type.toString().toLowerCase());
+			File f = new File(url);
+			if (f.canRead() == true) {
+				logger.debug("Fichier de configuration trouvé : " + url);
+				confsUrls.put(type, url);
+			} else {
+				logger.warn("Fichier de configuration "
+						+ type.toString().toLowerCase() + " manquant.\n" + url);
+			}
+		}
+	}
+
+	private static void configureSessionFactory(SGBD type) {
 		try {
-			URL urlPostgresql = HibernateUtil.class
-					.getResource("/gd/hibernate/conf/postgresql/hibernate.cfg.xml");
-			URL urlMysql = HibernateUtil.class
-					.getResource("/gd/hibernate/conf/mysql/hibernate.cfg.xml");
-			URL urlOracle = HibernateUtil.class
-					.getResource("/gd/hibernate/conf/oracle/hibernate.cfg.xml");
-			
-			logger.debug("Chargement du fichier de configuration Postgresql...\n"+urlPostgresql.toString());
-			
-			sessionFactory.put(SGBD.POSTGRESQL, new Configuration()
-			.configure(urlPostgresql).buildSessionFactory());
-			
-			logger.debug("Chargement du fichier de configuration Mysql...\n"+urlMysql.toString());
-			
-			sessionFactory.put(SGBD.MYSQL, new Configuration()
-			.configure(urlMysql).buildSessionFactory());
-			
-			logger.debug("Chargement du fichier de configuration Oracle...\n"+urlOracle.toString());
-			
-			sessionFactory.put(SGBD.ORACLE, new Configuration()
-			.configure(urlOracle).buildSessionFactory());
-			
-			logger.debug("Chargement des configurations hibernate terminé");
-			
-			
-			
+			if (currentSGBD == null)
+				logger.debug("Première configuration du sessionFactory en "
+						+ type.toString().toLowerCase());
+			else
+				logger.debug("Re-configuration du sessionFactory de type "
+						+ currentSGBD.toString().toLowerCase() + " en "
+						+ type.toString().toLowerCase());
+
+			HibernateUtil.closeSession();
+
+			String url = confsUrls.get(type);
+
+			if (url == null)
+				throw new FileNotFoundException("Type de SGBD "+type.toString().toLowerCase()+" non disponible");
+
+			File f = new File(url);
+			if (!f.exists())
+				throw new FileNotFoundException("Fichier de configuration du SGBD "+type.toString().toLowerCase()+"non disponible");
+
+			sessionFactory = new Configuration().configure(f)
+					.buildSessionFactory();
+			currentSGBD = type;
+
 		} catch (HibernateException ex) {
-			logger.fatal("Erreur lors du chargement des fichiers de configuration Hibernate :\n"+ex.getMessage());
+			logger.warn("Problème de configuration : " + ex.getMessage());
+			throw new RuntimeException("Problème de configuration : "
+					+ ex.getMessage(), ex);
+		} catch (FileNotFoundException ex) {
+			logger.warn("Problème de configuration : " + ex.getMessage());
 			throw new RuntimeException("Problème de configuration : "
 					+ ex.getMessage(), ex);
 		}
 	}
 
 	@SuppressWarnings("javadoc")
-	public static final ThreadLocal<Session> sessionPostgresql = new ThreadLocal<Session>();
-	@SuppressWarnings("javadoc")
-	public static final ThreadLocal<Session> sessionOracle = new ThreadLocal<Session>();
-	@SuppressWarnings("javadoc")
-	public static final ThreadLocal<Session> sessionMysql = new ThreadLocal<Session>();
+	public static final ThreadLocal<Session> session = new ThreadLocal<Session>();
 
 	/**
-	 * @param type Type de SGBD (Enum SGBD)
+	 * @param type
 	 * @return Current Session
-	 * @throws Exception
+	 * @throws HibernateException
 	 */
-	public static Session currentSession(SGBD type) throws Exception {
-		Session s = (Session) getThreadLocalSession(type).get();
+	public static Session currentSession(SGBD type) throws HibernateException {
+		logger.debug("Demande de session de type "
+				+ type.toString().toLowerCase());
+		Session s = (Session) session.get();
+		// Ouvre une nouvelle Session, si ce Thread n'en a aucune ou si elle
+		// n'est pas du bon type.
+		if (s == null || !currentSGBD.equals(type)) {
+			logger.debug("Nécéssite une configuration du sessionFactory");
 
-		if (s == null) {
-			logger.debug("session de type "+type.toString()+" absent, creation de la session.");
-			s = sessionFactory.get(type).openSession();
-			getThreadLocalSession(type).set(s);
+			configureSessionFactory(type);
+
+			s = sessionFactory.openSession();
+			session.set(s);
 		}
-
 		return s;
 	}
 
 	/**
-	 * @param type Type du SGBD (Enum SGBD)
-	 * @throws Exception 
+	 * @throws HibernateException
 	 */
-	public static void closeSession(SGBD type) throws Exception {
-		logger.debug("fermeture de la session "+type.toString());
-		Session s = (Session) getThreadLocalSession(type).get();
-		getThreadLocalSession(type).set(null);
-		if (s != null)
-			s.close();
+	public static void closeSession() throws HibernateException {
+		logger.debug("Fermeture de la session");
+		currentSGBD = null;
+		if (session != null) {
+			Session s = (Session) session.get();
+			session.set(null);
+			if (s != null)
+				s.close();
+		}
 	}
 
-	private static ThreadLocal<Session> getThreadLocalSession(SGBD type)
-			throws Exception {
-		if (type.equals(SGBD.POSTGRESQL))
-			return sessionPostgresql;
-		else if (type.equals(SGBD.MYSQL))
-			return sessionMysql;
-		else if (type.equals(SGBD.ORACLE))
-			return sessionOracle;
-
-		throw new Exception("SGBD not implemented");
+	/**
+	 * Retourne le type de SGBD courant.
+	 * 
+	 * @return SGBD enum
+	 */
+	public static SGBD getCurrentSGBD() {
+		return currentSGBD;
 	}
 }

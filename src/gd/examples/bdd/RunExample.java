@@ -31,7 +31,7 @@ public class RunExample {
 		// addExample(s);
 		showExample(s);
 
-		HibernateUtil.closeSession(SGBD.POSTGRESQL);
+		HibernateUtil.closeSession();
 
 	}
 

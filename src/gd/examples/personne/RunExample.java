@@ -9,7 +9,7 @@ import org.hibernate.*;
 
 /**
  * Classe d'exemple d'utilisation d'Hibernate et de log4j Requiere la creation
- * de deux tables : Personne(id integer, nom varchar, prenom varchar)
+ * de deux tables : PostgresqlPersonne(id integer, nom varchar, prenom varchar)
  * Adresse(id_personne integer, numero integer, rue varchar)
  * 
  * @author thibaut
@@ -29,32 +29,20 @@ public class RunExample {
 
 		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
 
-		// addExample(s);
+		showExample(s);
+		
+		s = HibernateUtil.currentSession(SGBD.ORACLE);
+
+		showExample(s);
+		
+		HibernateUtil.closeSession();
+		
+		s = HibernateUtil.currentSession(SGBD.MYSQL);
+
 		showExample(s);
 
-		HibernateUtil.closeSession(SGBD.POSTGRESQL);
+		HibernateUtil.closeSession();
 
-	}
-
-	/**
-	 * Exemple d'ajout d'un utilisateur (Jean-Claude Dusse id=0)
-	 * 
-	 * @param s
-	 */
-	public static void addExample(Session s) {
-		logger.debug("Méthode addExample");
-		Transaction tx = s.beginTransaction();
-
-		Personne personne = new Personne(2);
-		personne.setNom("René");
-		personne.setPrenom("Dusse");
-		personne.setNumero(34);
-		personne.setRue("machine");
-		logger.debug("Méthode addExample -> save()");
-		s.save(personne);
-
-		logger.debug("Méthode addExample --> commit()");
-		tx.commit();
 	}
 
 	/**

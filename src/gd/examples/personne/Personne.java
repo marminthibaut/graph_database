@@ -15,6 +15,12 @@ public class Personne implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1620089226222021068L;
+	
+	private Integer id;
+	private String nom;
+	private String prenom;
+	private Integer numero;
+	private String rue;
 
 	/**
 	 * Constructeur standard sans paramètre
@@ -27,12 +33,6 @@ public class Personne implements Serializable {
 		super();
 		this.id = id;
 	}
-
-	private Integer id;
-	private String nom;
-	private String prenom;
-	private Integer numero;
-	private String rue;
 
 	/**
 	 * @return the id
