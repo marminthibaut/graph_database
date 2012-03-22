@@ -1,24 +1,25 @@
 package gd.app.cli;
+
 import java.io.FileNotFoundException;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import gd.app.model.Table;
 import gd.app.util.ParamManager;
+import gd.examples.graphviz.ToNeato;
 import gd.hibernate.util.HibernateUtil;
-
-
 
 public class CommandLineInterface {
 
-
 	/**
 	 * main
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String username = "", password = "", db_name = "", sgbd_type = "",
-				host = "", port = "";
+		String username = "", password = "", db_name = "", sgbd_type = "", host = "", port = null;
 
 		ParamManager param_manager = new ParamManager(args);
 		String arg;
@@ -26,7 +27,7 @@ public class CommandLineInterface {
 		try {
 			while ((arg = param_manager.getNextParam()) != null) {
 				if (!ParamManager.isAnOptionName(arg)) {
-					throw new Exception("wrong option : "+arg);
+					throw new Exception("wrong option : " + arg);
 
 				} else {
 					String param = ParamManager.getOptionName(arg);
@@ -40,12 +41,15 @@ public class CommandLineInterface {
 
 					switch (param) {
 					case "host":
+					case "h":
 						host = value;
 						break;
 					case "username":
+					case "u":
 						username = value;
 						break;
 					case "password":
+					case "p":
 						password = value;
 						break;
 					case "dbname":
@@ -58,7 +62,7 @@ public class CommandLineInterface {
 						port = value;
 						break;
 					default:
-						throw new Exception("wrong option : "+arg);
+						throw new Exception("wrong option : " + arg);
 					}
 
 				}
@@ -67,18 +71,21 @@ public class CommandLineInterface {
 			System.err.println(e.getMessage());
 		}
 
-		System.out.println(host+"/"+sgbd_type+"/"+db_name+"/"+username+"/"+
-				password+"/"+port);
-
 		Session session = null;
 		try {
-			session = HibernateUtil.openSession(host, sgbd_type, db_name, username,
-					password);
+			session = HibernateUtil.openSession(sgbd_type, host, db_name,
+					username, password, port);
+
+			Criteria c = session.createCriteria(Table.class);
+
+			String neato = ToNeato.convertToNeato(c.list());
+			System.out.println(neato);
+
 		} catch (HibernateException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println(e.getMessage());
+		} finally {
+			session.close();
 		}
-		session.close();
 
 	}
 
