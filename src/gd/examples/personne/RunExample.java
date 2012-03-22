@@ -1,7 +1,6 @@
 package gd.examples.personne;
 
 import gd.hibernate.util.*;
-
 import java.util.List;
 
 import org.apache.log4j.Logger;

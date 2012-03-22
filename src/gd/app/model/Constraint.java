@@ -12,11 +12,10 @@ import java.util.Set;
 public class Constraint {
 
 	private String name;
-	private String truetype;
-	private ConstraintType type;
+	private String type;
 	private Column column;
-
 	// private Constraint references;
+	// TODO gestion des references
 
 	private Set<Column> attributeRestrictorsMirror;
 
@@ -33,16 +32,9 @@ public class Constraint {
 	/**
 	 * @return Type réel de la contrainte (non générique)
 	 */
-	public String getTruetype() {
-		return truetype;
+	public String getType() {
+		return type;
 	}
-
-	/**
-	 * @return Type générique de la contrainte
-	 */
-	/*
-	 * public ConstraintType getType() { return type; }
-	 */
 
 	/**
 	 * @return Colonne propriétaire propriétaire de la contrainte
@@ -52,7 +44,7 @@ public class Constraint {
 	}
 
 	/**
-	 * @return Contrainte référencée par la contrainte de truetype 'FOREIGN_KEY'
+	 * @return Contrainte référencée par la contrainte de type 'FOREIGN_KEY'
 	 */
 	/*
 	 * public Constraint getReferences() { return references; }
@@ -77,11 +69,8 @@ public class Constraint {
 	 * @param type
 	 *            Type de contrainte
 	 */
-	public void setTruetype(String type) {
-		this.truetype = type;
-		// this.type = ConstraintTypeConvertor.convertFromTruetype(type,
-		// HibernateUtil.getCurrentSGBD());
-		this.type = ConstraintType.OTHER;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**
@@ -94,7 +83,7 @@ public class Constraint {
 
 	/**
 	 * @param references
-	 *            Contrainte à référencer (en cas de contrainte de truetype
+	 *            Contrainte à référencer (en cas de contrainte de type
 	 *            'FOREIGN_KEY')
 	 */
 	/*
@@ -134,7 +123,7 @@ public class Constraint {
 	@Override
 	public String toString() {
 		return "Constraint [" + (name != null ? "name=" + name + ", " : "")
-				+ (truetype != null ? "truetype=" + truetype + ", " : "")
+				+ (type != null ? "type=" + type + ", " : "")
 				+ (type != null ? "type=" + type + ", " : "")
 				// + (column != null ? "column=" + column + ", " : "")
 				// + (references != null ? "references=" + references + ", " :

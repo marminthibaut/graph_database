@@ -1,8 +1,13 @@
 package gd.examples.graphviz;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.jdom.JDOMException;
+
 import gd.app.model.*;
+import gd.util.ConvertTypeUtil;
+import gd.util.ConvertTypeUtil.Thing;
 
 /**
  * 
@@ -17,8 +22,11 @@ public class ToNeato {
 	/**
 	 * @param liste
 	 * @return Dot string
+	 * @throws JDOMException
+	 * @throws IOException
 	 */
-	public static String convertToNeato(List<?> liste) {
+	public static String convertToNeato(List<?> liste) throws IOException,
+			JDOMException {
 		String retour = "digraph mon_graphe {\n"
 				+ "   graph [bgcolor=white];\n";
 
@@ -45,7 +53,8 @@ public class ToNeato {
 					Boolean PKEY = false;
 					// TODO Gérer FKEY !
 					for (Constraint co : c.getRestrictors()) {
-						if (co.getTruetype().equals("PRIMARY KEY")) {
+						if (ConvertTypeUtil.convert("postgresql", co.getType(),
+								Thing.CONSTRAINT).equals("PRIMARY KEY")) {
 							PKEY = true;
 							retour += "   " + column_ident + " -> "
 									+ table_ident

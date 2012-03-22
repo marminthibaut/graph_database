@@ -11,9 +11,10 @@ import java.util.Set;
 public class Column {
 
 	private String name;
-	private String truetype;
-	private ColumnType type;
+	private String type;
 	// private float precision;
+	// TODO prendre en charge la précision des
+	// attributs
 	private Table table;
 
 	private Set<Constraint> restrictors;
@@ -31,19 +32,12 @@ public class Column {
 	/**
 	 * @return Type réel de l'attribut (dépend du SGBD)
 	 */
-	public String getTruetype() {
-		return truetype;
-	}
-
-	/**
-	 * @return Type générique de l'attribut
-	 */
-	public ColumnType getType() {
+	public String getType() {
 		return type;
 	}
 
 	/**
-	 * @return Précision du truetype de l'attribut
+	 * @return Précision du type de l'attribut
 	 */
 	/*
 	 * public float getPrecision() { return precision; }
@@ -76,12 +70,8 @@ public class Column {
 	 * @param type
 	 *            Type d'attribut
 	 */
-	public void setTruetype(String type) {
-		this.truetype = type;
-		// this.type = ColumnTypeConvertor.concertFromTruetype(type,
-		// HibernateUtil.getCurrentSGBD());
-		// TODO
-		this.type = ColumnType.OTHER;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**
@@ -138,7 +128,6 @@ public class Column {
 	public String toString() {
 		return "Column ["
 				+ (name != null ? "name=" + name + ", " : "")
-				+ (truetype != null ? "truetype=" + truetype + ", " : "") // +
 				+ (type != null ? "type=" + type + ", " : "") // +
 																// "precision="
 				// + precision + ", "
