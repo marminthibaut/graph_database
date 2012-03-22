@@ -1,5 +1,5 @@
 <?xml version="1.0" standalone="no" ?>
-<!DOCTYPE convertTypes PUBLIC "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd" "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd">
+<!DOCTYPE convertTypes PUBLIC "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/types/convertTypes.dtd" "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/types/convertTypes.dtd">
 <genericTypes>
 	<genericType name="VARCHAR">
 		<type>character varying</type>
