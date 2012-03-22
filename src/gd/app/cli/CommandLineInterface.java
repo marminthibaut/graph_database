@@ -1,28 +1,33 @@
 package gd.app.cli;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import org.jdom.JDOMException;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.jdom.JDOMException;
 
 import gd.app.model.Table;
 import gd.app.util.ParamManager;
 import gd.examples.graphviz.ToNeato;
 import gd.hibernate.util.HibernateUtil;
 
+
+/**
+ * Command Line Interface class, this class contains the main function to compile
+ * the command line program.
+ * 
+ * @author Clément Sipieter <csipieter@gmail.com>
+ * @version 0.1
+ */
 public class CommandLineInterface {
 
 	/**
-	 * main
+	 * Main
 	 * 
-	 * @param args
-	 * @throws JDOMException 
-	 * @throws IOException 
+	 * @param args see the man page.
 	 */
-	public static void main(String[] args) throws IOException, JDOMException {
+	public static void main(String[] args){
 		String username = "", password = "", db_name = null, sgbd_type = null, host = "", port = null;
 
 		ParamManager param_manager = new ParamManager(args);
@@ -96,7 +101,7 @@ public class CommandLineInterface {
 			String neato = ToNeato.convertToNeato(c.list());
 			System.out.println(neato);
 
-		} catch (HibernateException | FileNotFoundException e) {
+		} catch (JDOMException | IOException | HibernateException e) {
 			System.err.println(e.getMessage());
 		} finally {
 			session.close();
@@ -104,7 +109,7 @@ public class CommandLineInterface {
 
 	}
 	
-	public static void printHelp(){
+	private static void printHelp(){
 		System.out.println(
 				"Usage:\n" +
 				"gd [OPTION...] SGBD_NAME DATABASE_NAME\n" +
