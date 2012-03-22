@@ -19,7 +19,7 @@ public class CommandLineInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String username = "", password = "", db_name = "", sgbd_type = "", host = "", port = null;
+		String username = "", password = "", db_name = null, sgbd_type = null, host = "", port = null;
 
 		ParamManager param_manager = new ParamManager(args);
 		String arg;
@@ -27,11 +27,13 @@ public class CommandLineInterface {
 		try {
 			while ((arg = param_manager.getNextParam()) != null) {
 				if (!ParamManager.isAnOptionName(arg)) {
-					throw new Exception("wrong option : " + arg);
-
+					if(sgbd_type == null){
+						sgbd_type = ParamManager.getOptionName(arg);
+					}else{
+						db_name = ParamManager.getOptionName(arg);
+					}
 				} else {
 					String param = ParamManager.getOptionName(arg);
-					System.out.println(param);
 					String value = param_manager.getNextParam();
 					if (value == null)
 						throw new Exception("wrong option");
@@ -44,7 +46,7 @@ public class CommandLineInterface {
 					case "h":
 						host = value;
 						break;
-					case "username":
+					case "user":
 					case "u":
 						username = value;
 						break;
@@ -56,19 +58,28 @@ public class CommandLineInterface {
 						db_name = value;
 						break;
 					case "sgbd_type":
-						sgbd_type = value;
+						
 						break;
 					case "port":
 						port = value;
 						break;
+					case "help":
+						printHelp();
+						System.exit(0);
 					default:
 						throw new Exception("wrong option : " + arg);
 					}
 
 				}
 			}
+			
+			if(sgbd_type == null || db_name == null)
+				throw new Exception("Bad usage");
+				
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			printHelp();
+			System.exit(1);
 		}
 
 		Session session = null;
@@ -87,6 +98,26 @@ public class CommandLineInterface {
 			session.close();
 		}
 
+	}
+	
+	public static void printHelp(){
+		System.out.println(
+				"Usage:\n" +
+				"gd [OPTION...] SGBD_NAME DATABASE_NAME\n" +
+				"\n" +
+				"Options:\n" +
+				"	-u, --user <USERNAME>\n" +
+				"		use this username.\n" +
+				"	-p, --password [PASSWORD]\n" +
+				"		use this password.\n" +
+				" 	-h, --host <HOST>\n" +
+				"		use this host.\n" +
+				"	--port <PORT>\n" +
+				"		use this port.\n" +
+				"	--help\n" +
+				"		print this message.\n" +
+				"\n"				
+				);
 	}
 
 }
