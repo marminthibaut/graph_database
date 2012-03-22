@@ -1,0 +1,5 @@
+<!ELEMENT genericTypes (convertType*)>
+<!ELEMENT genericType (type*)>
+<!ELEMENT type (#PCDATA) >
+
+<!ATTLIST genericType name CDATA #REQUIRED>
