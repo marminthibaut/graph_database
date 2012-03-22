@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE convertTypes PUBLIC "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd" "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd">
+<genericTypes>
+	<genericType name="VARCHAR">
+		<type>character varying</type>
+		<type>text</type>
+	</genericType>
+	<genericType name="CHAR">
+		<type>char</type>
+		<type>character</type>
+	</genericType>
+	<genericType name="INTEGER">
+		<type>int</type>
+		<type>smallint</type>
+		<type>integer</type>
+		<type>mediumint</type>
+		<type>bigint</type>
+		<type>decimal</type>
+		<type>numeric</type>
+	</genericType>
+	<genericType name="FLOAT">
+		<type>real</type>
+		<type>double precision</type>
+		<type>money</type>
+	</genericType>
+	<genericType name="SERIAL">
+		<type>serial</type>
+		<type>bigserial</type>
+	</genericType>
+	<genericType name="DATE">
+		<type>timestamp</type>
+		<type>interval</type>
+		<type>date</type>
+		<type>time</type>
+	</genericType>
+	<genericType name="BINARY">
+		<type>bytes</type>
+	</genericType>
+	<genericType name="VARCHAR BINARY">
+		<type>bit</type>
+		<type>bit varying</type>
+	</genericType>
+</genericTypes>

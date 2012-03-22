@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE convertTypes PUBLIC "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd" "https://raw.github.com/marminthibaut/graph_database/master/src/gd/conf/convertTypes.dtd">
+<genericTypes>
+	<genericType name="PK">
+		<type>PRIMARY KEY</type>
+	</genericType>
+	<genericType name="FK">
+		<type>FOREIGN KEY</type>
+	</genericType>
+	<genericType name="CHECK">
+		<type>CHECK</type>
+	</genericType>
+</genericTypes>
