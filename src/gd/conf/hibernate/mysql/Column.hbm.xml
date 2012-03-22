@@ -5,9 +5,8 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Column">
 		<subselect>
-			SELECT table_name as table, column_name as name, data_type as type
+			SELECT `table_name` as `table`, `column_name` as `name`, `data_type` as `type`
 			FROM information_schema.columns
-			WHERE table_schema='public'
 			ORDER BY ordinal_position ASC
 		</subselect>
 		<id name="name" type="java.lang.String">
