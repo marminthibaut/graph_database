@@ -1,5 +1,8 @@
 package gd.app.model;
 
+import gd.app.model.convertor.ColumnTypeConvertor;
+import gd.hibernate.util.HibernateUtil;
+
 import java.util.Set;
 
 /**
@@ -11,7 +14,8 @@ import java.util.Set;
 public class Column {
 
 	private String name;
-	private String type;
+	private String truetype;
+	private ColumnType type;
 	// private float precision;
 	private Table table;
 
@@ -28,14 +32,21 @@ public class Column {
 	}
 
 	/**
-	 * @return Type de l'attribut
+	 * @return Type réel de l'attribut (dépend du SGBD)
 	 */
-	public String getType() {
+	public String getTruetype() {
+		return truetype;
+	}
+
+	/**
+	 * @return Type générique de l'attribut
+	 */
+	public ColumnType getType() {
 		return type;
 	}
 
 	/**
-	 * @return Précision du type de l'attribut
+	 * @return Précision du truetype de l'attribut
 	 */
 	/*
 	 * public float getPrecision() { return precision; }
@@ -68,8 +79,10 @@ public class Column {
 	 * @param type
 	 *            Type d'attribut
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setTruetype(String type) {
+		this.truetype = type;
+		this.type = ColumnTypeConvertor.concertFromTruetype(type,
+				HibernateUtil.getCurrentSGBD());
 	}
 
 	/**
@@ -126,7 +139,9 @@ public class Column {
 	public String toString() {
 		return "Column ["
 				+ (name != null ? "name=" + name + ", " : "")
-				+ (type != null ? "type=" + type + ", " : "") // + "precision="
+				+ (truetype != null ? "truetype=" + truetype + ", " : "") // +
+				+ (type != null ? "type=" + type + ", " : "") // +
+																// "precision="
 				// + precision + ", "
 				// + (table != null ? "table=" + table + ", " : "")
 				+ (restrictors != null ? "restrictors=" + restrictors : "")
