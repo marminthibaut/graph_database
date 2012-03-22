@@ -1,12 +1,9 @@
 <?xml version="1.0" standalone="no" ?>
 <genericTypes>
 	<genericType name="PK">
-		<type>PRIMARY KEY</type>
 	</genericType>
 	<genericType name="FK">
-		<type>FOREIGN KEY</type>
 	</genericType>
 	<genericType name="CHECK">
-		<type>CHECK</type>
 	</genericType>
 </genericTypes>

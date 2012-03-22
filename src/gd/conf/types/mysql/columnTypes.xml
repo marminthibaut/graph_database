@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="no" ?>
+<genericTypes>
+	<genericType name="VARCHAR">
+	</genericType>
+	<genericType name="CHAR">
+	</genericType>
+	<genericType name="INTEGER">
+	</genericType>
+	<genericType name="FLOAT">
+	</genericType>
+	<genericType name="SERIAL">
+	</genericType>
+	<genericType name="DATE">
+	</genericType>
+	<genericType name="BINARY">
+	</genericType>
+	<genericType name="VARCHAR BINARY">
+	</genericType>
+</genericTypes>
