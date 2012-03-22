@@ -1,5 +1,8 @@
 package gd.app.model;
 
+import gd.app.model.convertor.ConstraintTypeConvertor;
+import gd.hibernate.util.HibernateUtil;
+
 import java.util.Set;
 
 /**
@@ -12,7 +15,8 @@ import java.util.Set;
 public class Constraint {
 
 	private String name;
-	private String type;
+	private String truetype;
+	private ConstraintType type;
 	private Column column;
 
 	// private Constraint references;
@@ -30,9 +34,16 @@ public class Constraint {
 	}
 
 	/**
-	 * @return Type de la contrainte
+	 * @return Type réel de la contrainte (non générique)
 	 */
-	public String getType() {
+	public String getTruetype() {
+		return truetype;
+	}
+
+	/**
+	 * @return Type générique de la contrainte
+	 */
+	public ConstraintType getType() {
 		return type;
 	}
 
@@ -44,7 +55,7 @@ public class Constraint {
 	}
 
 	/**
-	 * @return Contrainte référencée par la contrainte de type 'FOREIGN_KEY'
+	 * @return Contrainte référencée par la contrainte de truetype 'FOREIGN_KEY'
 	 */
 	/*
 	 * public Constraint getReferences() { return references; }
@@ -69,8 +80,10 @@ public class Constraint {
 	 * @param type
 	 *            Type de contrainte
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setTruetype(String type) {
+		this.truetype = type;
+		this.type = ConstraintTypeConvertor.convertFromTruetype(type,
+				HibernateUtil.getCurrentSGBD());
 	}
 
 	/**
@@ -83,7 +96,7 @@ public class Constraint {
 
 	/**
 	 * @param references
-	 *            Contrainte à référencer (en cas de contrainte de type
+	 *            Contrainte à référencer (en cas de contrainte de truetype
 	 *            'FOREIGN_KEY')
 	 */
 	/*
@@ -123,6 +136,7 @@ public class Constraint {
 	@Override
 	public String toString() {
 		return "Constraint [" + (name != null ? "name=" + name + ", " : "")
+				+ (truetype != null ? "truetype=" + truetype + ", " : "")
 				+ (type != null ? "type=" + type + ", " : "")
 				// + (column != null ? "column=" + column + ", " : "")
 				// + (references != null ? "references=" + references + ", " :
