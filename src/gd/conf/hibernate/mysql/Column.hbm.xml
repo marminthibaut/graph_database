@@ -7,6 +7,7 @@
 		<subselect>
 			SELECT `table_name` as `table`, `column_name` as `name`, `data_type` as `type`
 			FROM information_schema.columns
+			WHERE table_schema=database()
 			ORDER BY ordinal_position ASC
 		</subselect>
 		<id name="name" type="java.lang.String">

@@ -10,6 +10,7 @@
 			FROM information_schema.table_constraints c
 			INNER JOIN information_schema.key_column_usage cu ON
 			(c.constraint_name = cu.constraint_name AND c.table_name = cu.table_name)
+			WHERE c.table_schema=database()
 		</subselect>
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />

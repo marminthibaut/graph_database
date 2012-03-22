@@ -6,8 +6,8 @@
 	<class name="gd.app.model.Table" table="TABLE">
 		<subselect>
 			SELECT `table_name` as `name`, `table_catalog` as `catalog`
-			FROM
-			information_schema.tables
+			FROM information_schema.tables
+			WHERE table_schema=database()
 		</subselect>
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />

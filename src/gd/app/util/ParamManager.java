@@ -2,7 +2,7 @@ package gd.app.util;
 
 /**
  * @author Clément Sipieter <csipieter@gmail.com>
- *
+ * 
  */
 public class ParamManager {
 
@@ -10,7 +10,8 @@ public class ParamManager {
 	private int cursor;
 
 	/**
-	 * @param args the array of arguments to manage
+	 * @param args
+	 *            the array of arguments to manage
 	 */
 	public ParamManager(String[] args) {
 		this.cursor = -1;
@@ -18,7 +19,7 @@ public class ParamManager {
 	}
 
 	/**
-	 * @return the next parameter 
+	 * @return the next parameter
 	 */
 	public String getNextParam() {
 		if (++this.cursor < this.args.length)

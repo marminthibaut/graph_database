@@ -12,10 +12,9 @@ import gd.app.util.ParamManager;
 import gd.examples.graphviz.ToNeato;
 import gd.hibernate.util.HibernateUtil;
 
-
 /**
- * Command Line Interface class, this class contains the main function to compile
- * the command line program.
+ * Command Line Interface class, this class contains the main function to
+ * compile the command line program.
  * 
  * @author Clément Sipieter <csipieter@gmail.com>
  * @version 0.1
@@ -25,9 +24,10 @@ public class CommandLineInterface {
 	/**
 	 * Main
 	 * 
-	 * @param args see the man page.
+	 * @param args
+	 *            see the man page.
 	 */
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		String username = "", password = "", db_name = null, sgbd_type = null, host = "", port = null;
 
 		ParamManager param_manager = new ParamManager(args);
@@ -36,9 +36,9 @@ public class CommandLineInterface {
 		try {
 			while ((arg = param_manager.getNextParam()) != null) {
 				if (!ParamManager.isAnOptionName(arg)) {
-					if(sgbd_type == null){
+					if (sgbd_type == null) {
 						sgbd_type = ParamManager.getOptionName(arg);
-					}else{
+					} else {
 						db_name = ParamManager.getOptionName(arg);
 					}
 				} else {
@@ -67,7 +67,7 @@ public class CommandLineInterface {
 						db_name = value;
 						break;
 					case "sgbd_type":
-						
+
 						break;
 					case "port":
 						port = value;
@@ -81,10 +81,10 @@ public class CommandLineInterface {
 
 				}
 			}
-			
-			if(sgbd_type == null || db_name == null)
+
+			if (sgbd_type == null || db_name == null)
 				throw new Exception("Bad usage");
-				
+
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			printHelp();
@@ -108,25 +108,16 @@ public class CommandLineInterface {
 		}
 
 	}
-	
-	private static void printHelp(){
-		System.out.println(
-				"Usage:\n" +
-				"gd [OPTION...] SGBD_NAME DATABASE_NAME\n" +
-				"\n" +
-				"Options:\n" +
-				"	-u, --user <USERNAME>\n" +
-				"		use this username.\n" +
-				"	-p, --password [PASSWORD]\n" +
-				"		use this password.\n" +
-				" 	-h, --host <HOST>\n" +
-				"		use this host.\n" +
-				"	--port <PORT>\n" +
-				"		use this port.\n" +
-				"	--help\n" +
-				"		print this message.\n" +
-				"\n"				
-				);
+
+	private static void printHelp() {
+		System.out.println("Usage:\n"
+				+ "gd [OPTION...] SGBD_NAME DATABASE_NAME\n" + "\n"
+				+ "Options:\n" + "	-u, --user <USERNAME>\n"
+				+ "		use this username.\n" + "	-p, --password [PASSWORD]\n"
+				+ "		use this password.\n" + " 	-h, --host <HOST>\n"
+				+ "		use this host.\n" + "	--port <PORT>\n"
+				+ "		use this port.\n" + "	--help\n"
+				+ "		print this message.\n" + "\n");
 	}
 
 }
