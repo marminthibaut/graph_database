@@ -26,12 +26,13 @@ public class RunExample {
 
 		logger.debug("Execution de la méthode de gd.examples.bdd");
 
-		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
+		Session s = HibernateUtil.openSession("postgresql", "localhost",
+				"test", "test", "test");
 
 		// addExample(s);
 		showExample(s);
 
-		HibernateUtil.closeSession();
+		s.close();
 
 	}
 

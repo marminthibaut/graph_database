@@ -1,8 +1,5 @@
 package gd.app.model;
 
-import gd.app.model.convertor.ConstraintTypeConvertor;
-import gd.hibernate.util.HibernateUtil;
-
 import java.util.Set;
 
 /**
@@ -43,9 +40,9 @@ public class Constraint {
 	/**
 	 * @return Type générique de la contrainte
 	 */
-	public ConstraintType getType() {
-		return type;
-	}
+	/*
+	 * public ConstraintType getType() { return type; }
+	 */
 
 	/**
 	 * @return Colonne propriétaire propriétaire de la contrainte
@@ -82,8 +79,9 @@ public class Constraint {
 	 */
 	public void setTruetype(String type) {
 		this.truetype = type;
-		this.type = ConstraintTypeConvertor.convertFromTruetype(type,
-				HibernateUtil.getCurrentSGBD());
+		// this.type = ConstraintTypeConvertor.convertFromTruetype(type,
+		// HibernateUtil.getCurrentSGBD());
+		this.type = ConstraintType.OTHER;
 	}
 
 	/**

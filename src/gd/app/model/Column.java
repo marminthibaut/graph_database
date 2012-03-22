@@ -1,8 +1,5 @@
 package gd.app.model;
 
-import gd.app.model.convertor.ColumnTypeConvertor;
-import gd.hibernate.util.HibernateUtil;
-
 import java.util.Set;
 
 /**
@@ -81,8 +78,10 @@ public class Column {
 	 */
 	public void setTruetype(String type) {
 		this.truetype = type;
-		this.type = ColumnTypeConvertor.concertFromTruetype(type,
-				HibernateUtil.getCurrentSGBD());
+		// this.type = ColumnTypeConvertor.concertFromTruetype(type,
+		// HibernateUtil.getCurrentSGBD());
+		// TODO
+		this.type = ColumnType.OTHER;
 	}
 
 	/**

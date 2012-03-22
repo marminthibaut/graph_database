@@ -45,7 +45,7 @@ public class ToNeato {
 					Boolean PKEY = false;
 					// TODO Gérer FKEY !
 					for (Constraint co : c.getRestrictors()) {
-						if (co.getType().equals("PRIMARY KEY")) {
+						if (co.getTruetype().equals("PRIMARY KEY")) {
 							PKEY = true;
 							retour += "   " + column_ident + " -> "
 									+ table_ident

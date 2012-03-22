@@ -23,7 +23,9 @@ public class ColumnTypeConvertor {
 		case POSTGRESQL:
 			c = ColumnTypeConvertor.convertFromTruetypeToPostgresql(truetype);
 			break;
-		// TODO implementer les autres convertisseurs
+		case MYSQL:
+			c = ColumnTypeConvertor.convertFromTruetypeToMysql(truetype);
+			// TODO implementer les autres convertisseurs
 		default:
 			break;
 		}
@@ -99,6 +101,68 @@ public class ColumnTypeConvertor {
 			c = ColumnType.IDENTIFIER;
 			break;
 		default:
+			break;
+		}
+		return c;
+	}
+
+	private static ColumnType convertFromTruetypeToMysql(String truetype) {
+
+		ColumnType c = ColumnType.OTHER;
+
+		switch (truetype) {
+		case "TINYINT":
+		case "SMALLINT":
+		case "MEDIUMINT":
+		case "INT":
+		case "INTEGER":
+		case "NUMERIC":
+		case "DEC":
+		case "DECIMAL":
+		case "BIGINT":
+		case "UNSIGNED TINYINT":
+		case "UNSIGNED SMALLINT":
+		case "UNSIGNED MEDIUMINT":
+		case "UNSIGNED INT":
+		case "UNSIGNED INTEGER":
+		case "UNSIGNED NUMERIC":
+		case "UNSIGNED DEC":
+		case "UNSIGNED DECIMAL":
+		case "UNSIGNED BIGINT":
+			c = ColumnType.INTEGER;
+			break;
+		case "FLOAT":
+		case "REAL":
+		case "DOUBLE PRECISION":
+			c = ColumnType.FLOAT;
+			break;
+		case "DATE":
+		case "DATETIME":
+		case "TIMESTAMP":
+		case "YEAR":
+		case "TIME":
+			c = ColumnType.DATE;
+			break;
+		case "CHAR":
+			c = ColumnType.CHAR;
+			break;
+		case "VARCHAR":
+		case "TEXT":
+		case "TINYTEXT":
+		case "MEDIUMTEXT":
+		case "LONGTEXT":
+			c = ColumnType.VARCHAR;
+			break;
+		case "BINARY":
+		case "VARCHAR BINARY":
+			c = ColumnType.BINARY;
+			break;
+		case "VARBINARY":
+		case "BOLB":
+		case "TINYBOLB":
+		case "MEDIUMBOLB":
+		case "LONGBOLB":
+			c = ColumnType.BINARYSTRING;
 			break;
 		}
 		return c;

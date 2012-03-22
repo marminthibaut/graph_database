@@ -2,9 +2,6 @@ package gd.hibernate.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.cfg.*;
@@ -22,113 +19,83 @@ import org.hibernate.cfg.*;
 public class HibernateUtil {
 
 	private static final Logger logger = Logger.getLogger(HibernateUtil.class);
-	private static SessionFactory sessionFactory = null;
-	private static SGBD currentSGBD = null;
-	private static final Map<SGBD, String> confsUrls = new HashMap<SGBD, String>();
 
-	static {
-		for (SGBD type : SGBD.values()) {
-			String url = System.getProperty("user.dir")
-					+ "/bin/gd/hibernate/conf/" + type.toString().toLowerCase()
-					+ "/hibernate.cfg.xml";
-			logger.debug("Chargement du fichier de configuration "
-					+ type.toString().toLowerCase());
-			File f = new File(url);
-			if (f.canRead() == true) {
-				logger.debug("Fichier de configuration trouvé : " + url);
-				confsUrls.put(type, url);
-			} else {
-				logger.warn("Fichier de configuration "
-						+ type.toString().toLowerCase() + " manquant.\n" + url);
-			}
-		}
+	private static String createConfPath(String type) {
+		String url = System.getProperty("user.dir") + "/bin/gd/conf/hibernate/"
+				+ type.toString().toLowerCase() + "/hibernate.cfg.xml";
+		logger.debug("Génération de l'url de configuration pour " + type + "\n"
+				+ url);
+		return url;
 	}
 
-	private static void configureSessionFactory(SGBD type) {
-		try {
-			if (currentSGBD == null)
-				logger.debug("Première configuration du sessionFactory en "
-						+ type.toString().toLowerCase());
-			else
-				logger.debug("Re-configuration du sessionFactory de type "
-						+ currentSGBD.toString().toLowerCase() + " en "
-						+ type.toString().toLowerCase());
+	private static String generateURI(String sgbdtype, String host,
+			String database, String port) {
+		String uri;
+		if (port != null)
+			uri = "jdbc:" + sgbdtype + "://" + host + ":" + port + "/"
+					+ database;
+		else
+			uri = "jdbc:" + sgbdtype + "://" + host + "/" + database;
 
-			HibernateUtil.closeSession();
-
-			String url = confsUrls.get(type);
-
-			if (url == null)
-				throw new FileNotFoundException("Type de SGBD "
-						+ type.toString().toLowerCase() + " non disponible");
-
-			File f = new File(url);
-			if (!f.exists())
-				throw new FileNotFoundException(
-						"Fichier de configuration du SGBD "
-								+ type.toString().toLowerCase()
-								+ "non disponible");
-
-			sessionFactory = new Configuration().configure(f)
-					.buildSessionFactory();
-			currentSGBD = type;
-
-		} catch (HibernateException ex) {
-			logger.warn("Problème de configuration : " + ex.getMessage());
-			throw new RuntimeException("Problème de configuration : "
-					+ ex.getMessage(), ex);
-		} catch (FileNotFoundException ex) {
-			logger.warn("Problème de configuration : " + ex.getMessage());
-			throw new RuntimeException("Problème de configuration : "
-					+ ex.getMessage(), ex);
-		}
-	}
-
-	@SuppressWarnings("javadoc")
-	public static final ThreadLocal<Session> session = new ThreadLocal<Session>();
-
-	/**
-	 * @param type
-	 * @return Current Session
-	 * @throws HibernateException
-	 */
-	public static Session currentSession(SGBD type) throws HibernateException {
-		logger.debug("Demande de session de type "
-				+ type.toString().toLowerCase());
-		Session s = (Session) session.get();
-		// Ouvre une nouvelle Session, si ce Thread n'en a aucune ou si elle
-		// n'est pas du bon type.
-		if (s == null || !currentSGBD.equals(type)) {
-			logger.debug("Nécéssite une configuration du sessionFactory");
-
-			configureSessionFactory(type);
-
-			s = sessionFactory.openSession();
-			session.set(s);
-		}
-		return s;
+		logger.debug("Génération d'une uri JDBC \n" + uri);
+		return uri;
 	}
 
 	/**
-	 * @throws HibernateException
-	 */
-	public static void closeSession() throws HibernateException {
-		logger.debug("Fermeture de la session");
-		currentSGBD = null;
-		if (session != null) {
-			Session s = (Session) session.get();
-			session.set(null);
-			if (s != null)
-				s.close();
-		}
-	}
-
-	/**
-	 * Retourne le type de SGBD courant.
+	 * Ouvre une session sans définition du port
 	 * 
-	 * @return SGBD enum
+	 * @param sgbdtype
+	 * @param host
+	 * @param database
+	 * @param username
+	 * @param password
+	 * @return nouvelle session
+	 * @throws FileNotFoundException
+	 * @throws HibernateException
 	 */
-	public static SGBD getCurrentSGBD() {
-		return currentSGBD;
+	public static Session openSession(String sgbdtype, String host,
+			String database, String username, String password)
+			throws FileNotFoundException, HibernateException {
+		return HibernateUtil.openSession(sgbdtype, host, database, username,
+				password, null);
+	}
+
+	/**
+	 * 
+	 * Ouvre une session JDBC
+	 * 
+	 * @param sgbdtype
+	 *            Type de sgbd (respectant la norme jdbc)
+	 * @param host
+	 * @param database
+	 * @param username
+	 * @param password
+	 * @param port
+	 * @return Nouvelle session
+	 * @throws FileNotFoundException
+	 * @throws HibernateException
+	 */
+	public static Session openSession(String sgbdtype, String host,
+			String database, String username, String password, String port)
+			throws FileNotFoundException, HibernateException {
+
+		logger.debug("Ouverture d'une session de type " + sgbdtype);
+
+		File f = new File(HibernateUtil.createConfPath(sgbdtype));
+		if (!f.exists()) {
+			throw new FileNotFoundException("Fichier de configuration du SGBD "
+					+ sgbdtype.toString().toLowerCase() + "non trouvé");
+		}
+
+		Configuration cfg = new Configuration().configure(f);
+		cfg.setProperty("hibernate.connection.url",
+				HibernateUtil.generateURI(sgbdtype, host, database, port));
+
+		cfg.setProperty("hibernate.connection.username", username);
+		cfg.setProperty("hibernate.connection.password", password);
+
+		logger.debug("Session de type " + sgbdtype + " ouverte.");
+		return cfg.buildSessionFactory().openSession();
+
 	}
 }

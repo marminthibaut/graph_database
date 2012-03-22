@@ -25,7 +25,8 @@ public class RunExample {
 	public static void main(String[] args) throws Exception {
 		logger.debug("Execution de la méthode de gd.examples.graphviz");
 
-		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
+		Session s = HibernateUtil.openSession("postgresql", "localhost",
+				"test", "test", "test");
 
 		Criteria c = s.createCriteria(Table.class);
 
@@ -33,7 +34,7 @@ public class RunExample {
 		String neato = ToNeato.convertToNeato(liste);
 		logger.debug("Graphviz code : \n" + neato);
 
-		HibernateUtil.closeSession();
+		s.close();
 	}
 
 }

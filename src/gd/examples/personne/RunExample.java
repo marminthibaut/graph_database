@@ -27,21 +27,12 @@ public class RunExample {
 
 		logger.debug("Execution de la méthode de gd.examples.personne");
 
-		Session s = HibernateUtil.currentSession(SGBD.POSTGRESQL);
+		Session s = HibernateUtil.openSession("postgresql", "localhost",
+				"test", "test", "test");
 
 		showExample(s);
 
-		s = HibernateUtil.currentSession(SGBD.ORACLE);
-
-		showExample(s);
-
-		HibernateUtil.closeSession();
-
-		s = HibernateUtil.currentSession(SGBD.MYSQL);
-
-		showExample(s);
-
-		HibernateUtil.closeSession();
+		s.close();
 
 	}
 
