@@ -1,10 +1,12 @@
 package gd.app.cli;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.jdom.JDOMException;
 
 import gd.app.model.Table;
 import gd.app.util.ParamManager;
@@ -17,8 +19,10 @@ public class CommandLineInterface {
 	 * main
 	 * 
 	 * @param args
+	 * @throws JDOMException 
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, JDOMException {
 		String username = "", password = "", db_name = null, sgbd_type = null, host = "", port = null;
 
 		ParamManager param_manager = new ParamManager(args);
