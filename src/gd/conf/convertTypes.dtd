@@ -1,4 +1,4 @@
-<!ELEMENT genericTypes (convertType*)>
+<!ELEMENT genericTypes (genericType*)>
 <!ELEMENT genericType (type*)>
 <!ELEMENT type (#PCDATA) >
 
