@@ -15,7 +15,7 @@
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />
 		</id>
-		<property name="type">
+		<property name="truetype">
 			<column name="TYPE" />
 			<type name="java.lang.String">
 			</type>
