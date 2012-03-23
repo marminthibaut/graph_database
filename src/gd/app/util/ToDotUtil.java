@@ -1,4 +1,4 @@
-package gd.util;
+package gd.app.util;
 
 import java.io.IOException;
 import java.util.List;

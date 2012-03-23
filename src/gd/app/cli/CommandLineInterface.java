@@ -8,8 +8,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import gd.app.model.Table;
-import gd.app.util.ParamManager;
-import gd.examples.graphviz.ToNeato;
+import gd.util.ParamManager;
+import gd.app.util.ToDotUtil;
 import gd.hibernate.util.HibernateUtil;
 
 /**
@@ -98,7 +98,8 @@ public class CommandLineInterface {
 
             Criteria c = session.createCriteria(Table.class);
 
-            String neato = ToNeato.convertToNeato(c.list());
+            String neato = ToDotUtil.convertToNeato(c.list(), sgbd_type,
+                    db_name);
             System.out.println(neato);
 
         } catch (JDOMException | IOException | HibernateException e) {

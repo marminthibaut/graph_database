@@ -1,4 +1,4 @@
-package gd.app.util;
+package gd.util;
 
 /**
  * @author Clément Sipieter <csipieter@gmail.com>
