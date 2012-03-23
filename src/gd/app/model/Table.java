@@ -102,11 +102,44 @@ public class Table {
 
     @Override
     public String toString() {
-        return "Table [" + (name != null ? "name=" + name + ", " : "")
-                + (catalog != null ? "catalog=" + catalog + ", " : "")
-                + (columns != null ? "columns=" + columns + ", " : "")
-                + (constraints != null ? "constraints=" + constraints : "")
-                + "]";
-    }
+        String retour = "Table{";
+        retour += "\n    name = " + name;
+        retour += "\n    catalog = " + catalog;
+        retour += "\n    Columns = [";
 
+        for (Column c : columns) {
+            retour += "\n        Column = [";
+            retour += "\n            name = " + c.getName();
+            retour += "\n            type = " + c.getType();
+            if (c.getConstraints() != null)
+                for (Constraint co : c.getConstraints()) {
+                    retour += "\n            constraints = <Set <Constraint>>"
+                            + co.getName();
+                }
+            retour += "\n        ]";
+        }
+        retour += "\n    ]";
+
+        retour += "\n    Constraints = [";
+        for (Constraint c : constraints) {
+            retour += "\n        Constraint = [";
+            retour += "\n            name = " + c.getName();
+            retour += "\n            type = " + c.getType();
+            retour += "\n            column = <Column>"
+                    + c.getColumn().getTable().getName() + "." + c.getColumn().getName();
+            if (c.getReferences() != null)
+                retour += "\n            references = <Constraint>"
+                        + c.getReferences().getName();
+            retour += "\n            referenced_by = <Set <Constraint>>";
+            if (c.getReferenced_by() != null)
+                for (Constraint r : c.getReferenced_by()) {
+                    retour += r.getName() + " ";
+                }
+        }
+        retour += "\n    ]";
+
+        retour += "}";
+
+        return retour;
+    }
 }

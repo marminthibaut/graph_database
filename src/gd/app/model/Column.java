@@ -16,8 +16,7 @@ public class Column {
     // TODO prendre en charge la précision des
     // attributs
     private Table table;
-
-    private Set<Constraint> restrictors;
+    private Set<Constraint> constraints;
 
     private Column() {
     }
@@ -51,11 +50,10 @@ public class Column {
     }
 
     /**
-     * @return Ensemble de contraintes affectées sur l'attribut
+     * @return Contraintes de la colonne
      */
-
-    public Set<Constraint> getRestrictors() {
-        return restrictors;
+    public Set<Constraint> getConstraints() {
+        return constraints;
     }
 
     /**
@@ -91,12 +89,11 @@ public class Column {
     }
 
     /**
-     * @param restrictors
-     *            Ensemble de contraintes
+     * @param constraints
+     *            Table propriétaire
      */
-
-    public void setRestrictors(Set<Constraint> restrictors) {
-        this.restrictors = restrictors;
+    public void setConstraints(Set<Constraint> constraints) {
+        this.constraints = constraints;
     }
 
     @Override
@@ -126,13 +123,11 @@ public class Column {
      */
     @Override
     public String toString() {
-        return "Column ["
-                + (name != null ? "name=" + name + ", " : "")
+        return "Column [" + (name != null ? "name=" + name + ", " : "")
                 + (type != null ? "type=" + type + ", " : "") // +
                                                               // "precision="
                 // + precision + ", "
                 // + (table != null ? "table=" + table + ", " : "")
-                + (restrictors != null ? "restrictors=" + restrictors : "")
                 + "]";
     }
 

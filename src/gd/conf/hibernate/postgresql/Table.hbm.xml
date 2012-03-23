@@ -22,7 +22,11 @@
 			</key>
 			<one-to-many class="gd.app.model.Column" />
 		</set>
-		<!-- <set name="constraints" inverse="true"> <key> <column name="table" 
-			/> </key> <one-to-many class="gd.app.model.Constraint" /> </set> -->
+		<set name="constraints" inverse="true">
+			<key>
+				<column name="table" />
+			</key>
+			<one-to-many class="gd.app.model.Constraint" />
+		</set>
 	</class>
 </hibernate-mapping>

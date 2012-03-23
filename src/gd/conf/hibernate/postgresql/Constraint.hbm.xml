@@ -5,32 +5,54 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Constraint">
 		<subselect>
-			SELECT c.constraint_name as name, c.table_name as table, c.constraint_type
-			as type, cu.column_name as column
-			FROM information_schema.table_constraints c
-			INNER JOIN information_schema.constraint_column_usage cu ON
-			(c.constraint_name = cu.constraint_name)
+			SELECT c.constraint_name as name, c.table_name as table,
+			c.constraint_type
+			as type, cu.column_name as column,
+			rc.unique_constraint_name as
+			references
+			FROM
+			information_schema.table_constraints c
+			INNER JOIN
+			information_schema.constraint_column_usage cu ON
+			(c.constraint_name =
+			cu.constraint_name)
+			LEFT OUTER JOIN
+			information_schema.referential_constraints rc ON
+			(c.constraint_name =
+			rc.constraint_name)
 			WHERE c.constraint_schema='public'
 		</subselect>
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />
 		</id>
+		
+		<many-to-one name="table" class="gd.app.model.Table"
+            fetch="join">
+            <column name="table" />
+        </many-to-one>
+		
 		<property name="type">
 			<column name="TYPE" />
 			<type name="java.lang.String">
 			</type>
 		</property>
+
 		<many-to-one name="column" class="gd.app.model.Column"
 			fetch="join">
 			<column name="COLUMN" />
 		</many-to-one>
-		<!-- <one-to-one name="references" class="gd.app.model.Constraint"></one-to-one>
-		<set name="attributeRestrictorsMirror" table="COLUMN" inverse="false"
-			lazy="true">
+
+		<set name="referenced_by" inverse="true">
 			<key>
-				<column name="NAME" />
+				<column name="references" />
 			</key>
-			<one-to-many class="gd.app.model.Column" />
-		</set> -->
+			<one-to-many class="gd.app.model.Constraint" />
+		</set>
+
+		<many-to-one name="references" class="gd.app.model.Constraint"
+			fetch="join">
+			<column name="REFERENCES" />
+		</many-to-one>
+
 	</class>
 </hibernate-mapping>

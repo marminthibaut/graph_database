@@ -12,12 +12,12 @@ import java.util.Set;
 public class Constraint {
 
     private String name;
+    private Table table;
     private String type;
     private Column column;
-    // private Constraint references;
-    // TODO gestion des references
 
-    private Set<Column> attributeRestrictorsMirror;
+    private Constraint references;
+    private Set<Constraint> referenced_by;
 
     private Constraint() {
     }
@@ -27,6 +27,13 @@ public class Constraint {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * @return Table à laquelle appartient cette contrainte
+     */
+    public Table getTable() {
+        return table;
     }
 
     /**
@@ -46,15 +53,24 @@ public class Constraint {
     /**
      * @return Contrainte référencée par la contrainte de type 'FOREIGN_KEY'
      */
-    /*
-     * public Constraint getReferences() { return references; }
-     */
+
+    public Constraint getReferences() {
+        return references;
+    }
 
     /**
-     * @return Ensemble des attributs sur lesquels s'applique la contrainte
+     * @return Colonnes concernées par cette contrainte.
      */
-    public Set<Column> getAttributeRestrictorsMirror() {
-        return attributeRestrictorsMirror;
+    public Set<Column> getConstraintColumns() {
+        return null;
+    }
+
+    /**
+     * @param referenced_by
+     *            the referenced_by to set
+     */
+    public void setReferenced_by(Set<Constraint> referenced_by) {
+        this.referenced_by = referenced_by;
     }
 
     /**
@@ -63,6 +79,15 @@ public class Constraint {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @param table
+     * @param type
+     *            Type de contrainte
+     */
+    public void setTable(Table table) {
+        this.table = table;
     }
 
     /**
@@ -86,18 +111,16 @@ public class Constraint {
      *            Contrainte à référencer (en cas de contrainte de type
      *            'FOREIGN_KEY')
      */
-    /*
-     * public void setReferences(Constraint references) { this.references =
-     * references; }
-     */
+
+    public void setReferences(Constraint references) {
+        this.references = references;
+    }
 
     /**
-     * @param attributeRestrictorsMirror
-     *            Liste d'attributs sur lesquels s'applique la contrainte
+     * @return the referenced_by
      */
-    public void setAttributeRestrictorsMirror(
-            Set<Column> attributeRestrictorsMirror) {
-        this.attributeRestrictorsMirror = attributeRestrictorsMirror;
+    public Set<Constraint> getReferenced_by() {
+        return referenced_by;
     }
 
     @Override
@@ -122,15 +145,15 @@ public class Constraint {
 
     @Override
     public String toString() {
-        return "Constraint [" + (name != null ? "name=" + name + ", " : "")
-                + (type != null ? "type=" + type + ", " : "")
+        return "Constraint ["
+                + (name != null ? "name=" + name + ", " : "")
                 + (type != null ? "type=" + type + ", " : "")
                 // + (column != null ? "column=" + column + ", " : "")
-                // + (references != null ? "references=" + references + ", " :
-                // "")
-                // + (attributeRestrictorsMirror != null ?
-                // "attributeRestrictorsMirror="
-                // + attributeRestrictorsMirror
+                + (references != null ? "references=" + references.getName()
+                        + ", " : "")
+                // + (columns_restricted != null ?
+                // "columns_restricted="
+                // + columns_restricted
                 // : "")
                 + "]";
     };
