@@ -1,5 +1,7 @@
 package gd.app.cli;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import org.jdom.JDOMException;
 
@@ -8,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import gd.app.model.Table;
+import gd.util.ImageFrame;
 import gd.util.ParamManager;
 import gd.app.util.ToDotUtil;
 import gd.hibernate.util.HibernateUtil;
@@ -28,7 +31,9 @@ public class CommandLineInterface {
      *            see the man page.
      */
     public static void main(String[] args) {
-        String username = "", password = "", db_name = null, sgbd_type = null, host = "", port = null;
+        String username = "", password = "", db_name = null, sgbd_type = null;
+        String host = "", port = null, output = null;
+        boolean opt_show = false;
 
         ParamManager param_manager = new ParamManager(args);
         String arg;
@@ -43,12 +48,18 @@ public class CommandLineInterface {
                     }
                 } else {
                     String param = ParamManager.getOptionName(arg);
-                    String value = param_manager.getNextParam();
-                    if (value == null)
-                        throw new Exception("wrong option");
-                    else if (ParamManager.isAnOptionName(value))
-                        throw new Exception("wrong value for " + param
-                                + " option");
+                    // @todo manage this next line width ParamManager
+                    String value = "";
+                    System.out.println("-" + param + "-");
+
+                    if (!param.equals("show") && !param.equals("help")) {
+                        value = param_manager.getNextParam();
+                        if (value == null)
+                            throw new Exception("wrong option : " + param);
+                        else if (ParamManager.isAnOptionName(value))
+                            throw new Exception("wrong value for " + param
+                                    + " option");
+                    }
 
                     switch (param) {
                         case "host":
@@ -72,6 +83,13 @@ public class CommandLineInterface {
                         case "port":
                             port = value;
                             break;
+                        case "output":
+                        case "o":
+                            output = value;
+                            break;
+                        case "show":
+                            opt_show = true;
+                            break;
                         case "help":
                             printHelp();
                             System.exit(0);
@@ -92,17 +110,47 @@ public class CommandLineInterface {
         }
 
         Session session = null;
+        String dot = "";
+        String dir = System.getProperty("user.dir") + "/";
+
         try {
             session = HibernateUtil.openSession(sgbd_type, host, db_name,
                     username, password, port);
 
             Criteria c = session.createCriteria(Table.class);
+            dot = ToDotUtil.convertToNeato(c.list(), sgbd_type, db_name);
 
-            String neato = ToDotUtil.convertToNeato(c.list(), sgbd_type,
-                    db_name);
-            System.out.println(neato);
+            if (output == null && !opt_show) {
+                System.out.println(dot);
+            } else {
+                if (opt_show && output == null)
+                    output = "output.png";
 
-        } catch (JDOMException | IOException | HibernateException e) {
+                // Write a dot file
+                String url_dot_file = dir
+                        + output.substring(0, output.lastIndexOf('.')) + ".dot";
+                BufferedWriter bw = new BufferedWriter(new FileWriter(
+                        url_dot_file));
+                bw.write(dot);
+                bw.close();
+
+                // Generate a png image from the dot file
+                String url_image = dir + output;
+                // @todo externalise next command
+                String neato_cmd = "neato " + url_dot_file + " -Tpng -o "
+                        + url_image;
+                Process process = Runtime.getRuntime().exec(neato_cmd);
+                if (process.waitFor() == 0) {
+                    if (opt_show)
+                        new ImageFrame(url_image, db_name);
+                } else {
+                    System.err.println("Command neato not found or fail : "
+                            + neato_cmd);
+                }
+            }
+
+        } catch (JDOMException | IOException | HibernateException
+                | InterruptedException e) {
             System.err.println(e.getMessage());
         } finally {
             session.close();
@@ -117,8 +165,11 @@ public class CommandLineInterface {
                 + "		use this username.\n" + "	-p, --password [PASSWORD]\n"
                 + "		use this password.\n" + " 	-h, --host <HOST>\n"
                 + "		use this host.\n" + "	--port <PORT>\n"
-                + "		use this port.\n" + "	--help\n"
-                + "		print this message.\n" + "\n");
+                + "		use this port.\n" + "     -o, --output <FILE_NAME>\n"
+                + "             generate an png image width graphviz\n"
+                + "     --show \n"
+                + "             open a window with graph representation.\n"
+                + "	--help\n" + "		print this message.\n" + "\n");
     }
 
 }
