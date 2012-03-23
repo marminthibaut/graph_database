@@ -14,27 +14,27 @@ import org.hibernate.*;
  * @author thibaut
  */
 public class RunExample {
-	private static final Logger logger = Logger.getLogger(RunExample.class);
+    private static final Logger logger = Logger.getLogger(RunExample.class);
 
-	/**
-	 * Main method
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String[] args) throws Exception {
-		logger.debug("Execution de la méthode de gd.examples.graphviz");
+    /**
+     * Main method
+     * 
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        logger.debug("Execution de la méthode de gd.examples.graphviz");
 
-		Session s = HibernateUtil.openSession("postgresql", "localhost",
-				"test", "test", "test");
+        Session s = HibernateUtil.openSession("postgresql", "localhost",
+                "test", "test", "test");
 
-		Criteria c = s.createCriteria(Table.class);
+        Criteria c = s.createCriteria(Table.class);
 
-		List<?> liste = c.list();
-		String neato = ToNeato.convertToNeato(liste);
-		logger.debug("Graphviz code : \n" + neato);
+        List<?> liste = c.list();
+        String neato = ToNeato.convertToNeato(liste);
+        logger.debug("Graphviz code : \n" + neato);
 
-		s.close();
-	}
+        s.close();
+    }
 
 }

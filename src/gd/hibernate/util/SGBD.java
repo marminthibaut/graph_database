@@ -7,17 +7,17 @@ package gd.hibernate.util;
  * @version 0.1
  */
 public enum SGBD {
-	/**
-	 * SGBD Postgresql
-	 */
-	POSTGRESQL,
-	/**
-	 * SGBD Mysql
-	 */
-	MYSQL,
-	/**
-	 * SGBD Oracle
-	 */
-	ORACLE
+    /**
+     * SGBD Postgresql
+     */
+    POSTGRESQL,
+    /**
+     * SGBD Mysql
+     */
+    MYSQL,
+    /**
+     * SGBD Oracle
+     */
+    ORACLE
 
 }

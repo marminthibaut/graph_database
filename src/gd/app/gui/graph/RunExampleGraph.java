@@ -8,10 +8,10 @@ package gd.app.gui.graph;
  * 
  */
 public class RunExampleGraph {
-	@SuppressWarnings("javadoc")
-	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		GlobalConsoleFrame test = new GlobalConsoleFrame();
+    @SuppressWarnings("javadoc")
+    public static void main(String[] args) {
+        @SuppressWarnings("unused")
+        GlobalConsoleFrame test = new GlobalConsoleFrame();
 
-	}
+    }
 }

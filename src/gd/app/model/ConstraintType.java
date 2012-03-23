@@ -8,20 +8,20 @@ package gd.app.model;
  * 
  */
 public enum ConstraintType {
-	/**
-	 * Contrainte de clé primaire
-	 */
-	PK,
-	/**
-	 * Contrainte de clé étrangère
-	 */
-	FK,
-	/**
-	 * Contrainte de type check
-	 */
-	CHECK,
-	/**
-	 * Autre type de contrainte
-	 */
-	OTHER
+    /**
+     * Contrainte de clé primaire
+     */
+    PK,
+    /**
+     * Contrainte de clé étrangère
+     */
+    FK,
+    /**
+     * Contrainte de type check
+     */
+    CHECK,
+    /**
+     * Autre type de contrainte
+     */
+    OTHER
 }

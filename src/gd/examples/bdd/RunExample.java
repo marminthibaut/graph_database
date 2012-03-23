@@ -16,44 +16,44 @@ import org.hibernate.*;
  */
 public class RunExample {
 
-	private static final Logger logger = Logger.getLogger(RunExample.class);
+    private static final Logger logger = Logger.getLogger(RunExample.class);
 
-	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String[] args) throws Exception {
+    /**
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
 
-		logger.debug("Execution de la méthode de gd.examples.bdd");
+        logger.debug("Execution de la méthode de gd.examples.bdd");
 
-		Session s = HibernateUtil.openSession("postgresql", "localhost",
-				"test", "test", "test");
+        Session s = HibernateUtil.openSession("postgresql", "localhost",
+                "test", "test", "test");
 
-		// addExample(s);
-		showExample(s);
+        // addExample(s);
+        showExample(s);
 
-		s.close();
+        s.close();
 
-	}
+    }
 
-	/**
-	 * Exemple d'affichage de la BDD
-	 * 
-	 * @param s
-	 */
-	public static void showExample(Session s) {
-		logger.debug("Méthode showExample");
-		Criteria q = s.createCriteria(Table.class);
+    /**
+     * Exemple d'affichage de la BDD
+     * 
+     * @param s
+     */
+    public static void showExample(Session s) {
+        logger.debug("Méthode showExample");
+        Criteria q = s.createCriteria(Table.class);
 
-		List<?> list = q.list();
+        List<?> list = q.list();
 
-		logger.debug("Méthode showExample --> affichage");
+        logger.debug("Méthode showExample --> affichage");
 
-		for (Object p : list) {
-			if (p instanceof Table) {
-				logger.debug(p);
-			}
-		}
+        for (Object p : list) {
+            if (p instanceof Table) {
+                logger.debug(p);
+            }
+        }
 
-	}
+    }
 }
