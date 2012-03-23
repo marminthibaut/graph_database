@@ -71,13 +71,15 @@ public class ConvertTypeUtil {
 
 		while (igt.hasNext()) {
 			Element genericType = (Element) igt.next();
-			String genericTypeString = genericType.getAttributeValue("name");
+			String genericTypeString = genericType.getAttributeValue("name")
+					.toUpperCase();
 
 			Iterator<?> it = genericType.getChildren("type").iterator();
 			while (it.hasNext()) {
 				Element trueType = (Element) it.next();
-				con.put(trueType.getText(), genericTypeString);
-				logger.debug("Ajout d'un type " + trueType.getText() + " -- "
+				con.put(trueType.getText().toLowerCase(), genericTypeString);
+				logger.debug("Ajout d'un type "
+						+ trueType.getText().toLowerCase() + " -- "
 						+ genericTypeString);
 			}
 
@@ -133,7 +135,7 @@ public class ConvertTypeUtil {
 	public static String convert(String sgbdtype, String type, Thing convertType)
 			throws IOException, JDOMException {
 		HashMap<String, String> con = getConverts(sgbdtype, convertType);
-		String converted = con.get(type);
+		String converted = con.get(type.toLowerCase());
 		if (converted == null)
 			converted = "OTHER";
 		return converted;
