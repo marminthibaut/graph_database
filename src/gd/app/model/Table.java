@@ -17,7 +17,12 @@ public class Table {
     private Set<Column> columns;
     private Set<Constraint> constraints;
 
-    private Table() {
+    private String sgbdtype;
+
+    /**
+     * 
+     */
+    public Table() {
     }
 
     /**
@@ -46,6 +51,13 @@ public class Table {
      */
     public Set<Constraint> getConstraints() {
         return constraints;
+    }
+
+    /**
+     * @return Type de SGBD
+     */
+    public String getSgbdtype() {
+        return sgbdtype;
     }
 
     /**
@@ -78,6 +90,14 @@ public class Table {
      */
     public void setConstraints(Set<Constraint> constraints) {
         this.constraints = constraints;
+    }
+
+    /**
+     * @param sgbdtype
+     *            Type de SGBD
+     */
+    public void setSgbdtype(String sgbdtype) {
+        this.sgbdtype = sgbdtype;
     }
 
     @Override
@@ -126,10 +146,13 @@ public class Table {
             retour += "\n            name = " + c.getName();
             retour += "\n            type = " + c.getType();
             retour += "\n            column = <Column>"
-                    + c.getColumn().getTable().getName() + "." + c.getColumn().getName();
+                    + c.getColumn().getTable().getName() + "."
+                    + c.getColumn().getName();
             if (c.getReferences() != null)
                 retour += "\n            references = <Constraint>"
-                        + c.getReferences().getName();
+                        + c.getReferences().getTable().getName() + "."
+                        + c.getReferences().getColumn().getName() + "("
+                        + c.getReferences().getName() + ")";
             retour += "\n            referenced_by = <Set <Constraint>>";
             if (c.getReferenced_by() != null)
                 for (Constraint r : c.getReferenced_by()) {

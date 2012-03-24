@@ -1,6 +1,13 @@
 package gd.app.model;
 
+import gd.util.ConvertTypeUtil;
+import gd.util.ConvertTypeUtil.Thing;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Set;
+
+import org.jdom.JDOMException;
 
 /**
  * Objet de représentation d'une contrainte.
@@ -9,8 +16,12 @@ import java.util.Set;
  * @version 0.1
  * 
  */
-public class Constraint {
+public class Constraint implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4031745260635303864L;
     private String name;
     private Table table;
     private String type;
@@ -19,7 +30,10 @@ public class Constraint {
     private Constraint references;
     private Set<Constraint> referenced_by;
 
-    private Constraint() {
+    /**
+     * 
+     */
+    public Constraint() {
     }
 
     /**
@@ -137,7 +151,8 @@ public class Constraint {
 
         final Constraint constraint = (Constraint) obj;
 
-        if (!constraint.getName().equals(getName()))
+        if (!constraint.getName().equals(getName())
+                || !constraint.getColumn().equals(getColumn()))
             return true;
 
         return false;
@@ -156,6 +171,28 @@ public class Constraint {
                 // + columns_restricted
                 // : "")
                 + "]";
+    }
+
+    /**
+     * @return Vrai si la contrainte est de type PK, faux sinon
+     * @throws JDOMException
+     * @throws IOException
+     */
+    public boolean isFK() throws IOException, JDOMException {
+        return getGenericType().equals("FK");
     };
+
+    /**
+     * @return Type générique de la contrainte, obtenue grâce à l'utilitaire de
+     *         conversion (ConvertTypeUtil)
+     * @throws IOException
+     *             En cas d'erreur de lecteur du fichier XML de conversion
+     * @throws JDOMException
+     *             En cas d'erreur de parsing du fichier XML de conversion
+     */
+    public String getGenericType() throws IOException, JDOMException {
+        return ConvertTypeUtil.convert(table.getSgbdtype(), type,
+                Thing.CONSTRAINT);
+    }
 
 }

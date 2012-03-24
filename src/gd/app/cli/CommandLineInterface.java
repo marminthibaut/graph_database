@@ -118,7 +118,7 @@ public class CommandLineInterface {
                     username, password, port);
 
             Criteria c = session.createCriteria(Table.class);
-            dot = ToDotUtil.convertToNeato(c.list(), sgbd_type, db_name);
+            dot = ToDotUtil.convertToNeato(c.list(), db_name);
 
             if (output == null && !opt_show) {
                 System.out.println(dot);

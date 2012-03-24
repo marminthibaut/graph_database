@@ -5,17 +5,22 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Table" table="TABLE">
 		<subselect>
-			SELECT table_name as name, table_catalog as catalog
+			SELECT table_name as name, table_catalog as catalog,
+			'postgresql' as sgbdtype
 			FROM
 			information_schema.tables
-			WHERE table_schema = 'public'
+			WHERE
+			table_schema = 'public'
 		</subselect>
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />
 		</id>
 		<property name="catalog" type="java.lang.String">
-			<column name="CATALOG" />
-		</property>
+            <column name="CATALOG" />
+        </property>
+        <property name="sgbdtype" type="java.lang.String">
+            <column name="SGBDTYPE" />
+        </property>
 		<set name="columns" inverse="true">
 			<key>
 				<column name="table" />

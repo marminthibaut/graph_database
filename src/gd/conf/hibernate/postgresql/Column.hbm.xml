@@ -11,26 +11,28 @@
 			WHERE table_schema='public'
 			ORDER BY ordinal_position ASC
 		</subselect>
-		<id name="name" type="java.lang.String">
-			<column name="NAME" />
-		</id>
+		<composite-id>
+			<key-property name="name" type="java.lang.String"
+				column="NAME" />
+			<key-many-to-one name="table" class="gd.app.model.Table"
+				column="TABLE" />
+		</composite-id>
+
 		<property name="type">
 			<column name="TYPE" />
 			<type name="java.lang.String">
 			</type>
 		</property>
+
 		<!-- <property name="precision" type="float"> <column name="PRECISION" 
 			/> </property> -->
-		<many-to-one name="table" class="gd.app.model.Table"
-			fetch="join">
-			<column name="TABLE" />
-		</many-to-one>
-		
-		<set name="constraints" inverse="true">
-            <key>
-                <column name="column" />
-            </key>
-            <one-to-many class="gd.app.model.Constraint" />
-        </set>
+
+		<set name="constraints" inverse="true" lazy="true">
+			<key>
+				<column name="name" />
+				<column name="column" />
+			</key>
+			<one-to-many class="gd.app.model.Constraint" />
+		</set>
 	</class>
 </hibernate-mapping>

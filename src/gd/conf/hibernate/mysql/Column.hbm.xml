@@ -5,31 +5,35 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Column">
 		<subselect>
-			SELECT `table_name` as `table`, `column_name` as `name`, `data_type` as `type`
+			SELECT `table_name` as `table`, `column_name` as `name`, `data_type` as
+			`type`
 			FROM information_schema.columns
 			WHERE table_schema=database()
 			ORDER BY ordinal_position ASC
 		</subselect>
-		<id name="name" type="java.lang.String">
-			<column name="NAME" />
-		</id>
+		<composite-id>
+			<key-property name="name" type="java.lang.String"
+				column="NAME" />
+			<key-many-to-one name="table" class="gd.app.model.Table"
+				column="TABLE" />
+		</composite-id>
+
 		<property name="type">
 			<column name="TYPE" />
 			<type name="java.lang.String">
 			</type>
 		</property>
-		<!--  <property name="precision" type="float">
-			<column name="PRECISION" />
-		</property>  -->
-		<many-to-one name="table" class="gd.app.model.Table"
-			fetch="join">
-			<column name="TABLE" />
-		</many-to-one>
-		<set name="restrictors" table="CONSTRAINT" inverse="false" lazy="true">
+
+		<!-- <property name="precision" type="float"> <column name="PRECISION" 
+			/> </property> -->
+
+		<set name="constraints" inverse="true" lazy="true">
 			<key>
+				<column name="name" />
 				<column name="column" />
 			</key>
 			<one-to-many class="gd.app.model.Constraint" />
 		</set>
 	</class>
 </hibernate-mapping>
+		

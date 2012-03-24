@@ -10,6 +10,6 @@
         <mapping resource="gd/examples/personne/PSQL.Personne.hbm.xml"/>
         <mapping resource="gd/conf/hibernate/postgresql/Table.hbm.xml"/>
         <mapping resource="gd/conf/hibernate/postgresql/Column.hbm.xml"/>
-        <mapping resource="gd/conf/hibernate/postgresql/Constraint.hbm.xml"/>
+        <mapping resource="gd/conf/hibernate/postgresql/Constraint.hbm.xml"/> 
     </session-factory>
 </hibernate-configuration>

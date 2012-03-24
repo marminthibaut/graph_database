@@ -1,6 +1,13 @@
 package gd.app.model;
 
+import gd.util.ConvertTypeUtil;
+import gd.util.ConvertTypeUtil.Thing;
+
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Set;
+
+import org.jdom.JDOMException;
 
 /**
  * Représentation d'un attribut d'une table
@@ -8,8 +15,12 @@ import java.util.Set;
  * @author thibaut
  * @version 0.1
  */
-public class Column {
+public class Column implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2783675353811975370L;
     private String name;
     private String type;
     // private float precision;
@@ -18,7 +29,10 @@ public class Column {
     private Table table;
     private Set<Constraint> constraints;
 
-    private Column() {
+    /**
+     * 
+     */
+    public Column() {
     }
 
     /**
@@ -110,7 +124,8 @@ public class Column {
 
         final Column column = (Column) obj;
 
-        if (!column.getName().equals(getName()))
+        if (!column.getName().equals(getName())
+                || !column.getTable().getName().equals(table.getName()))
             return true;
 
         return false;
@@ -129,6 +144,26 @@ public class Column {
                 // + precision + ", "
                 // + (table != null ? "table=" + table + ", " : "")
                 + "]";
+    }
+
+    /**
+     * @return Retourne vrai si la column est contrainte par une PK, faux sinon
+     */
+    public boolean isPK() {
+        // TODO Gérer les PK
+        return false;
+    }
+
+    /**
+     * @return Type générique de la colonne, obtenue grâce à l'utilitaire de
+     *         conversion (ConvertTypeUtil)
+     * @throws IOException
+     *             En cas d'erreur de lecteur du fichier XML de conversion
+     * @throws JDOMException
+     *             En cas d'erreur de parsing du fichier XML de conversion
+     */
+    public String getGenericType() throws IOException, JDOMException {
+        return ConvertTypeUtil.convert(table.getSgbdtype(), type, Thing.COLUMN);
     }
 
 }

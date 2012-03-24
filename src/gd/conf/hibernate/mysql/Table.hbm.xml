@@ -5,7 +5,9 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Table" table="TABLE">
 		<subselect>
-			SELECT `table_name` as `name`, `table_catalog` as `catalog`
+			SELECT `table_name` as `name`, `table_catalog` as
+			`catalog`, 'mysql'
+			as sgbdtype
 			FROM information_schema.tables
 			WHERE table_schema=database()
 		</subselect>
@@ -15,13 +17,21 @@
 		<property name="catalog" type="java.lang.String">
 			<column name="CATALOG" />
 		</property>
+		<property name="sgbdtype" type="java.lang.String">
+			<column name="SGBDTYPE" />
+		</property>
 		<set name="columns" inverse="true">
 			<key>
 				<column name="table" />
 			</key>
 			<one-to-many class="gd.app.model.Column" />
 		</set>
-		<!-- <set name="constraints" inverse="true"> <key> <column name="table" 
-			/> </key> <one-to-many class="gd.app.model.Constraint" /> </set> -->
+		<set name="constraints" inverse="true">
+			<key>
+				<column name="table" />
+			</key>
+			<one-to-many class="gd.app.model.Constraint" />
+		</set>
 	</class>
 </hibernate-mapping>
+		
