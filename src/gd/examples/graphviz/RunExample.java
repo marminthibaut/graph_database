@@ -2,7 +2,7 @@ package gd.examples.graphviz;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
-import gd.app.util.ToDotUtil;
+import gd.app.util.ToDotUtilOld;
 import gd.hibernate.util.*;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class RunExample {
         Criteria c = s.createCriteria(Table.class);
 
         List<?> liste = c.list();
-        String neato = ToDotUtil.convertToNeato(liste, "test");
+        String neato = ToDotUtilOld.convertToDot(liste, "test");
         logger.debug("Graphviz code : \n" + neato);
 
         s.close();

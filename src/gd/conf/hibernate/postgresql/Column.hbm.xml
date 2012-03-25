@@ -6,7 +6,7 @@
 	<class name="gd.app.model.Column">
 		<subselect>
 			SELECT table_name as table, column_name as name, data_type
-			as type
+			as type, ordinal_position as position
 			FROM information_schema.columns
 			WHERE table_schema='public'
 			ORDER BY ordinal_position ASC
@@ -19,18 +19,24 @@
 		</composite-id>
 
 		<property name="type">
-			<column name="TYPE" />
-			<type name="java.lang.String">
-			</type>
-		</property>
+            <column name="TYPE" />
+            <type name="java.lang.String">
+            </type>
+        </property>
+        
+        <property name="position">
+            <column name="POSITION" />
+            <type name="java.lang.Integer">
+            </type>
+        </property>
 
 		<!-- <property name="precision" type="float"> <column name="PRECISION" 
 			/> </property> -->
 
-		<set name="constraints" inverse="true" lazy="true">
+		<set name="constraints" inverse="true" lazy="false">
 			<key>
-				<column name="name" />
 				<column name="column" />
+				<column name="table" />
 			</key>
 			<one-to-many class="gd.app.model.Constraint" />
 		</set>

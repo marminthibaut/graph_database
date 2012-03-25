@@ -1,7 +1,7 @@
 package gd.app.util;
 
 /**
- * Classe Exception personnalisée pour ToDotUtil
+ * Classe Exception personnalisée pour ToDotUtilOld
  * 
  * @author thibaut
  * @version 0.1

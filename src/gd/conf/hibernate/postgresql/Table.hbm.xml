@@ -21,7 +21,7 @@
         <property name="sgbdtype" type="java.lang.String">
             <column name="SGBDTYPE" />
         </property>
-		<set name="columns" inverse="true">
+		<set name="columns" inverse="true" order-by="position asc">
 			<key>
 				<column name="table" />
 			</key>

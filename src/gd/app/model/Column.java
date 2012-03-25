@@ -21,6 +21,7 @@ public class Column implements Serializable {
     private static final long serialVersionUID = 2783675353811975370L;
     private String name;
     private String type;
+    private Integer position;
     // private float precision;
     // TODO prendre en charge la précision des
     // attributs
@@ -45,6 +46,13 @@ public class Column implements Serializable {
      */
     public String getType() {
         return type;
+    }
+    
+    /**
+     * @return Position de la colonne dans la table
+     */
+    public Integer getPosition() {
+        return position;
     }
 
     /**
@@ -82,6 +90,14 @@ public class Column implements Serializable {
      */
     public void setType(String type) {
         this.type = type;
+    }
+    
+    /**
+     * @param position
+     *            Position dans la table
+     */
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     /**
@@ -151,13 +167,16 @@ public class Column implements Serializable {
     public boolean isPK() throws ConvertTypeUtilException {
         Boolean isPK = false;
 
-        for (Constraint c : constraints) {
-            if (c.isPK()) {
-                isPK = true;
-                break;
+        if (getConstraints() != null) {
+            for (Constraint c : getConstraints()) {
+                System.out.println(c);
+                if (c.isPK()) {
+                    isPK = true;
+                    break;
+                }
             }
         }
-        
+
         return isPK;
     }
 

@@ -7,6 +7,9 @@
 		<type>FOREIGN KEY</type>
 	</genericType>
 	<genericType name="CHECK">
-		<type>CHECK</type>
-	</genericType>
+        <type>CHECK</type>
+    </genericType>
+    <genericType name="UNIQUE">
+        <type>UNIQUE</type>
+    </genericType>
 </genericTypes>
