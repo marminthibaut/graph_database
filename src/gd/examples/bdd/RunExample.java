@@ -1,6 +1,5 @@
 package gd.examples.bdd;
 
-import gd.app.model.Constraint;
 import gd.app.model.Table;
 import gd.hibernate.util.*;
 

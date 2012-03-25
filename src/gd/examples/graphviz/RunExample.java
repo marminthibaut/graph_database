@@ -32,7 +32,7 @@ public class RunExample {
         Criteria c = s.createCriteria(Table.class);
 
         List<?> liste = c.list();
-        String neato = ToDotUtil.convertToNeato(c.list(), "test");
+        String neato = ToDotUtil.convertToNeato(liste, "test");
         logger.debug("Graphviz code : \n" + neato);
 
         s.close();
