@@ -24,10 +24,17 @@ public class ToDotUtil {
     private static String column_bg_color;
     private static String column_font_color;
     private static String column_shape;
+
     private static String constraint_fk_font_color;
+    private static String constraint_fk_arrow_color;
+
+    private static String constraint_arrow_color;
     private static String constraint_bg_color;
     private static String constraint_font_color;
+
     private static String constraint_shape;
+    private static Double space_scale;
+    private static Double font_size_scale;
 
     static {
         resetConf();
@@ -40,15 +47,23 @@ public class ToDotUtil {
         table_bg_color = "black";
         table_font_color = "white";
         table_shape = "box";
+        
         graph_bg_color = "white";
+        
         column_bg_color = "none";
         column_font_color = "black";
-        column_shape = "none";
+        column_shape = "box";
 
-        constraint_fk_font_color = "red";
-        constraint_bg_color = "gray";
-        constraint_font_color = "blue";
-        constraint_shape = "none";
+        constraint_fk_font_color = "darkred";
+        constraint_fk_arrow_color = "red";
+
+        constraint_arrow_color = "gray";
+        constraint_bg_color = "#DDDDDD";
+        constraint_font_color = "black";
+        constraint_shape = "box";
+
+        space_scale = 1.0;
+        font_size_scale = 1.0;
     }
 
     /**
@@ -82,81 +97,6 @@ public class ToDotUtil {
 
         retour += "}";
         return retour;
-    }
-
-    /**
-     * @return the table_bg_color
-     */
-    public static String getTable_bg_color() {
-        return table_bg_color;
-    }
-
-    /**
-     * @return the table_font_color
-     */
-    public static String getTable_font_color() {
-        return table_font_color;
-    }
-
-    /**
-     * @return the graph_bg_color
-     */
-    public static String getGraph_bg_color() {
-        return graph_bg_color;
-    }
-
-    /**
-     * @return the column_bg_color
-     */
-    public static String getColumn_bg_color() {
-        return column_bg_color;
-    }
-
-    /**
-     * @return the column_font_color
-     */
-    public static String getColumn_font_color() {
-        return column_font_color;
-    }
-
-    /**
-     * @param table_bg_color
-     *            the table_bg_color to set
-     */
-    public static void setTable_bg_color(String table_bg_color) {
-        ToDotUtil.table_bg_color = table_bg_color;
-    }
-
-    /**
-     * @param table_font_color
-     *            the table_font_color to set
-     */
-    public static void setTable_font_color(String table_font_color) {
-        ToDotUtil.table_font_color = table_font_color;
-    }
-
-    /**
-     * @param graph_bg_color
-     *            the graph_bg_color to set
-     */
-    public static void setGraph_bg_color(String graph_bg_color) {
-        ToDotUtil.graph_bg_color = graph_bg_color;
-    }
-
-    /**
-     * @param column_bg_color
-     *            the column_bg_color to set
-     */
-    public static void setColumn_bg_color(String column_bg_color) {
-        ToDotUtil.column_bg_color = column_bg_color;
-    }
-
-    /**
-     * @param column_font_color
-     *            the column_font_color to set
-     */
-    public static void setColumn_font_color(String column_font_color) {
-        ToDotUtil.column_font_color = column_font_color;
     }
 
     private static String generateTableIdent(Table t) {
@@ -212,7 +152,8 @@ public class ToDotUtil {
         retour += "   " + column_ident + " [shape=" + column_shape
                 + ", color=\"" + column_bg_color + "\", fontcolor=\""
                 + column_font_color + "\", label=\"" + c.getName() + "\\n{"
-                + c.getType() + "}\", fontsize=10];\n";
+                + c.getType() + "}\", fontsize=" + (font_size_scale * 10)
+                + "];\n";
 
         Boolean isPK = false;
 
@@ -231,11 +172,12 @@ public class ToDotUtil {
         if (isPK) {
             logger.debug("Colonne appartenant à une PK");
             retour += "   " + column_ident + " -> " + table_ident
-                    + " [arrowhead=\"ediamond\", len=1.2];\n";
+                    + " [arrowhead=\"ediamond\", len=" + (space_scale * 1.2)
+                    + "];\n";
         } else {
             logger.debug("Colonne n'appartenant pas à une PK");
             retour += "   " + column_ident + " -> " + table_ident
-                    + " [arrowsize=0, len=1.2];\n";
+                    + " [arrowsize=0, len=" + (space_scale * 1.2) + "];\n";
         }
 
         return retour;
@@ -264,11 +206,14 @@ public class ToDotUtil {
             logger.debug("Génération de la contrainte " + c.getName());
             retour += generateConstraintIdent(c) + "[shape=" + constraint_shape
                     + ", label=\"" + c.getName() + "\\n" + c.getType()
-                    + "\", color=\"" + constraint_font_color + "\"]\n";
+                    + "\", style=filled, color=\"" + constraint_bg_color
+                    + "\", fontsize=" + (font_size_scale * 10)
+                    + ", fontcolor=\"" + constraint_font_color + "\"]\n";
 
             retour += generateConstraintIdent(c) + " -> "
                     + generateColumnIdent(c.getColumn()) + "[color=\""
-                    + constraint_bg_color + "\", len=1.8]\n";
+                    + constraint_arrow_color + "\", len=" + (space_scale * 1.8)
+                    + "]\n";
         }
         return retour;
     }
@@ -282,7 +227,9 @@ public class ToDotUtil {
         retour += generateColumnIdent(c.getColumn()) + " -> "
                 + generateColumnIdent(c.getReferences().getColumn())
                 + "[label=\"" + c.getName() + "\\n" + c.getType()
-                + "\", color=\"" + constraint_fk_font_color + "\" len=1.8]\n";
+                + "\", fontcolor=\"" + constraint_fk_font_color + "\" len="
+                + (space_scale * 1.8) + ", fontsize=" + (font_size_scale * 10)
+                + ", color=\"" + constraint_fk_arrow_color + "\"]\n";
 
         return retour;
     }
