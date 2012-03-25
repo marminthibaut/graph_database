@@ -32,20 +32,101 @@ import gd.hibernate.util.HibernateUtil;
  */
 public class CommandLineInterface {
 
-    
+    private static String username = "";
+    private static String password = "";
+    private static String db_name = null;
+    private static String sgbd_type = null;
+    private static String host = "";
+    private static String port = null;
+    private static String output = null;
+    private static boolean opt_show = false;
+    private static GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
     /**
      * Main
      * 
      * @param args
-     *            see the man page.
+     *            see --help.
      */
     public static void main(String[] args) {
-        String username = "", password = "", db_name = null, sgbd_type = null;
-        String host = "", port = null, output = null;
-        boolean opt_show = false;
-        GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
+        Session session = null;
+        String dot = "";
+        String dir = System.getProperty("user.dir") + "/";
+
+        manageParams(args);
+
+        try {
+            session = HibernateUtil.openSession(sgbd_type, host, db_name,
+                    username, password, port);
+
+            Criteria c = session.createCriteria(Table.class);
+            dot = ToDotUtil.convertToDot(c.list(), db_name);
+
+            if (output == null && !opt_show) {
+                System.out.println(dot);
+            } else {
+                String racine_file = (output == null) ? "out" : output
+                        .substring(0, output.lastIndexOf('.'));
+                String url_dot_file = dir + racine_file + ".dot";
+                String url_dot_pos_file = dir + racine_file + "_pos.dot";
+
+                // Write a dot file
+                BufferedWriter bw = new BufferedWriter(new FileWriter(
+                        url_dot_file));
+                bw.write(dot);
+                bw.close();
+
+                if (opt_show) {
+                    // generate position with neato
+                    int val = gv_cmd.exec(url_dot_file, url_dot_pos_file);
+                    if (val == 0) {
+                        Parser parser = new Parser(new FileReader(
+                                url_dot_pos_file));
+                        parser.parse();
+                        Graph graph = parser.getGraph();
+
+                        // affichage graphique
+                        JFrame frame = new JFrame("title");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setSize(800, 600);
+                        GrappaPanel panel = new GrappaPanel(graph);
+                        panel.setPreferredSize(new Dimension(800, 600));
+                        frame.setContentPane(panel);
+                        frame.pack();
+                        frame.setVisible(true);
+
+                    }
+                } else if (output != null) {
+                    // Generate a png image from the dot file
+                    // @todo treat other image format
+                    String url_image = dir + output;
+
+                    // System call to graphviz
+                    // @todo externalise next command
+                    String neato_cmd = gv_cmd.toString() + " " + url_dot_file
+                            + " -Tpng -o " + url_image;
+                    Process process = Runtime.getRuntime().exec(neato_cmd);
+                    if (process.waitFor() != 0)
+                        System.err.println("Command neato not found or fail : "
+                                + neato_cmd);
+
+                }
+
+            }
+
+        } catch (IOException | HibernateException | InterruptedException
+                | ToDotUtilException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+    }
+
+    private static void manageParams(String args[]) {
         ParamManager param_manager = new ParamManager(args);
         String arg;
 
@@ -123,87 +204,14 @@ public class CommandLineInterface {
             printHelp();
             System.exit(1);
         }
-
-        Session session = null;
-        String dot = "";
-        String dir = System.getProperty("user.dir") + "/";
-
-        try {
-            session = HibernateUtil.openSession(sgbd_type, host, db_name,
-                    username, password, port);
-
-            Criteria c = session.createCriteria(Table.class);
-            dot = ToDotUtil.convertToNeato(c.list(), db_name);
-
-            if (output == null && !opt_show) {
-                System.out.println(dot);
-            } else {
-                if (opt_show && output == null)
-                    output = "output.png";
-
-                // Write a dot file
-                String url_dot_file = dir
-                        + output.substring(0, output.lastIndexOf('.')) + ".dot";
-                String url_neato_file = dir
-                        + output.substring(0, output.lastIndexOf('.'))
-                        + "_pos.dot";
-                BufferedWriter bw = new BufferedWriter(new FileWriter(
-                        url_dot_file));
-                bw.write(dot);
-                bw.close();
-
-                // Generate a png image from the dot file
-                String url_image = dir + output;
-                // @todo externalise next command
-                String neato_cmd = gv_cmd.toString() + " " + url_dot_file
-                        + " -Tpng -o " + url_image;
-                Process process = Runtime.getRuntime().exec(neato_cmd);
-                if (process.waitFor() == 0) {
-                    if (opt_show) {
-                        // generate position with neato
-                        neato_cmd = gv_cmd.toString() + " " + url_dot_file
-                                + " -o " + url_neato_file;
-                        process = Runtime.getRuntime().exec(neato_cmd);
-                        if (process.waitFor() == 0) {
-                            Parser parser = new Parser(new FileReader(
-                                    url_neato_file));
-                            parser.parse();
-                            Graph graph = parser.getGraph();
-
-                            // affichage graphique
-                            JFrame frame = new JFrame("title");
-                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                            frame.setSize(800, 600);
-                            GrappaPanel panel = new GrappaPanel(graph);
-                            panel.setPreferredSize(new Dimension(800, 600));
-                            frame.setContentPane(panel);
-                            frame.pack();
-                            frame.setVisible(true);
-
-                        }
-                    }
-                } else {
-                    System.err.println("Command neato not found or fail : "
-                            + neato_cmd);
-                }
-            }
-
-        } catch (IOException | HibernateException | InterruptedException
-                | ToDotUtilException e) {
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
     }
 
     private static void printHelp() {
         System.out.println("Usage:\n"
                 + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n" + "\n"
                 + "Options:\n" + "    -u, --user <USERNAME>\n"
-                + "        use this username.\n" + "    -p, --password [PASSWORD]\n"
+                + "        use this username.\n"
+                + "    -p, --password [PASSWORD]\n"
                 + "        use this password.\n" + "    -h, --host <HOST>\n"
                 + "        use this host.\n" + "    --port <PORT>\n"
                 + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
