@@ -3,8 +3,6 @@ package gd.app.cli;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.jdom.JDOMException;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,6 +11,7 @@ import gd.app.model.Table;
 import gd.util.ImageFrame;
 import gd.util.ParamManager;
 import gd.app.util.ToDotUtil;
+import gd.app.util.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
 
 /**
@@ -149,8 +148,8 @@ public class CommandLineInterface {
                 }
             }
 
-        } catch (JDOMException | IOException | HibernateException
-                | InterruptedException e) {
+        } catch (IOException | HibernateException
+                | InterruptedException | ToDotUtilException e) {
             System.err.println(e.getMessage());
         } finally {
             session.close();

@@ -1,11 +1,10 @@
 package gd.app.util;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.jdom.JDOMException;
-
+import org.apache.log4j.Logger;
 import gd.app.model.*;
+import gd.util.ConvertTypeUtilException;
 
 /**
  * 
@@ -15,6 +14,8 @@ import gd.app.model.*;
  * 
  */
 public class ToDotUtil {
+
+    private static final Logger logger = Logger.getLogger(ToDotUtil.class);
 
     private static String table_bg_color;
     private static String table_font_color;
@@ -61,16 +62,13 @@ public class ToDotUtil {
      * @param dbname
      *            Nom de la base de données
      * @return Dot string Graphe au langage DOT valide
+     * @throws ToDotUtilException
      * 
-     * @throws JDOMException
-     *             Lors de l'erreur de parsing du fichier de translate des types
-     *             génériques
-     * @throws IOException
-     *             Lors de l'erreur d'ouverture du fichier de translate des
-     *             types génériques
      */
     public static String convertToNeato(List<?> liste, String dbname)
-            throws IOException, JDOMException {
+            throws ToDotUtilException {
+
+        logger.debug("Génération d'un graphe ToNeato");
         String retour = generateHeader(dbname);
 
         for (Object o : liste) {
@@ -174,14 +172,16 @@ public class ToDotUtil {
     }
 
     private static String generateHeader(String dbname) {
+        logger.debug("Génération du Header");
         return "digraph " + dbname + " {\n" + "   graph [bgcolor=\""
                 + graph_bg_color + "\"];\n";
     }
 
-    private static String generateTableContent(Table t) throws IOException,
-            JDOMException {
+    private static String generateTableContent(Table t)
+            throws ToDotUtilException {
         String retour = "";
 
+        logger.debug("Génération de la table " + t.getName());
         retour += "   " + generateTableIdent(t) + "[shape=" + table_shape
                 + ", label=\"" + t.getName() + "\", color=\"" + table_bg_color
                 + "\", fontcolor=\"" + table_font_color
@@ -198,35 +198,70 @@ public class ToDotUtil {
         return retour;
     }
 
-    private static String generateColumnContent(Column c) {
+    private static String generateColumnContent(Column c)
+            throws ToDotUtilException {
         String retour = "";
         Table t = c.getTable();
 
         String column_ident = generateColumnIdent(c);
         String table_ident = generateTableIdent(t);
 
+        logger.debug("Génération de la colonne " + c.getTable().getName() + "("
+                + c.getName() + ")");
+
         retour += "   " + column_ident + " [shape=" + column_shape
                 + ", color=\"" + column_bg_color + "\", fontcolor=\""
                 + column_font_color + "\", label=\"" + c.getName() + "\\n{"
                 + c.getType() + "}\", fontsize=10];\n";
 
-        if (c.isPK())
+        Boolean isPK = false;
+
+        try {
+            isPK = c.isPK();
+        } catch (ConvertTypeUtilException e) {
+            logger.error("Impossible de déterminer si la colonne "
+                    + c.getTable().getName() + "(" + c.getName()
+                    + "appartient à une PK", e);
+            throw new ToDotUtilException(
+                    "Impossible de déterminer si la colonne "
+                            + c.getTable().getName() + "(" + c.getName()
+                            + ") appartient à une PK", e);
+        }
+
+        if (isPK) {
+            logger.debug("Colonne appartenant à une PK");
             retour += "   " + column_ident + " -> " + table_ident
                     + " [arrowhead=\"ediamond\", len=1.2];\n";
-
-        else
+        } else {
+            logger.debug("Colonne n'appartenant pas à une PK");
             retour += "   " + column_ident + " -> " + table_ident
                     + " [arrowsize=0, len=1.2];\n";
+        }
 
         return retour;
     }
 
     private static String generateConstraintContent(Constraint c)
-            throws IOException, JDOMException {
+            throws ToDotUtilException {
         String retour = "";
-        if (c.isFK()) {
+
+        Boolean isFK = false;
+        try {
+            isFK = c.isFK();
+        } catch (ConvertTypeUtilException e) {
+            logger.error(
+                    "Impossible de dérerminer si la contrainte " + c.getName()
+                            + " est de type FK", e);
+            throw new ToDotUtilException(
+                    "Impossible de déterminer si la contrainte " + c.getName()
+                            + " est de type FK", e);
+        }
+
+        if (isFK) {
             retour += generateConstraintFKContent(c);
         } else {
+
+            logger.debug("Génération de la contrainte " + c.getName());
             retour += generateConstraintIdent(c) + "[shape=" + constraint_shape
                     + ", label=\"" + c.getName() + "\\n" + c.getType()
                     + "\" color=\"" + constraint_font_color + "\"]\n";
@@ -239,8 +274,11 @@ public class ToDotUtil {
     }
 
     private static String generateConstraintFKContent(Constraint c) {
+
+        logger.debug("Génération de la contrainte " + c.getName()
+                + " de type FK");
         String retour = "";
-        
+
         retour += generateColumnIdent(c.getColumn()) + " -> "
                 + generateColumnIdent(c.getReferences().getColumn())
                 + "[label=\"" + c.getName() + "\\n" + c.getType()

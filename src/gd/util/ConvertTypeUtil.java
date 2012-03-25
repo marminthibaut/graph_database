@@ -56,10 +56,22 @@ public class ConvertTypeUtil {
     }
 
     private static HashMap<String, String> createConvert(String sgbdtype,
-            Thing convertType) throws IOException, JDOMException {
+            Thing convertType) throws ConvertTypeUtilException {
 
-        Document doc = XmlUtil.parseXmlFile(ConvertTypeUtil.generateConfURL(
-                sgbdtype, convertType));
+        Document doc;
+        try {
+            doc = XmlUtil.parseXmlFile(ConvertTypeUtil.generateConfURL(
+                    sgbdtype, convertType));
+        } catch (IOException e) {
+            throw new ConvertTypeUtilException("Fail to open config file \""
+                    + ConvertTypeUtil.generateConfURL(sgbdtype, convertType)
+                    + "\".", e);
+        } catch (JDOMException e) {
+            throw new ConvertTypeUtilException(
+                    "XML Parsing error. Verify your config file syntax \""
+                            + ConvertTypeUtil.generateConfURL(sgbdtype,
+                                    convertType) + "\"", e);
+        }
 
         Element racine = doc.getRootElement();
 
@@ -89,7 +101,7 @@ public class ConvertTypeUtil {
     }
 
     private static HashMap<String, String> getConverts(String sgbdtype,
-            Thing convertType) throws IOException, JDOMException {
+            Thing convertType) throws ConvertTypeUtilException {
 
         HashMap<String, String> con = null;
 
@@ -131,9 +143,10 @@ public class ConvertTypeUtil {
      * @return Type générique
      * @throws JDOMException
      * @throws IOException
+     * @throws ConvertTypeUtilException
      */
     public static String convert(String sgbdtype, String type, Thing convertType)
-            throws IOException, JDOMException {
+            throws ConvertTypeUtilException {
         HashMap<String, String> con = getConverts(sgbdtype, convertType);
         String converted = con.get(type.toLowerCase());
         if (converted == null)
