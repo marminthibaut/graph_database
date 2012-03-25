@@ -18,6 +18,7 @@ import att.grappa.Parser;
 
 import gd.app.model.Table;
 import gd.util.ParamManager;
+import gd.app.util.GraphvizCmd;
 import gd.app.util.ToDotUtil;
 import gd.app.util.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
@@ -31,45 +32,7 @@ import gd.hibernate.util.HibernateUtil;
  */
 public class CommandLineInterface {
 
-    private static enum GraphvizCommand {
-        DOT, NEATO, TWOPI, CIRCO, FDP;
-
-        @Override
-        public String toString() {
-            switch (this) {
-                case DOT:
-                    return "dot";
-                case NEATO:
-                    return "neato";
-                case TWOPI:
-                    return "twopi";
-                case CIRCO:
-                    return "circo";
-                case FDP:
-                    return "fdp";
-                default:
-                    return "dot";
-            }
-        }
-
-        public static GraphvizCommand getInstance(String graphviz_command) {
-            switch (graphviz_command) {
-                case "dot":
-                    return DOT;
-                case "neato":
-                    return NEATO;
-                case "twopi":
-                    return TWOPI;
-                case "circo":
-                    return CIRCO;
-                case "fdp":
-                    return FDP;
-                default:
-                    return DOT;
-            }
-        }
-
-    }
+    
 
     /**
      * Main
@@ -81,7 +44,7 @@ public class CommandLineInterface {
         String username = "", password = "", db_name = null, sgbd_type = null;
         String host = "", port = null, output = null;
         boolean opt_show = false;
-        GraphvizCommand gv_cmd = GraphvizCommand.DOT;
+        GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
         ParamManager param_manager = new ParamManager(args);
         String arg;
@@ -133,7 +96,7 @@ public class CommandLineInterface {
                             break;
                         case "cmd":
                         case "c":
-                            gv_cmd = GraphvizCommand.getInstance(value);
+                            gv_cmd = GraphvizCmd.getInstance(value);
                             break;
                         case "output":
                         case "o":
