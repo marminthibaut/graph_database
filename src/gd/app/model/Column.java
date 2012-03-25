@@ -47,7 +47,7 @@ public class Column implements Serializable {
     public String getType() {
         return type;
     }
-    
+
     /**
      * @return Position de la colonne dans la table
      */
@@ -91,7 +91,7 @@ public class Column implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-    
+
     /**
      * @param position
      *            Position dans la table
