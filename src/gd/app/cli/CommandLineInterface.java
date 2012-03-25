@@ -25,6 +25,7 @@ import gd.app.model.Table;
 import gd.util.ImageFrame;
 import gd.util.ParamManager;
 import gd.app.util.ToDotUtil;
+import gd.app.util.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
 
 /**
@@ -183,8 +184,8 @@ public class CommandLineInterface {
                 }
             }
 
-        } catch (JDOMException | IOException | HibernateException
-                | InterruptedException e) {
+        } catch (IOException | HibernateException
+                | InterruptedException | ToDotUtilException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();

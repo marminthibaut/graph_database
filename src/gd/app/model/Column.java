@@ -2,12 +2,10 @@ package gd.app.model;
 
 import gd.util.ConvertTypeUtil;
 import gd.util.ConvertTypeUtil.Thing;
+import gd.util.ConvertTypeUtilException;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
-
-import org.jdom.JDOMException;
 
 /**
  * Représentation d'un attribut d'une table
@@ -148,21 +146,26 @@ public class Column implements Serializable {
 
     /**
      * @return Retourne vrai si la column est contrainte par une PK, faux sinon
+     * @throws ConvertTypeUtilException
      */
-    public boolean isPK() {
-        // TODO Gérer les PK
-        return false;
+    public boolean isPK() throws ConvertTypeUtilException {
+        Boolean isPK = false;
+
+        for (Constraint c : constraints) {
+            if (c.isPK()) {
+                isPK = true;
+                break;
+            }
+        }
+        return isPK;
     }
 
     /**
      * @return Type générique de la colonne, obtenue grâce à l'utilitaire de
      *         conversion (ConvertTypeUtil)
-     * @throws IOException
-     *             En cas d'erreur de lecteur du fichier XML de conversion
-     * @throws JDOMException
-     *             En cas d'erreur de parsing du fichier XML de conversion
+     * @throws ConvertTypeUtilException
      */
-    public String getGenericType() throws IOException, JDOMException {
+    public String getGenericType() throws ConvertTypeUtilException {
         return ConvertTypeUtil.convert(table.getSgbdtype(), type, Thing.COLUMN);
     }
 
