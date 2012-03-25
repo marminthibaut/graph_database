@@ -22,7 +22,6 @@ import att.grappa.GrappaPanel;
 import att.grappa.Parser;
 
 import gd.app.model.Table;
-import gd.util.ImageFrame;
 import gd.util.ParamManager;
 import gd.app.util.ToDotUtil;
 import gd.app.util.ToDotUtilException;
