@@ -19,11 +19,11 @@ public class ToDotUtil {
 
     private static DotColors table_bg_color;
     private static DotColors table_font_color;
-    private static String table_shape;
+    private static DotShapes table_shape;
     private static DotColors graph_bg_color;
     private static DotColors column_bg_color;
     private static DotColors column_font_color;
-    private static String column_shape;
+    private static DotShapes column_shape;
 
     private static DotColors constraint_fk_font_color;
     private static DotColors constraint_fk_arrow_color;
@@ -32,7 +32,7 @@ public class ToDotUtil {
     private static DotColors constraint_bg_color;
     private static DotColors constraint_font_color;
 
-    private static String constraint_shape;
+    private static DotShapes constraint_shape;
     private static Double space_scale;
     private static Double font_size_scale;
 
@@ -44,23 +44,23 @@ public class ToDotUtil {
      * Réinitialise la configuration d'origine
      */
     public static void resetConf() {
-        table_bg_color = DotColors.white;
-        table_font_color = DotColors.black;
-        table_shape = "box";
+        table_bg_color = DotColors.black;
+        table_font_color = DotColors.white;
+        table_shape = DotShapes.box;
         
-        graph_bg_color = DotColors.black;
+        graph_bg_color = DotColors.white;
         
         column_bg_color = DotColors.white;
-        column_font_color = DotColors.white;
-        column_shape = "box";
+        column_font_color = DotColors.black;
+        column_shape = DotShapes.box;
 
-        constraint_fk_font_color = DotColors.red;
-        constraint_fk_arrow_color = DotColors.darkred;
+        constraint_fk_font_color = DotColors.darkred;
+        constraint_fk_arrow_color = DotColors.red;
 
         constraint_arrow_color = DotColors.gray;
         constraint_bg_color = DotColors.gray;
         constraint_font_color = DotColors.white;
-        constraint_shape = "box";
+        constraint_shape = DotShapes.box;
 
         space_scale = 1.0;
         font_size_scale = 1.0;
