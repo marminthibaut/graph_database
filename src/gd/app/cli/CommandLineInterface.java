@@ -13,8 +13,8 @@ import gd.app.model.Table;
 import gd.util.ParamManager;
 import gd.app.util.GraphvizCmd;
 import gd.app.util.GrappaFrame;
-import gd.app.util.ToDotUtil;
-import gd.app.util.ToDotUtilException;
+import gd.app.util.todot.ToDotUtil;
+import gd.app.util.todot.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
 
 /**
