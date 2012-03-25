@@ -2,16 +2,11 @@ package gd.app.cli;
 
 import java.awt.Dimension;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 
 import javax.swing.JFrame;
-
-import org.jdom.JDOMException;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -23,6 +18,7 @@ import att.grappa.Parser;
 
 import gd.app.model.Table;
 import gd.util.ParamManager;
+import gd.app.util.GraphvizCmd;
 import gd.app.util.ToDotUtil;
 import gd.app.util.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
@@ -36,6 +32,8 @@ import gd.hibernate.util.HibernateUtil;
  */
 public class CommandLineInterface {
 
+    
+
     /**
      * Main
      * 
@@ -46,6 +44,7 @@ public class CommandLineInterface {
         String username = "", password = "", db_name = null, sgbd_type = null;
         String host = "", port = null, output = null;
         boolean opt_show = false;
+        GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
         ParamManager param_manager = new ParamManager(args);
         String arg;
@@ -95,6 +94,10 @@ public class CommandLineInterface {
                         case "port":
                             port = value;
                             break;
+                        case "cmd":
+                        case "c":
+                            gv_cmd = GraphvizCmd.getInstance(value);
+                            break;
                         case "output":
                         case "o":
                             output = value;
@@ -142,7 +145,8 @@ public class CommandLineInterface {
                 String url_dot_file = dir
                         + output.substring(0, output.lastIndexOf('.')) + ".dot";
                 String url_neato_file = dir
-                        + output.substring(0, output.lastIndexOf('.')) + ".neato";
+                        + output.substring(0, output.lastIndexOf('.'))
+                        + "_pos.dot";
                 BufferedWriter bw = new BufferedWriter(new FileWriter(
                         url_dot_file));
                 bw.write(dot);
@@ -151,21 +155,22 @@ public class CommandLineInterface {
                 // Generate a png image from the dot file
                 String url_image = dir + output;
                 // @todo externalise next command
-                String neato_cmd = "neato " + url_dot_file + " -Tpng -o "
-                        + url_image;
+                String neato_cmd = gv_cmd.toString() + " " + url_dot_file
+                        + " -Tpng -o " + url_image;
                 Process process = Runtime.getRuntime().exec(neato_cmd);
                 if (process.waitFor() == 0) {
-                    if (opt_show){
-                        //generate position with neato
-                        neato_cmd = "neato " + url_dot_file + " -o "
-                                + url_neato_file;
+                    if (opt_show) {
+                        // generate position with neato
+                        neato_cmd = gv_cmd.toString() + " " + url_dot_file
+                                + " -o " + url_neato_file;
                         process = Runtime.getRuntime().exec(neato_cmd);
                         if (process.waitFor() == 0) {
-                            Parser parser = new Parser(new FileReader(url_neato_file));
+                            Parser parser = new Parser(new FileReader(
+                                    url_neato_file));
                             parser.parse();
                             Graph graph = parser.getGraph();
-                            
-                            //affichage graphique
+
+                            // affichage graphique
                             JFrame frame = new JFrame("title");
                             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                             frame.setSize(800, 600);
@@ -174,7 +179,7 @@ public class CommandLineInterface {
                             frame.setContentPane(panel);
                             frame.pack();
                             frame.setVisible(true);
-                            
+
                         }
                     }
                 } else {
@@ -183,8 +188,8 @@ public class CommandLineInterface {
                 }
             }
 
-        } catch (IOException | HibernateException
-                | InterruptedException | ToDotUtilException e) {
+        } catch (IOException | HibernateException | InterruptedException
+                | ToDotUtilException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
@@ -197,15 +202,17 @@ public class CommandLineInterface {
     private static void printHelp() {
         System.out.println("Usage:\n"
                 + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n" + "\n"
-                + "Options:\n" + "	-u, --user <USERNAME>\n"
-                + "		use this username.\n" + "	-p, --password [PASSWORD]\n"
-                + "		use this password.\n" + " 	-h, --host <HOST>\n"
-                + "		use this host.\n" + "	--port <PORT>\n"
-                + "		use this port.\n" + "     -o, --output <FILE_NAME>\n"
-                + "             generate an png image width graphviz\n"
-                + "     --show \n"
-                + "             open a window with graph representation.\n"
-                + "	--help\n" + "		print this message.\n" + "\n");
+                + "Options:\n" + "    -u, --user <USERNAME>\n"
+                + "        use this username.\n" + "    -p, --password [PASSWORD]\n"
+                + "        use this password.\n" + "    -h, --host <HOST>\n"
+                + "        use this host.\n" + "    --port <PORT>\n"
+                + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
+                + "        generate an png image width graphviz\n"
+                + "    -c, --cmd <GRAPHVIZ_CMD>\n"
+                + "        choose your graphviz command (man graphviz).\n"
+                + "    --show \n"
+                + "        open a window with graph representation.\n"
+                + "    --help\n" + "        print this message.\n" + "\n");
     }
 
 }
