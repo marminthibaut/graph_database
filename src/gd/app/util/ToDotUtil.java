@@ -17,20 +17,20 @@ public class ToDotUtil {
 
     private static final Logger logger = Logger.getLogger(ToDotUtil.class);
 
-    private static String table_bg_color;
-    private static String table_font_color;
+    private static DotColors table_bg_color;
+    private static DotColors table_font_color;
     private static String table_shape;
-    private static String graph_bg_color;
-    private static String column_bg_color;
-    private static String column_font_color;
+    private static DotColors graph_bg_color;
+    private static DotColors column_bg_color;
+    private static DotColors column_font_color;
     private static String column_shape;
 
-    private static String constraint_fk_font_color;
-    private static String constraint_fk_arrow_color;
+    private static DotColors constraint_fk_font_color;
+    private static DotColors constraint_fk_arrow_color;
 
-    private static String constraint_arrow_color;
-    private static String constraint_bg_color;
-    private static String constraint_font_color;
+    private static DotColors constraint_arrow_color;
+    private static DotColors constraint_bg_color;
+    private static DotColors constraint_font_color;
 
     private static String constraint_shape;
     private static Double space_scale;
@@ -44,22 +44,22 @@ public class ToDotUtil {
      * Réinitialise la configuration d'origine
      */
     public static void resetConf() {
-        table_bg_color = "black";
-        table_font_color = "white";
+        table_bg_color = DotColors.white;
+        table_font_color = DotColors.black;
         table_shape = "box";
         
-        graph_bg_color = "white";
+        graph_bg_color = DotColors.black;
         
-        column_bg_color = "none";
-        column_font_color = "black";
+        column_bg_color = DotColors.white;
+        column_font_color = DotColors.white;
         column_shape = "box";
 
-        constraint_fk_font_color = "darkred";
-        constraint_fk_arrow_color = "red";
+        constraint_fk_font_color = DotColors.red;
+        constraint_fk_arrow_color = DotColors.darkred;
 
-        constraint_arrow_color = "gray";
-        constraint_bg_color = "#DDDDDD";
-        constraint_font_color = "black";
+        constraint_arrow_color = DotColors.gray;
+        constraint_bg_color = DotColors.gray;
+        constraint_font_color = DotColors.white;
         constraint_shape = "box";
 
         space_scale = 1.0;
