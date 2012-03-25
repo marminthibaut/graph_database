@@ -5,12 +5,14 @@
 <hibernate-mapping>
 	<class name="gd.app.model.Constraint">
 		<subselect>
-			SELECT c.constraint_name as name, c.table_name as table,
-			c.constraint_type
-			as type, cu.column_name as column,
-			rc.unique_constraint_name as
-			references, cu.table_name as
-			references_table
+			SELECT c.constraint_name as name,
+			c.table_name as table,
+			kcu.column_name as column,
+			c.constraint_type as type,
+			cu.column_name as
+			references_column,
+			cu.table_name as references_table,
+			rc.unique_constraint_name as references_constraint_name
 			FROM
 			information_schema.table_constraints c
 			INNER JOIN
@@ -21,6 +23,10 @@
 			information_schema.referential_constraints rc ON
 			(c.constraint_name =
 			rc.constraint_name)
+			LEFT OUTER JOIN
+			information_schema.key_column_usage AS kcu ON
+			(c.constraint_name =
+			kcu.constraint_name)
 			WHERE c.constraint_schema='public'
 		</subselect>
 		<composite-id>
@@ -63,9 +69,9 @@
 
 		<many-to-one name="references" class="gd.app.model.Constraint"
 			fetch="join" not-null="false" insert="false" update="false">
-			<column name="name" />
-			<column name="column" />
-			<column name="table" />
+			<column name="references_constraint_name" />
+			<column name="references_column" />
+			<column name="references_table" />
 		</many-to-one>
 
 	</class>
