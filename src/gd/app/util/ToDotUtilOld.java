@@ -19,22 +19,22 @@ public class ToDotUtilOld {
 
     private static final Logger logger = Logger.getLogger(ToDotUtilOld.class);
 
-    private static DotColors table_bg_color;
-    private static DotColors table_font_color;
-    private static DotShapes table_shape;
-    private static DotColors graph_bg_color;
-    private static DotColors column_bg_color;
-    private static DotColors column_font_color;
-    private static DotShapes column_shape;
+    private static DotColor table_bg_color;
+    private static DotColor table_font_color;
+    private static DotShape table_shape;
+    private static DotColor graph_bg_color;
+    private static DotColor column_bg_color;
+    private static DotColor column_font_color;
+    private static DotShape column_shape;
 
-    private static DotColors constraint_fk_font_color;
-    private static DotColors constraint_fk_arrow_color;
+    private static DotColor constraint_fk_font_color;
+    private static DotColor constraint_fk_arrow_color;
 
-    private static DotColors constraint_arrow_color;
-    private static DotColors constraint_bg_color;
-    private static DotColors constraint_font_color;
+    private static DotColor constraint_arrow_color;
+    private static DotColor constraint_bg_color;
+    private static DotColor constraint_font_color;
 
-    private static DotShapes constraint_shape;
+    private static DotShape constraint_shape;
     private static Double space_scale;
     private static Double font_size_scale;
 
@@ -46,23 +46,23 @@ public class ToDotUtilOld {
      * Réinitialise la configuration d'origine
      */
     public static void resetConf() {
-        table_bg_color = DotColors.black;
-        table_font_color = DotColors.white;
-        table_shape = DotShapes.box;
+        table_bg_color = DotColor.black;
+        table_font_color = DotColor.white;
+        table_shape = DotShape.box;
 
-        graph_bg_color = DotColors.white;
+        graph_bg_color = DotColor.white;
 
-        column_bg_color = DotColors.white;
-        column_font_color = DotColors.black;
-        column_shape = DotShapes.box;
+        column_bg_color = DotColor.white;
+        column_font_color = DotColor.black;
+        column_shape = DotShape.box;
 
-        constraint_fk_font_color = DotColors.darkred;
-        constraint_fk_arrow_color = DotColors.red;
+        constraint_fk_font_color = DotColor.darkred;
+        constraint_fk_arrow_color = DotColor.red;
 
-        constraint_arrow_color = DotColors.gray;
-        constraint_bg_color = DotColors.gray;
-        constraint_font_color = DotColors.white;
-        constraint_shape = DotShapes.box;
+        constraint_arrow_color = DotColor.gray;
+        constraint_bg_color = DotColor.gray;
+        constraint_font_color = DotColor.white;
+        constraint_shape = DotShape.box;
 
         space_scale = 1.0;
         font_size_scale = 1.0;

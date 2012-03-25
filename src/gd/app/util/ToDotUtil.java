@@ -15,55 +15,52 @@ import gd.util.ConvertTypeUtilException;
  */
 public class ToDotUtil {
 
-    private static final Logger logger = Logger.getLogger(ToDotUtilOld.class);
+    private static final Logger logger = Logger.getLogger(ToDotUtil.class);
 
-    private static DotColors table_bg_color;
-    private static DotColors table_font_color;
-    private static DotShapes table_shape;
-    private static DotColors graph_bg_color;
-    private static DotColors column_bg_color;
-    private static DotColors column_font_color;
-    private static DotShapes column_shape;
+    private static DotColor table_border_color;
+    private static DotColor table_bg_color;
+    private static DotColor table_font_color;
 
-    private static DotColors constraint_fk_font_color;
-    private static DotColors constraint_fk_arrow_color;
+    private static DotColor graph_bg_color;
 
-    private static DotColors constraint_arrow_color;
-    private static DotColors constraint_bg_color;
-    private static DotColors constraint_font_color;
+    private static DotColor constraint_fk_font_color;
+    private static DotColor constraint_fk_arrow_color;
+    private static DotStyle constraint_fk_arrow_style;
 
-    private static DotShapes constraint_shape;
-    private static Double space_scale;
-    private static Double font_size_scale;
+    private static DotColor constraint_arrow_color;
+    private static DotStyle constraint_arrow_style;
+    private static DotColor constraint_bg_color;
+    private static DotColor constraint_border_color;
+    private static DotColor constraint_font_color;
+    private static DotStyle constraint_style;
+
+    private static DotShape constraint_shape;
 
     static {
-        resetConf();
+        resetStyle();
     }
 
     /**
      * Réinitialise la configuration d'origine
      */
-    public static void resetConf() {
-        table_bg_color = DotColors.black;
-        table_font_color = DotColors.white;
-        table_shape = DotShapes.box;
+    public static void resetStyle() {
+        table_bg_color = DotColor.white;
+        table_border_color = DotColor.black;
+        table_font_color = DotColor.black;
 
-        graph_bg_color = DotColors.white;
+        graph_bg_color = DotColor.white;
 
-        column_bg_color = DotColors.white;
-        column_font_color = DotColors.black;
-        column_shape = DotShapes.box;
+        constraint_fk_font_color = DotColor.darkred;
+        constraint_fk_arrow_color = DotColor.darkred;
+        constraint_fk_arrow_style = DotStyle.solid;
 
-        constraint_fk_font_color = DotColors.darkred;
-        constraint_fk_arrow_color = DotColors.red;
-
-        constraint_arrow_color = DotColors.gray;
-        constraint_bg_color = DotColors.gray;
-        constraint_font_color = DotColors.white;
-        constraint_shape = DotShapes.box;
-
-        space_scale = 1.0;
-        font_size_scale = 1.0;
+        constraint_arrow_color = DotColor.black;
+        constraint_arrow_style = DotStyle.dotted;
+        constraint_bg_color = DotColor.gold;
+        constraint_font_color = DotColor.saddlebrown;
+        constraint_border_color = DotColor.black;
+        constraint_shape = DotShape.note;
+        constraint_style = DotStyle.filled;
     }
 
     /**
@@ -123,7 +120,10 @@ public class ToDotUtil {
         String retour = "";
 
         logger.debug("Génération de la table " + t.getName());
-        retour += generateTableIdent(t) + "[shape=\"plaintext\", label=<"
+        retour += generateTableIdent(t)
+                + "[shape=\"plaintext\", style=filled, color="
+                + table_border_color + ", fillcolor=" + table_bg_color
+                + ", fontcolor=" + table_font_color + ", label=<"
                 + "<table cellspacing=\"0\" border=\"1\" cellborder=\"1\">"
                 + "<tr><td cellpadding=\"10\"><b>" + t.getName()
                 + "</b></td></tr>";
@@ -186,14 +186,17 @@ public class ToDotUtil {
 
         try {
             if (c.isFK()) {
-                retour += generateConstraintFKContent(c);
+                retour += generateConstraintArrow(c);
             } else if (!c.isPK()) {
 
                 logger.debug("Génération de la contrainte " + c.getName()
                         + " de type " + c.getGenericType() + "(" + c.getType()
                         + ")");
-                retour += generateConstraintIdent(c)
-                        + " [shape=note, style=filled, fillcolor=gold, color=black, fontcolor=saddlebrown, label=\""
+                retour += generateConstraintIdent(c) + " [shape="
+                        + constraint_shape + ", style=" + constraint_style
+                        + ", fillcolor=" + constraint_bg_color + ", color="
+                        + constraint_border_color + ", fontcolor="
+                        + constraint_font_color + ", label=\""
                         + c.getGenericType() + "\\n" + c.getName() + "\"];";
 
                 retour += generateConstraintArrow(c);
@@ -209,19 +212,6 @@ public class ToDotUtil {
         return retour;
     }
 
-    private static String generateConstraintFKContent(Constraint c)
-            throws ConvertTypeUtilException {
-
-        logger.debug("Génération de la contrainte " + c.getName()
-                + " de type FK");
-        String retour = "";
-
-        retour += generateConstraintArrow(c) + " [label=\"" + c.getName()
-                + "\", len=2];";
-
-        return retour;
-    }
-
     private static String generateConstraintArrow(Constraint c)
             throws ConvertTypeUtilException {
         String retour = "";
@@ -230,12 +220,17 @@ public class ToDotUtil {
             retour = generateTableIdent(c.getTable()) + ":"
                     + generateColumnIdent(c.getColumn()) + " -> "
                     + generateTableIdent(c.getReferences().getTable()) + ":"
-                    + generateColumnIdent(c.getReferences().getColumn());
+                    + generateColumnIdent(c.getReferences().getColumn())
+                    + " [label=\"" + c.getName() + "\", color=\""
+                    + constraint_fk_arrow_color + "\", style=\""
+                    + constraint_fk_arrow_style + "\", fontcolor=\""
+                    + constraint_fk_font_color + "\"];";
         } else {
             retour = generateConstraintIdent(c) + " -> "
                     + generateTableIdent(c.getColumn().getTable()) + ":"
-                    + generateColumnIdent(c.getColumn())
-                    + " [style=dotted, arrowsize=0, len=2];";
+                    + generateColumnIdent(c.getColumn()) + " [style="
+                    + constraint_arrow_style + ", color=\""
+                    + constraint_arrow_color + "\" arrowsize=0, len=2];";
         }
 
         return retour;
