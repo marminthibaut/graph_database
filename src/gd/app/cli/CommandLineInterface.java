@@ -1,13 +1,25 @@
 package gd.app.cli;
 
+import java.awt.Dimension;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+
+import javax.swing.JFrame;
+
 import org.jdom.JDOMException;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+
+import att.grappa.Graph;
+import att.grappa.GrappaPanel;
+import att.grappa.Parser;
 
 import gd.app.model.Table;
 import gd.util.ImageFrame;
@@ -129,6 +141,8 @@ public class CommandLineInterface {
                 // Write a dot file
                 String url_dot_file = dir
                         + output.substring(0, output.lastIndexOf('.')) + ".dot";
+                String url_neato_file = dir
+                        + output.substring(0, output.lastIndexOf('.')) + ".neato";
                 BufferedWriter bw = new BufferedWriter(new FileWriter(
                         url_dot_file));
                 bw.write(dot);
@@ -141,8 +155,28 @@ public class CommandLineInterface {
                         + url_image;
                 Process process = Runtime.getRuntime().exec(neato_cmd);
                 if (process.waitFor() == 0) {
-                    if (opt_show)
-                        new ImageFrame(url_image, db_name);
+                    if (opt_show){
+                        //generate position with neato
+                        neato_cmd = "neato " + url_dot_file + " -o "
+                                + url_neato_file;
+                        process = Runtime.getRuntime().exec(neato_cmd);
+                        if (process.waitFor() == 0) {
+                            Parser parser = new Parser(new FileReader(url_neato_file));
+                            parser.parse();
+                            Graph graph = parser.getGraph();
+                            
+                            //affichage graphique
+                            JFrame frame = new JFrame("title");
+                            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                            frame.setSize(800, 600);
+                            GrappaPanel panel = new GrappaPanel(graph);
+                            panel.setPreferredSize(new Dimension(800, 600));
+                            frame.setContentPane(panel);
+                            frame.pack();
+                            frame.setVisible(true);
+                            
+                        }
+                    }
                 } else {
                     System.err.println("Command neato not found or fail : "
                             + neato_cmd);
@@ -152,6 +186,8 @@ public class CommandLineInterface {
         } catch (JDOMException | IOException | HibernateException
                 | InterruptedException e) {
             System.err.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             session.close();
         }
