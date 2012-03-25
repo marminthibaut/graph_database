@@ -264,11 +264,11 @@ public class ToDotUtil {
             logger.debug("Génération de la contrainte " + c.getName());
             retour += generateConstraintIdent(c) + "[shape=" + constraint_shape
                     + ", label=\"" + c.getName() + "\\n" + c.getType()
-                    + "\" color=\"" + constraint_font_color + "\"]\n";
+                    + "\", color=\"" + constraint_font_color + "\"]\n";
 
             retour += generateConstraintIdent(c) + " -> "
                     + generateColumnIdent(c.getColumn()) + "[color=\""
-                    + constraint_bg_color + "\" len=1.8]\n";
+                    + constraint_bg_color + "\", len=1.8]\n";
         }
         return retour;
     }
@@ -282,7 +282,7 @@ public class ToDotUtil {
         retour += generateColumnIdent(c.getColumn()) + " -> "
                 + generateColumnIdent(c.getReferences().getColumn())
                 + "[label=\"" + c.getName() + "\\n" + c.getType()
-                + "\" color=\"" + constraint_fk_font_color + "\" len=1.8]\n";
+                + "\", color=\"" + constraint_fk_font_color + "\" len=1.8]\n";
 
         return retour;
     }
