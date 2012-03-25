@@ -80,7 +80,7 @@ public class ToDotUtil {
      * @throws ToDotUtilException
      * 
      */
-    public static String convertToNeato(List<?> liste, String dbname)
+    public static String convertToDot(List<?> liste, String dbname)
             throws ToDotUtilException {
 
         logger.debug("Génération d'un graphe ToNeato");
