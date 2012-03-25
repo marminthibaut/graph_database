@@ -2,7 +2,7 @@ package gd.examples.graphviz;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
-import gd.app.util.ToDotUtil;
+import gd.app.util.todot.ToDotUtil;
 import gd.hibernate.util.*;
 
 import java.util.List;
