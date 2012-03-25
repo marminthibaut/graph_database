@@ -1,21 +1,13 @@
 package gd.app.cli;
 
-import java.awt.Dimension;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import javax.swing.JFrame;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-
-import att.grappa.Graph;
-import att.grappa.GrappaPanel;
-import att.grappa.Parser;
 
 import gd.app.model.Table;
 import gd.util.ParamManager;
