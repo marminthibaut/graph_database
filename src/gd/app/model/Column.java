@@ -157,6 +157,7 @@ public class Column implements Serializable {
                 break;
             }
         }
+        
         return isPK;
     }
 
