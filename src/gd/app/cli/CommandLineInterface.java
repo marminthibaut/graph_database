@@ -2,6 +2,7 @@ package gd.app.cli;
 
 import java.awt.Dimension;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import att.grappa.Parser;
 import gd.app.model.Table;
 import gd.util.ParamManager;
 import gd.app.util.GraphvizCmd;
+import gd.app.util.GrappaFrame;
 import gd.app.util.ToDotUtil;
 import gd.app.util.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
@@ -31,6 +33,8 @@ import gd.hibernate.util.HibernateUtil;
  * @version 0.1
  */
 public class CommandLineInterface {
+
+    private static final String TITLE = "db2graph";
 
     private static String username = "";
     private static String password = "";
@@ -79,23 +83,12 @@ public class CommandLineInterface {
 
                 if (opt_show) {
                     // generate position with neato
-                    int val = gv_cmd.exec(url_dot_file, url_dot_pos_file);
+                    int val = gv_cmd.exec("tt.dot", url_dot_pos_file);
                     if (val == 0) {
-                        Parser parser = new Parser(new FileReader(
-                                url_dot_pos_file));
-                        parser.parse();
-                        Graph graph = parser.getGraph();
-
                         // affichage graphique
-                        JFrame frame = new JFrame("title");
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.setSize(800, 600);
-                        GrappaPanel panel = new GrappaPanel(graph);
-                        panel.setPreferredSize(new Dimension(800, 600));
-                        frame.setContentPane(panel);
-                        frame.pack();
+                        GrappaFrame frame = new GrappaFrame(new File(
+                                url_dot_pos_file), TITLE);
                         frame.setVisible(true);
-
                     }
                 } else if (output != null) {
                     // Generate a png image from the dot file
