@@ -83,7 +83,7 @@ public class CommandLineInterface {
 
                 if (opt_show) {
                     // generate position with neato
-                    int val = gv_cmd.exec("tt.dot", url_dot_pos_file);
+                    int val = gv_cmd.exec(url_dot_file, url_dot_pos_file);
                     if (val == 0) {
                         // affichage graphique
                         GrappaFrame frame = new GrappaFrame(new File(
