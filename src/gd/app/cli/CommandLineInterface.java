@@ -10,8 +10,8 @@ import org.hibernate.Session;
 
 import gd.app.model.Table;
 import gd.util.ImageFrame;
-import gd.util.ParamManager;
-import gd.app.util.GraphvizCmd;
+import gd.util.ArgsManager;
+import gd.app.util.todot.GraphvizCmd;
 import gd.app.util.todot.ToDotUtil;
 import gd.app.util.todot.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
@@ -106,27 +106,27 @@ public class CommandLineInterface {
     }
 
     private static void manageParams(String args[]) {
-        ParamManager param_manager = new ParamManager(args);
+        ArgsManager param_manager = new ArgsManager(args);
         String arg;
 
         try {
             while ((arg = param_manager.getNextParam()) != null) {
-                if (!ParamManager.isAnOptionName(arg)) {
+                if (!ArgsManager.isAnOptionName(arg)) {
                     if (sgbd_type == null) {
-                        sgbd_type = ParamManager.getOptionName(arg);
+                        sgbd_type = ArgsManager.getOptionName(arg);
                     } else {
-                        db_name = ParamManager.getOptionName(arg);
+                        db_name = ArgsManager.getOptionName(arg);
                     }
                 } else {
-                    String param = ParamManager.getOptionName(arg);
-                    // @todo manage this next line width ParamManager
+                    String param = ArgsManager.getOptionName(arg);
+                    // @todo manage this next line width ArgsManager
                     String value = "";
 
                     if (!param.equals("show") && !param.equals("help")) {
                         value = param_manager.getNextParam();
                         if (value == null)
                             throw new Exception("wrong option : " + param);
-                        else if (ParamManager.isAnOptionName(value))
+                        else if (ArgsManager.isAnOptionName(value))
                             throw new Exception("wrong value for " + param
                                     + " option");
                     }

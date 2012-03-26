@@ -12,7 +12,7 @@ import org.hibernate.cfg.*;
  * permet également de récupérer la sessions courrante, ou de fermer la session
  * courante.
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  * 
  */

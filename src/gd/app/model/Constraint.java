@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Objet de représentation d'une contrainte.
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  * 
  */

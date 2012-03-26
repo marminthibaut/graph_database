@@ -1,9 +1,0 @@
-<?xml version="1.0" standalone="no" ?>
-<genericTypes>
-	<genericType name="PK">
-	</genericType>
-	<genericType name="FK">
-	</genericType>
-	<genericType name="CHECK">
-	</genericType>
-</genericTypes>

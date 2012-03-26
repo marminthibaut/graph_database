@@ -4,7 +4,8 @@
 package gd.app.model;
 
 /**
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
+ * @version 0.1
  * 
  */
 public enum ColumnType {

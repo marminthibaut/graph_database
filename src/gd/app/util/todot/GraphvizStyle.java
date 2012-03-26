@@ -3,10 +3,10 @@ package gd.app.util.todot;
 /**
  * Styles attribute for DOT language
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  */
-public enum DotStyle {
+public enum GraphvizStyle {
     /**
      * For nodes and edges
      */

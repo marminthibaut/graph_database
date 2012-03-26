@@ -15,7 +15,7 @@ import org.jdom.JDOMException;
  * 
  * Utilitaire de convertion des realtypes en fonction du type de SGBD
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  * 
  */
@@ -30,7 +30,7 @@ public class ConvertTypeUtil {
      * 
      * "Chose" à convertir
      * 
-     * @author thibaut
+     * @author Thibaut Marmin
      * 
      */
     public enum Thing {

@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Représentation d'un attribut d'une table
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  */
 public class Column implements Serializable {

@@ -4,7 +4,7 @@ package gd.util;
  * Classe exception personnalisée pour l'utilitaire de conversion des types
  * ConvertTypeUtil
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  */
 public class ConvertTypeUtilException extends Exception {

@@ -3,7 +3,7 @@ package gd.hibernate.util;
 /**
  * Enumération des SGBD pris en charge
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  */
 public enum SGBD {

@@ -12,7 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * @author clement
+ * Classe d'affichage d'une image dans une jFrame
+ * 
+ * @author Clément Sipieter <csipieter@gmail.com>
  * 
  */
 public class ImageFrame extends JFrame {

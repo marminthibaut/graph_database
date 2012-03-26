@@ -11,7 +11,10 @@ import att.grappa.GrappaPanel;
 import att.grappa.Parser;
 
 /**
- * @author Clément Sipieter
+ * Classe d'affichage d'une jFrame Grappa
+ * 
+ * @author Clément Sipieter <csipieter@gmail.com>
+ * @version 0.1
  * 
  */
 public class GrappaFrame extends JFrame {

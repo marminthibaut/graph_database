@@ -5,38 +5,38 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
-import gd.app.util.GraphvizCmd;
 import gd.util.ConvertTypeUtilException;
 
 /**
  * 
  * Classe utilitaire de génération de graphes au langage DOT
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
+ * @version 0.1
  * 
  */
 public class ToDotUtil {
 
     private static final Logger logger = Logger.getLogger(ToDotUtil.class);
 
-    private static DotColor table_border_color;
-    private static DotColor table_bg_color;
-    private static DotColor table_font_color;
+    private static GraphvizColor table_border_color;
+    private static GraphvizColor table_bg_color;
+    private static GraphvizColor table_font_color;
 
-    private static DotColor graph_bg_color;
+    private static GraphvizColor graph_bg_color;
 
-    private static DotColor constraint_fk_font_color;
-    private static DotColor constraint_fk_arrow_color;
-    private static DotStyle constraint_fk_arrow_style;
+    private static GraphvizColor constraint_fk_font_color;
+    private static GraphvizColor constraint_fk_arrow_color;
+    private static GraphvizStyle constraint_fk_arrow_style;
 
-    private static DotColor constraint_arrow_color;
-    private static DotStyle constraint_arrow_style;
-    private static DotColor constraint_bg_color;
-    private static DotColor constraint_border_color;
-    private static DotColor constraint_font_color;
-    private static DotStyle constraint_style;
+    private static GraphvizColor constraint_arrow_color;
+    private static GraphvizStyle constraint_arrow_style;
+    private static GraphvizColor constraint_bg_color;
+    private static GraphvizColor constraint_border_color;
+    private static GraphvizColor constraint_font_color;
+    private static GraphvizStyle constraint_style;
 
-    private static DotShape constraint_shape;
+    private static GraphvizShape constraint_shape;
 
     static {
         resetStyle();
@@ -46,23 +46,23 @@ public class ToDotUtil {
      * Réinitialise la configuration d'origine
      */
     public static void resetStyle() {
-        table_bg_color = DotColor.WHITE;
-        table_border_color = DotColor.BLACK;
-        table_font_color = DotColor.BLACK;
+        table_bg_color = GraphvizColor.WHITE;
+        table_border_color = GraphvizColor.BLACK;
+        table_font_color = GraphvizColor.BLACK;
 
-        graph_bg_color = DotColor.WHITE;
+        graph_bg_color = GraphvizColor.WHITE;
 
-        constraint_fk_font_color = DotColor.DARKRED;
-        constraint_fk_arrow_color = DotColor.DARKRED;
-        constraint_fk_arrow_style = DotStyle.SOLID;
+        constraint_fk_font_color = GraphvizColor.DARKRED;
+        constraint_fk_arrow_color = GraphvizColor.DARKRED;
+        constraint_fk_arrow_style = GraphvizStyle.SOLID;
 
-        constraint_arrow_color = DotColor.BLACK;
-        constraint_arrow_style = DotStyle.DOTTED;
-        constraint_bg_color = DotColor.GOLD;
-        constraint_font_color = DotColor.SADDLEBROWN;
-        constraint_border_color = DotColor.BLACK;
-        constraint_shape = DotShape.NOTE;
-        constraint_style = DotStyle.FILLED;
+        constraint_arrow_color = GraphvizColor.BLACK;
+        constraint_arrow_style = GraphvizStyle.DOTTED;
+        constraint_bg_color = GraphvizColor.GOLD;
+        constraint_font_color = GraphvizColor.SADDLEBROWN;
+        constraint_border_color = GraphvizColor.BLACK;
+        constraint_shape = GraphvizShape.NOTE;
+        constraint_style = GraphvizStyle.FILLED;
     }
 
     /**

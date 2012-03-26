@@ -10,7 +10,8 @@ import org.jdom.input.*;
  * 
  * Utilitaire de parsing XML
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
+ * @version 0.1
  * 
  */
 public class XmlUtil {

@@ -1,10 +1,13 @@
 package gd.util;
 
 /**
+ * Classe de gestion des arguments d'une ligne de commande
+ * 
  * @author Clément Sipieter <csipieter@gmail.com>
+ * @version 0.1
  * 
  */
-public class ParamManager {
+public class ArgsManager {
 
     private String[] args;
     private int cursor;
@@ -13,7 +16,7 @@ public class ParamManager {
      * @param args
      *            the array of arguments to manage
      */
-    public ParamManager(String[] args) {
+    public ArgsManager(String[] args) {
         this.cursor = -1;
         this.args = args;
     }

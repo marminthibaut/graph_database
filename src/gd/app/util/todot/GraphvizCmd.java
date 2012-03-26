@@ -1,12 +1,16 @@
 /**
  * 
  */
-package gd.app.util;
+package gd.app.util.todot;
 
 import java.io.IOException;
 
 /**
- * @author clement
+ * 
+ * Enumeration des commandes Graphviz
+ * 
+ * @author Clément Sipieter <csipieter@gmail.com>
+ * @version 0.1
  * 
  */
 public enum GraphvizCmd {

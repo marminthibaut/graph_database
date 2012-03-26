@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * Représentation d'une Table
  * 
- * @author thibaut
+ * @author Thibaut Marmin <marminthibaut@gmail.com>
  * @version 0.1
  * 
  */
