@@ -101,7 +101,8 @@ public class ToDotUtil {
     /**
      * @param gv_cmd
      * @param dot_file_path
-     * @param img_file_path the output file.
+     * @param img_file_path
+     *            the output file.
      * @return 0 if system call exited correctly, another value otherwise.
      */
     public static int dotToSvg(GraphvizCmd gv_cmd, String dot_file_path,
@@ -112,7 +113,8 @@ public class ToDotUtil {
     /**
      * @param gv_cmd
      * @param dot_file_path
-     * @param img_file_path the output file.
+     * @param img_file_path
+     *            the output file.
      * @return 0 if system call exited correctly, another value otherwise.
      */
     public static int dotToPng(GraphvizCmd gv_cmd, String dot_file_path,
