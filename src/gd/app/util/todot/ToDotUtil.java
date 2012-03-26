@@ -187,6 +187,22 @@ public class ToDotUtil {
         try {
             if (c.isFK()) {
                 retour += generateConstraintArrow(c);
+            } else if (c.isCheck() && c.getCheck_clause() != null) {
+
+                logger.debug("Génération de la contrainte " + c.getName()
+                        + " de type " + c.getGenericType() + " (" + c.getType()
+                        + ")");
+
+                retour += generateConstraintIdent(c) + " [shape="
+                        + constraint_shape + ", style=" + constraint_style
+                        + ", fillcolor=" + constraint_bg_color + ", color="
+                        + constraint_border_color + ", fontcolor="
+                        + constraint_font_color + ", label=\""
+                        + c.getGenericType() + "\\n" + c.getName()
+                        + "\\nClause = \\\"" + c.getCheck_clause() + "\\\"\"];";
+
+                retour += generateConstraintArrow(c);
+
             } else if (!c.isPK()) {
 
                 logger.debug("Génération de la contrainte " + c.getName()
