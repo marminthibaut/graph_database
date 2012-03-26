@@ -1,7 +1,6 @@
 package gd.app.cli;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -10,9 +9,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import gd.app.model.Table;
+import gd.util.ImageFrame;
 import gd.util.ParamManager;
 import gd.app.util.GraphvizCmd;
-import gd.app.util.GrappaFrame;
 import gd.app.util.todot.ToDotUtil;
 import gd.app.util.todot.ToDotUtilException;
 import gd.hibernate.util.HibernateUtil;
@@ -65,7 +64,6 @@ public class CommandLineInterface {
                 String racine_file = (output == null) ? "out" : output
                         .substring(0, output.lastIndexOf('.'));
                 String url_dot_file = dir + racine_file + ".dot";
-                String url_dot_pos_file = dir + racine_file + "_pos.dot";
 
                 // Write a dot file
                 BufferedWriter bw = new BufferedWriter(new FileWriter(
@@ -73,40 +71,36 @@ public class CommandLineInterface {
                 bw.write(dot);
                 bw.close();
 
-                if (opt_show) {
-                    // generate position with neato
-                    int val = gv_cmd.exec(url_dot_file, url_dot_pos_file);
-                    if (val == 0) {
-                        // affichage graphique
-                        GrappaFrame frame = new GrappaFrame(new File(
-                                url_dot_pos_file), TITLE);
-                        frame.setVisible(true);
-                    }
-                } else if (output != null) {
-                    // Generate a png image from the dot file
-                    // @todo treat other image format
-                    String url_image = dir + output;
+                // Generate a png image from the dot file
+                // @todo treat other image format
+                String url_image = dir + output;
+                if (output != null) {
 
                     // System call to graphviz
-                    // @todo externalise next command
-                    String neato_cmd = gv_cmd.toString() + " " + url_dot_file
-                            + " -Tpng -o " + url_image;
-                    Process process = Runtime.getRuntime().exec(neato_cmd);
-                    if (process.waitFor() != 0)
-                        System.err.println("Command neato not found or fail : "
-                                + neato_cmd);
+                    if (ToDotUtil.dotToSvg(gv_cmd, url_dot_file, url_image) != 0)
+                        System.err
+                                .println("Erreur lors de la génération du svg.");
 
+                }
+                if (opt_show) {
+                    String png_image = dir + racine_file + ".png";
+                    // System call to graphviz
+                    if (ToDotUtil.dotToPng(gv_cmd, url_dot_file, png_image) != 0)
+                        System.err
+                                .println("Erreur lors de la génération du png.");
+
+                    new ImageFrame(png_image, TITLE);
                 }
 
             }
 
-        } catch (IOException | HibernateException | InterruptedException
-                | ToDotUtilException e) {
+            session.close();
+
+        } catch (IOException | HibernateException | ToDotUtilException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            session.close();
         }
 
     }
@@ -127,7 +121,6 @@ public class CommandLineInterface {
                     String param = ParamManager.getOptionName(arg);
                     // @todo manage this next line width ParamManager
                     String value = "";
-                    System.out.println("-" + param + "-");
 
                     if (!param.equals("show") && !param.equals("help")) {
                         value = param_manager.getNextParam();
