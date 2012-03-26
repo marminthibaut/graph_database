@@ -8,5 +8,10 @@ package gd.app.util.todot;
  */
 @SuppressWarnings("javadoc")
 public enum DotShape {
-    box, polygon, ellipse, oval, circle, point, egg, triangle, plaitext, diamond, trapezium, parallelogram, house, pentagon, hexagon, septagon, octagon, doublecircle, doubleoctagon, tripleoctagon, invtriangle, invtrapezium, invhouse, Mdiamond, Msquare, Mcircle, rect, rectangle, square, none, note, tab, folder, box3d, component
+    BOX,POLYGON,ELLIPSE,OVAL,CIRCLE,POINT,EGG,TRIANGLE,PLAITEXT,DIAMOND,TRAPEZIUM,PARALLELOGRAM,HOUSE,PENTAGON,HEXAGON,SEPTAGON,OCTAGON,DOUBLECIRCLE,DOUBLEOCTAGON,TRIPLEOCTAGON,INVTRIANGLE,INVTRAPEZIUM,INVHOUSE,MDIAMOND,MSQUARE,MCIRCLE,RECT,RECTANGLE,SQUARE,NONE,NOTE,TAB,FOLDER,BOX3D,COMPONENT;
+    
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }

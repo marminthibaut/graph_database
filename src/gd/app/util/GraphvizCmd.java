@@ -23,20 +23,7 @@ public enum GraphvizCmd {
 
     @Override
     public String toString() {
-        switch (this) {
-            case DOT:
-                return "dot";
-            case NEATO:
-                return "neato";
-            case TWOPI:
-                return "twopi";
-            case CIRCO:
-                return "circo";
-            case FDP:
-                return "fdp";
-            default:
-                return "dot";
-        }
+        return super.toString().toLowerCase();
     }
 
     /**

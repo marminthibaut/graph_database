@@ -10,37 +10,42 @@ public enum DotStyle {
     /**
      * For nodes and edges
      */
-    dashed,
+    DASHED,
     /**
      * For nodes and edges
      */
-    dotted,
+    DOTTED,
     /**
      * For nodes and edges
      */
-    solid,
+    SOLID,
     /**
      * For nodes and edges
      */
-    invis,
+    INVIS,
     /**
      * For nodes and edges
      */
-    bold,
+    BOLD,
     /**
      * For edges only
      */
-    tapered,
+    TAPERED,
     /**
      * For nodes only
      */
-    filled,
+    FILLED,
     /**
      * For nodes only
      */
-    diagonals,
+    DIAGONALS,
     /**
      * For nodes only
      */
-    rounded
+    ROUNDED;
+
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
+    }
 }

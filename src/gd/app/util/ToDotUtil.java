@@ -49,26 +49,23 @@ public class ToDotUtil {
      * Réinitialise la configuration d'origine
      */
     public static void resetConf() {
-        table_bg_color = DotColor.black;
-        table_font_color = DotColor.white;
-        table_shape = DotShape.box;
+        table_bg_color = DotColor.BLACK;
+        table_font_color = DotColor.WHITE;
+        table_shape = DotShape.BOX;
 
-        graph_bg_color = DotColor.white;
+        graph_bg_color = DotColor.WHITE;
 
-        column_bg_color = DotColor.white;
-        column_font_color = DotColor.black;
-        column_shape = DotShape.box;
+        column_bg_color = DotColor.WHITE;
+        column_font_color = DotColor.BLACK;
+        column_shape = DotShape.BOX;
 
-        constraint_fk_font_color = DotColor.darkred;
-        constraint_fk_arrow_color = DotColor.red;
+        constraint_fk_font_color = DotColor.DARKRED;
+        constraint_fk_arrow_color = DotColor.RED;
 
-        constraint_arrow_color = DotColor.gray;
-        constraint_bg_color = DotColor.gray;
-        constraint_font_color = DotColor.white;
-        constraint_shape = DotShape.box;
-
-        space_scale = 1.0;
-        font_size_scale = 1.0;
+        constraint_arrow_color = DotColor.GRAY;
+        constraint_bg_color = DotColor.GRAY;
+        constraint_font_color = DotColor.WHITE;
+        constraint_shape = DotShape.BOX;
     }
 
     /**
