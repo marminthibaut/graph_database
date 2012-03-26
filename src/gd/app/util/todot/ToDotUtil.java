@@ -1,9 +1,11 @@
 package gd.app.util.todot;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
+import gd.app.util.GraphvizCmd;
 import gd.util.ConvertTypeUtilException;
 
 /**
@@ -94,6 +96,43 @@ public class ToDotUtil {
 
         retour += "}";
         return retour;
+    }
+
+    /**
+     * @param gv_cmd
+     * @param dot_file_path
+     * @param img_file_path the output file.
+     * @return 0 if system call exited correctly, another value otherwise.
+     */
+    public static int dotToSvg(GraphvizCmd gv_cmd, String dot_file_path,
+            String img_file_path) {
+        return dotToImg(gv_cmd, dot_file_path, img_file_path, "svg");
+    }
+
+    /**
+     * @param gv_cmd
+     * @param dot_file_path
+     * @param img_file_path the output file.
+     * @return 0 if system call exited correctly, another value otherwise.
+     */
+    public static int dotToPng(GraphvizCmd gv_cmd, String dot_file_path,
+            String img_file_path) {
+        return dotToImg(gv_cmd, dot_file_path, img_file_path, "png");
+    }
+
+    private static int dotToImg(GraphvizCmd gv_cmd, String dot_file_path,
+            String img_file_path, String image_type) {
+        int return_value = -1;
+        String cmd = gv_cmd.toString() + " " + dot_file_path + " -T"
+                + image_type + " -o " + img_file_path;
+        Process process;
+        try {
+            process = Runtime.getRuntime().exec(cmd);
+            return_value = process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            logger.error(e.getMessage());
+        }
+        return return_value;
     }
 
     private static String generateTableIdent(Table t) {
