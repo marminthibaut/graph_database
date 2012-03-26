@@ -62,10 +62,10 @@ public class ImageFrame extends JFrame {
             System.out.println(image_path);
             try {
                 img = ImageIO.read(new File(image_path));
+                setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
             } catch (IOException e) {
                 System.err.println(e.getMessage());
             }
-            setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
         }
 
         public void paintComponent(Graphics g) {
