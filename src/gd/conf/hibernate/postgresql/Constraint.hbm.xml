@@ -4,31 +4,40 @@
 <!-- Generated 19 mars 2012 11:48:49 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
 	<class name="gd.app.model.Constraint">
-		<subselect>
-			SELECT c.constraint_name as name,
-			c.table_name as table,
-			kcu.column_name as column,
-			c.constraint_type as type,
-			cu.column_name as
-			references_column,
-			cu.table_name as references_table,
-			rc.unique_constraint_name as references_constraint_name
-			FROM
-			information_schema.table_constraints c
-			INNER JOIN
-			information_schema.constraint_column_usage cu ON
-			(c.constraint_name =
-			cu.constraint_name)
-			LEFT OUTER JOIN
-			information_schema.referential_constraints rc ON
-			(c.constraint_name =
-			rc.constraint_name)
-			LEFT OUTER JOIN
-			information_schema.key_column_usage AS kcu ON
-			(c.constraint_name =
-			kcu.constraint_name)
-			WHERE c.constraint_schema='public'
-		</subselect>
+		<subselect><![CDATA[
+SELECT c.constraint_name as name,
+c.table_name as table,
+kcu.column_name as column,
+c.constraint_type as type,
+cu.column_name as
+references_column,
+cu.table_name as references_table,
+rc.unique_constraint_name as references_constraint_name,
+NULL as check_clause
+FROM
+information_schema.table_constraints c
+INNER JOIN information_schema.constraint_column_usage cu ON (c.constraint_name = cu.constraint_name)
+LEFT OUTER JOIN information_schema.referential_constraints rc ON (c.constraint_name = rc.constraint_name)
+LEFT OUTER JOIN information_schema.key_column_usage AS kcu ON (c.constraint_name = kcu.constraint_name)
+WHERE c.constraint_schema='public'
+AND c.constraint_type <> 'CHECK'
+UNION ALL
+SELECT c.constraint_name as name,
+c.table_name as table,
+cu.column_name as column,
+c.constraint_type as type,
+cu.column_name as references_column,
+cu.table_name as references_table,
+rc.unique_constraint_name as references_constraint_name,
+ccon.check_clause as check_clause
+FROM information_schema.table_constraints c
+INNER JOIN information_schema.constraint_column_usage cu ON (c.constraint_name = cu.constraint_name)
+LEFT OUTER JOIN information_schema.referential_constraints rc ON (c.constraint_name = rc.constraint_name)
+LEFT OUTER JOIN information_schema.key_column_usage AS kcu ON (c.constraint_name = kcu.constraint_name)
+LEFT OUTER JOIN information_schema.check_constraints AS ccon ON (c.constraint_name = ccon.constraint_name)
+WHERE c.constraint_schema='public'
+AND c.constraint_type = 'CHECK'
+		]]></subselect>
 		<composite-id>
 			<key-property name="name" type="java.lang.String"
 				column="NAME" />
@@ -47,10 +56,16 @@
 		</many-to-one>
 
 		<property name="type">
-			<column name="TYPE" />
-			<type name="java.lang.String">
-			</type>
-		</property>
+            <column name="TYPE" />
+            <type name="java.lang.String">
+            </type>
+        </property>
+        
+        <property name="check_clause" not-null="false">
+            <column name="CHECK_CLAUSE" />
+            <type name="java.lang.String">
+            </type>
+        </property>
 
 		<many-to-one name="column" class="gd.app.model.Column"
 			fetch="join" insert="false" update="false">

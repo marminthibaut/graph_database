@@ -23,6 +23,7 @@ public class Constraint implements Serializable {
     private String name;
     private Table table;
     private String type;
+    private String check_clause;
     private Column column;
 
     private Constraint references;
@@ -53,6 +54,13 @@ public class Constraint implements Serializable {
      */
     public String getType() {
         return type;
+    }
+
+    /**
+     * @return Clause de la contrainte de type check
+     */
+    public String getCheck_clause() {
+        return check_clause;
     }
 
     /**
@@ -108,6 +116,14 @@ public class Constraint implements Serializable {
      */
     public void setType(String type) {
         this.type = type;
+    }
+
+    /**
+     * @param check_clause
+     *            Clause de la contrainte
+     */
+    public void setCheck_clause(String check_clause) {
+        this.check_clause = check_clause;
     }
 
     /**
@@ -185,6 +201,14 @@ public class Constraint implements Serializable {
      */
     public boolean isPK() throws ConvertTypeUtilException {
         return getGenericType().equals("PK");
+    };
+
+    /**
+     * @return Vrai si la contrainte est de type CHECK, faux sinon
+     * @throws ConvertTypeUtilException
+     */
+    public boolean isCheck() throws ConvertTypeUtilException {
+        return getGenericType().equals("CHECK");
     };
 
     /**
