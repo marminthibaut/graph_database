@@ -190,7 +190,7 @@ public class CommandLineInterface
         + "        use this password.\n" + "    -h, --host <HOST>\n"
         + "        use this host.\n" + "    --port <PORT>\n"
         + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
-        + "        generate an png image width graphviz\n"
+        + "        generate a png image with graphviz\n"
         + "    -c, --cmd <GRAPHVIZ_CMD>\n"
         + "        choose your graphviz command (man graphviz).\n"
         + "    --show \n"
