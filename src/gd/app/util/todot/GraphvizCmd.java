@@ -44,7 +44,10 @@ public enum GraphvizCmd {
         try {
             process = Runtime.getRuntime().exec(graphviz_cmd);
             return_value = process.waitFor();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+            return_value = -1;
+        } catch (InterruptedException e) {
             e.printStackTrace();
             return_value = -1;
         }
@@ -58,20 +61,18 @@ public enum GraphvizCmd {
      *         value DOT is returned
      */
     public static GraphvizCmd getInstance(String graphviz_command) {
-        switch (graphviz_command) {
-            case "dot":
-                return DOT;
-            case "neato":
-                return NEATO;
-            case "twopi":
-                return TWOPI;
-            case "circo":
-                return CIRCO;
-            case "fdp":
-                return FDP;
-            default:
-                return DOT;
-        }
+        if (graphviz_command.equals("dot"))
+            return DOT;
+        if (graphviz_command.equals("neato"))
+            return NEATO;
+        if (graphviz_command.equals("twopi"))
+            return TWOPI;
+        if (graphviz_command.equals("circo"))
+            return CIRCO;
+        if (graphviz_command.equals("fdp"))
+            return FDP;
+
+        return DOT;
     }
 
 }
