@@ -131,8 +131,10 @@ public class ToDotUtil {
         try {
             process = Runtime.getRuntime().exec(cmd);
             return_value = process.waitFor();
-        } catch (IOException | InterruptedException e) {
-            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e);
+        }catch (InterruptedException e){
+            logger.error(e);
         }
         return return_value;
     }
