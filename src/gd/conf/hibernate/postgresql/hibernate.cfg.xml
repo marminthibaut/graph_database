@@ -7,7 +7,6 @@
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         
-        <mapping resource="gd/examples/personne/PSQL.Personne.hbm.xml"/>
         <mapping resource="gd/conf/hibernate/postgresql/Table.hbm.xml"/>
         <mapping resource="gd/conf/hibernate/postgresql/Column.hbm.xml"/>
         <mapping resource="gd/conf/hibernate/postgresql/Constraint.hbm.xml"/> 
