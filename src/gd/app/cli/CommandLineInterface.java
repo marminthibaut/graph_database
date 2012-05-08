@@ -155,7 +155,7 @@ public class CommandLineInterface
                   port = value;
                 else if (param.equals("cmd") || param.equals("c"))
                   gv_cmd = GraphvizCmd.getInstance(value);
-                else if (param.equals("output"))
+                else if (param.equals("output") || param.equals("o"))
                   output = value;
                 else if (param.equals("show"))
                   opt_show = true;
