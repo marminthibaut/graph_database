@@ -23,27 +23,28 @@ import gd.hibernate.util.HibernateUtil;
  * @author Clément Sipieter <csipieter@gmail.com>
  * @version 0.1
  */
-public class CommandLineInterface {
+public class CommandLineInterface
+{
 
-    private static final String TITLE = "db2graph";
+  private static final String TITLE = "db2graph";
 
-    private static String username = "";
-    private static String password = "";
-    private static String db_name = null;
-    private static String sgbd_type = null;
-    private static String host = "";
-    private static String port = null;
-    private static String output = null;
-    private static boolean opt_show = false;
-    private static GraphvizCmd gv_cmd = GraphvizCmd.DOT;
+  private static String username = "";
+  private static String password = "";
+  private static String db_name = null;
+  private static String sgbd_type = null;
+  private static String host = "";
+  private static String port = null;
+  private static String output = null;
+  private static boolean opt_show = false;
+  private static GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
-    /**
-     * Main
-     * 
-     * @param args
-     *            see --help.
-     */
-    public static void main(String[] args) {
+  /**
+   * Main
+   * 
+   * @param args
+   *          see --help.
+   */
+  public static void main(String[] args) {
 
         Session session = null;
         String dot = "";
@@ -96,109 +97,105 @@ public class CommandLineInterface {
 
             session.close();
 
-        } catch (IOException | HibernateException | ToDotUtilException e) {
-            System.err.println(e.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+          System.err.println(e.getMessage());
         } finally {
         }
 
     }
 
-    private static void manageParams(String args[]) {
-        ArgsManager param_manager = new ArgsManager(args);
-        String arg;
+  private static void manageParams(String args[])
+  {
+    ArgsManager param_manager = new ArgsManager(args);
+    String arg;
 
-        try {
-            while ((arg = param_manager.getNextParam()) != null) {
-                if (!ArgsManager.isAnOptionName(arg)) {
-                    if (sgbd_type == null) {
-                        sgbd_type = ArgsManager.getOptionName(arg);
-                    } else {
-                        db_name = ArgsManager.getOptionName(arg);
-                    }
-                } else {
-                    String param = ArgsManager.getOptionName(arg);
-                    // @todo manage this next line width ArgsManager
-                    String value = "";
+    try
+      {
+        while ((arg = param_manager.getNextParam()) != null)
+          {
+            if (!ArgsManager.isAnOptionName(arg))
+              {
+                if (sgbd_type == null)
+                  {
+                    sgbd_type = ArgsManager.getOptionName(arg);
+                  }
+                else
+                  {
+                    db_name = ArgsManager.getOptionName(arg);
+                  }
+              }
+            else
+              {
+                String param = ArgsManager.getOptionName(arg);
+                // @todo manage this next line width ArgsManager
+                String value = "";
 
-                    if (!param.equals("show") && !param.equals("help")) {
-                        value = param_manager.getNextParam();
-                        if (value == null)
-                            throw new Exception("wrong option : " + param);
-                        else if (ArgsManager.isAnOptionName(value))
-                            throw new Exception("wrong value for " + param
-                                    + " option");
-                    }
+                if (!param.equals("show") && !param.equals("help"))
+                  {
+                    value = param_manager.getNextParam();
+                    if (value == null)
+                      throw new Exception("wrong option : " + param);
+                    else if (ArgsManager.isAnOptionName(value))
+                      throw new Exception("wrong value for " + param
+                          + " option");
+                  }
 
-                    switch (param) {
-                        case "host":
-                        case "h":
-                            host = value;
-                            break;
-                        case "user":
-                        case "u":
-                            username = value;
-                            break;
-                        case "password":
-                        case "p":
-                            password = value;
-                            break;
-                        case "dbname":
-                            db_name = value;
-                            break;
-                        case "sgbd_type":
+                if (param.equals("host") || param.equals("h"))
+                  host = value;
+                else if (param.equals("user") || param.equals("u"))
+                  username = value;
+                else if (param.equals("password") || param.equals("p"))
+                  password = value;
+                else if (param.equals("dbname"))
+                  db_name = value;
+                else if (param.equals("sgbd_type"))
+                  {
+                  }
+                else if (param.equals("port"))
+                  port = value;
+                else if (param.equals("cmd") || param.equals("c"))
+                  gv_cmd = GraphvizCmd.getInstance(value);
+                else if (param.equals("output"))
+                  output = value;
+                else if (param.equals("show"))
+                  opt_show = true;
+                else if (param.equals("help"))
+                  {
+                    printHelp();
+                    System.exit(0);
+                  }
+                else
+                  throw new Exception("wrong option : " + arg);
 
-                            break;
-                        case "port":
-                            port = value;
-                            break;
-                        case "cmd":
-                        case "c":
-                            gv_cmd = GraphvizCmd.getInstance(value);
-                            break;
-                        case "output":
-                        case "o":
-                            output = value;
-                            break;
-                        case "show":
-                            opt_show = true;
-                            break;
-                        case "help":
-                            printHelp();
-                            System.exit(0);
-                        default:
-                            throw new Exception("wrong option : " + arg);
-                    }
+              }
+          }
 
-                }
-            }
+        if (sgbd_type == null || db_name == null)
+          throw new Exception("Bad usage");
 
-            if (sgbd_type == null || db_name == null)
-                throw new Exception("Bad usage");
+      }
+    catch (Exception e)
+      {
+        System.err.println(e.getMessage());
+        printHelp();
+        System.exit(1);
+      }
+  }
 
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            printHelp();
-            System.exit(1);
-        }
-    }
-
-    private static void printHelp() {
-        System.out.println("Usage:\n"
-                + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n" + "\n"
-                + "Options:\n" + "    -u, --user <USERNAME>\n"
-                + "        use this username.\n"
-                + "    -p, --password [PASSWORD]\n"
-                + "        use this password.\n" + "    -h, --host <HOST>\n"
-                + "        use this host.\n" + "    --port <PORT>\n"
-                + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
-                + "        generate an png image width graphviz\n"
-                + "    -c, --cmd <GRAPHVIZ_CMD>\n"
-                + "        choose your graphviz command (man graphviz).\n"
-                + "    --show \n"
-                + "        open a window with graph representation.\n"
-                + "    --help\n" + "        print this message.\n" + "\n");
-    }
+  private static void printHelp()
+  {
+    System.out.println("Usage:\n" + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n"
+        + "\n" + "Options:\n" + "    -u, --user <USERNAME>\n"
+        + "        use this username.\n" + "    -p, --password [PASSWORD]\n"
+        + "        use this password.\n" + "    -h, --host <HOST>\n"
+        + "        use this host.\n" + "    --port <PORT>\n"
+        + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
+        + "        generate an png image width graphviz\n"
+        + "    -c, --cmd <GRAPHVIZ_CMD>\n"
+        + "        choose your graphviz command (man graphviz).\n"
+        + "    --show \n"
+        + "        open a window with graph representation.\n" + "    --help\n"
+        + "        print this message.\n" + "\n");
+  }
 
 }
