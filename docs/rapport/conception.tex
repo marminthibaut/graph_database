@@ -46,18 +46,20 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 
 
 \section{Visualisation de graphes}
+	
+	Pour cette visualisation, nous souhaitons avoir une représentation la plus proche possible d'une représentation connue de schéma de base de données afin que celle-ci soit rapidement compréhensible par des personnes averties. Pour ce faire nous avons à notre dispositions plusieurs librairie permettant l'organisation et la visualisation de graphe.
+
   \subsection{différentes librairies}
+  	\paragraph{graphviz} Graph Visualization Software\\
+			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence} développé par AT\&T et les laboratoirs Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe \og DOT \fg{}. C'est un des logiciel les plus utilisé pour l'affichage de graphes, il permet notamment de représenter des nœuds présentant une forme complexe. De plus, il offre une interface en ligne de commande\footnote{man graphviz} aisément utilisable par un programme tierce.
 		\paragraph{JUNG} Java Universal Network/Graph Framework\\
-				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{http://jung.sourceforge.net/license.txt} développé par l'université de Californie.
-				inconvénients : dernières fonctionnalités dot non prise en charqe.
+				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{http://jung.sourceforge.net/license.txt} développé par l'université de Californie. Cette API semble bien fourni et documentée, mais ne semble pas être en mesure d'afficher des nœuds aux formats complexes. 
 		\paragraph{Grappa} A Java \texttt{gra}ph \texttt{pa}ckage\\
-			Grappa est une API java de visualisation et manipulation de graphes. C'est un logiciel libre sous CPL\footnote{CPL, Common Public Licence} développé par John Mocenigo d'AT\&T.
-				 entrée : fichier dot
-		\paragraph{graphviz} Graph Visualization Software\\
-			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence} développé par AT\&T et les laboratoirs Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe \og DOT \fg{}. Il offre une interface en ligne de commande\footnote{man graphviz}.
+			Grappa est une API java de visualisation et manipulation de graphes. C'est un logiciel libre sous CPL\footnote{CPL, Common Public Licence} développé par John Mocenigo d'AT\&T. Cette API se base sur le langage de description de graphe \og DOT \fg{} et semble pouvoir afficher des nœuds de formes complexes.
+		
 				
   \subsection{Notre choix}
-		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
+		Notre choix c'est porté sur GraphViz, et plus particulièrement sur la commande \og DOT \fg{} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente le principale avantage d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande.
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
