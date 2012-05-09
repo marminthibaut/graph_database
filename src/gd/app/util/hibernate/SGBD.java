@@ -1,4 +1,4 @@
-package gd.util.hibernate;
+package gd.app.util.hibernate;
 
 /**
  * Enumération des SGBD pris en charge

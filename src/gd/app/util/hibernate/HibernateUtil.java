@@ -1,4 +1,4 @@
-package gd.util.hibernate;
+package gd.app.util.hibernate;
 
 import java.io.File;
 import java.io.FileNotFoundException;

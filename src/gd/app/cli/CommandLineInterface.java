@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import gd.app.model.Table;
 import gd.util.ImageFrame;
 import gd.util.ArgsManager;
-import gd.util.hibernate.HibernateUtil;
+import gd.app.util.hibernate.HibernateUtil;
 import gd.app.util.todot.GraphvizCmd;
 import gd.app.util.todot.ToDotUtil;
 import gd.app.util.todot.ToDotUtilException;
