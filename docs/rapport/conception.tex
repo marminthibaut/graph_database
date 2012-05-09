@@ -21,13 +21,14 @@
 
 \section{Générateur de graphes}
   \subsection{différentes librairies}
-		\begin{itemize}
-			\item jung
+		\paragraph{jung}
 				entrée : un fichier dot\\
 				inconvénients : dernières fonctionnalités dot non prise en charqe.
-			\item grappa
+		\paragraph{grappa}
 				 entrée : fichier dot
-			\item graphviz
+		\paragraph{graphviz}
+			GraphViz est un ensemble de logiciel libre développé par AT&T pour la visualisation de graphes. Il introduit le langage de description de graphe DOT.
+				
 		\end{itemize}	
   \subsection{Notre choix}
 		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
@@ -35,6 +36,15 @@
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
-			\subsubsection{GUI : \og Graphical User Interface \fg{}}
-			\subsubsection{CLI : \og Command Line Interface \fg{}}
-				philosophie KISS « Keep it simple, Stupid! »
+	\label{ihm_choix_possibles}
+		Concernant la conception de l'interface utilisateur, deux choix principaux s'offrent à nous. Le premier est de concevoir
+une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. Le second est de concevoir 	une interface en ligne de commande générant une image. 	
+	
+		\subsubsection{GUI : \og Graphical User Interface \fg{}}
+			Une interface utilisateur graphique permet une prise en main rapide et intuitive d'un logiciel mais ne permet pas une grande interopérabilité. En effet, il est compliqué de demandé à un programme de configurer un autre programme via une interface graphique.
+			
+		\subsubsection{CLI : \og Command Line Interface \fg{}}
+			La conception d'une interface en ligne de commande entre dans la philosophie KISS, « Keep it simple, Stupid! ». Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Cette vision à l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
+			
+	\subsection{Notre choix}
+		Nous avons choisi pour notre logiciel, d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédement en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
