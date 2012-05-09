@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
-import gd.app.util.ConvertTypeUtilException;
+import gd.util.ConvertTypeUtilException;
 
 /**
  * 
@@ -107,7 +107,7 @@ public class ToDotUtil {
      */
     public static int dotToSvg(GraphvizCmd gv_cmd, String dot_file_path,
             String img_file_path) {
-        return dotToImg(gv_cmd, dot_file_path, img_file_path, "svg");
+        return graphviz(gv_cmd, dot_file_path, img_file_path, "svg");
     }
 
     /**
@@ -119,14 +119,22 @@ public class ToDotUtil {
      */
     public static int dotToPng(GraphvizCmd gv_cmd, String dot_file_path,
             String img_file_path) {
-        return dotToImg(gv_cmd, dot_file_path, img_file_path, "png");
+        return graphviz(gv_cmd, dot_file_path, img_file_path, "png");
     }
 
-    private static int dotToImg(GraphvizCmd gv_cmd, String dot_file_path,
+    /**
+     * @param gv_cmd
+     * @param dot_file_path
+     * @param img_file_path
+     * @param image_type
+     * @return 0 if system call exited correctly, another value otherwise.
+     */
+    public static int graphviz(GraphvizCmd gv_cmd, String dot_file_path,
             String img_file_path, String image_type) {
         int return_value = -1;
         String cmd = gv_cmd.toString() + " " + dot_file_path + " -T"
                 + image_type + " -o " + img_file_path;
+        logger.debug(cmd);
         Process process;
         try {
             process = Runtime.getRuntime().exec(cmd);
