@@ -12,10 +12,10 @@ import org.hibernate.Session;
 import gd.app.model.Table;
 import gd.util.ImageFrame;
 import gd.util.ArgsManager;
-import gd.app.util.hibernate.HibernateUtil;
 import gd.app.util.todot.GraphvizCmd;
 import gd.app.util.todot.ToDotUtil;
 import gd.app.util.todot.ToDotUtilException;
+import gd.hibernate.util.HibernateUtil;
 
 /**
  * Command Line Interface class, this class contains the main function to
@@ -27,9 +27,9 @@ import gd.app.util.todot.ToDotUtilException;
 public class CommandLineInterface
 {
 
-  private static final Logger LOGGER = Logger.getLogger(CommandLineInterface.class);
+  private static final Logger LOGGER = Logger
+      .getLogger(CommandLineInterface.class);
 
-  
   private static final String TITLE = "db2graph";
 
   private static String username = "";
@@ -48,63 +48,80 @@ public class CommandLineInterface
    * @param args
    *          see --help.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args)
+  {
 
-        Session session = null;
-        String dot = "";
-        String dir = System.getProperty("user.dir") + "/";
+    Session session = null;
+    String dot = "";
+    String dir = System.getProperty("user.dir") + "/";
 
-        manageParams(args);
+    // gestion des paramètres
+    manageParams(args);
 
-        try {
-            session = HibernateUtil.openSession(sgbd_type, host, db_name,
-                    username, password, port);
+    try
+      {
+        // ouverture d'une session hibernate
+        session = HibernateUtil.openSession(sgbd_type, host, db_name, username,
+            password, port);
 
-            Criteria c = session.createCriteria(Table.class);
-            dot = ToDotUtil.convertToDot(c.list(), db_name);
+        // récupération de la liste des tables
+        Criteria c = session.createCriteria(Table.class);
 
-            if (output == null && !opt_show) {
-                System.out.println(dot);
-            } else {
-                String racine_file = (output == null) ? "out" : output
-                        .substring(0, output.lastIndexOf('.'));
-                String url_dot_file = dir + racine_file + ".dot";
+        // génération du code dot
+        dot = ToDotUtil.convertToDot(c.list(), db_name);
 
-                // Write a dot file
-                BufferedWriter bw = new BufferedWriter(new FileWriter(
-                        url_dot_file));
-                bw.write(dot);
-                bw.close();
+        if (output == null && !opt_show)
+          {
+            // affichage du code dot sur la sortie standard
+            System.out.println(dot);
+          }
+        else
+          {
+            String racine_file = (output == null) ? "out" : output.substring(0,
+                output.lastIndexOf('.'));
+            String url_dot_file = dir + racine_file + ".dot";
 
-                // Generate a png image from the dot file
-                // @todo treat other image format
-                String url_image = dir + output;
-                if (output != null) {
+            // Write a dot file
+            BufferedWriter bw = new BufferedWriter(new FileWriter(url_dot_file));
+            bw.write(dot);
+            bw.close();
 
-                    // System call to graphviz
-                    if (ToDotUtil.dotToSvg(gv_cmd, url_dot_file, url_image) != 0)
-                        LOGGER.error("Erreur lors de la génération du svg.");
+            // Generate a png image from the dot file
+            // @todo treat other image format
+            String url_image = dir + output;
+            if (output != null)
+              {
 
-                }
-                if (opt_show) {
-                    String png_image = dir + racine_file + ".png";
-                    // System call to graphviz
-                    if (ToDotUtil.dotToPng(gv_cmd, url_dot_file, png_image) != 0)
-                      LOGGER.error("Erreur lors de la génération du png.");
+                // System call to graphviz
+                if (ToDotUtil.dotToSvg(gv_cmd, url_dot_file, url_image) != 0)
+                  LOGGER.error("Erreur lors de la génération du svg.");
 
-                    new ImageFrame(png_image, TITLE);
-                }
+              }
+            if (opt_show)
+              {
+                String png_image = dir + racine_file + ".png";
+                // System call to graphviz
+                if (ToDotUtil.dotToPng(gv_cmd, url_dot_file, png_image) != 0)
+                  LOGGER.error("Erreur lors de la génération du png.");
 
-            }
+                // affichage de l'image généré dans une fenêtre
+                new ImageFrame(png_image, TITLE);
+              }
 
-            session.close();
+          }
 
-        } catch (Exception e) {
-          LOGGER.warn(e);
-        } finally {
-        }
+      }
+    catch (Exception e)
+      {
+        LOGGER.warn(e);
+      }
+    finally
+      {
+        // fermeture de la session hibernate
+        session.close();
+      }
 
-    }
+  }
 
   private static void manageParams(String args[])
   {
@@ -186,18 +203,29 @@ public class CommandLineInterface
 
   private static void printHelp()
   {
-    System.out.println("Usage:\n" + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n"
-        + "\n" + "Options:\n" + "    -u, --user <USERNAME>\n"
-        + "        use this username.\n" + "    -p, --password [PASSWORD]\n"
-        + "        use this password.\n" + "    -h, --host <HOST>\n"
-        + "        use this host.\n" + "    --port <PORT>\n"
-        + "        use this port.\n" + "    -o, --output <FILE_NAME>\n"
-        + "        generate a png image with graphviz\n"
-        + "    -c, --cmd <GRAPHVIZ_CMD>\n"
-        + "        choose your graphviz command (man graphviz).\n"
-        + "    --show \n"
-        + "        open a window with graph representation.\n" + "    --help\n"
-        + "        print this message.\n" + "\n");
+    System.out
+        .println("Usage:\n"
+            + "gd [OPTION...] SGBD_NAME DATABASE_NAME\n"
+            + "\n"
+            + "Options:\n"
+            + "    -u, --user <USERNAME>\n"
+            + "        use this username.\n"
+            + "    -p, --password [PASSWORD]\n"
+            + "        use this password.\n"
+            + "    -h, --host <HOST>\n"
+            + "        use this host.\n"
+            + "    --port <PORT>\n"
+            + "        use this port.\n"
+            + "    -o, --output <FILE_NAME>\n"
+            + "        generate a png image with graphviz\n"
+            + "    -T, --type <type> \n"
+            + "        the output format : svg, ps, png, gif, dia… \n"
+            + "        See graphviz output formats for more formats.\n"
+            + "    -c, --cmd <GRAPHVIZ_CMD>\n"
+            + "        choose your graphviz command (man graphviz).\n"
+            + "    --show \n"
+            + "        open a window with graph representation.\n"
+            + "    --help\n" + "        print this message.\n" + "\n");
   }
 
 }
