@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="16cm" height="31cm" viewBox="98 58 303 601" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #d8e5e5" x="100" y="60" width="140" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="100" y="60" width="140" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:italic;font-weight:700" x="170" y="78.45">
+    <tspan x="170" y="78.45">metadata_graph</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="200" y="100" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="200" y="100" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:700" x="230" y="118.45">
+    <tspan x="230" y="118.45">app</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="200" y="340" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="200" y="340" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:700" x="230" y="358.45">
+    <tspan x="230" y="358.45">conf</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="200" y="630" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="200" y="630" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.8;font-family:sanserif;font-style:normal;font-weight:700" x="230" y="648.45">
+    <tspan x="230" y="648.45">util</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="140" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="140" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="290" y="158.45">
+    <tspan x="290" y="158.45">cli</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="180" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="180" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="290" y="198.45">
+    <tspan x="290" y="198.45">model</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="220" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="220" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="290" y="238.264">
+    <tspan x="290" y="238.264">util</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="260" width="80" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="260" width="80" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="360" y="278.45">
+    <tspan x="360" y="278.45">hibernate</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="300" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="300" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="350" y="318.264">
+    <tspan x="350" y="318.264">todot</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="386" width="80" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="386" width="80" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="300" y="404.45">
+    <tspan x="300" y="404.45">hibernate</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="426" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="426" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="350" y="444.45">
+    <tspan x="350" y="444.45">mysql</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="466" width="80" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="466" width="80" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="360" y="484.45">
+    <tspan x="360" y="484.45">postgresql</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="506" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="506" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="290" y="524.45">
+    <tspan x="290" y="524.45">types</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="546" width="60" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="546" width="60" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="350" y="564.45">
+    <tspan x="350" y="564.45">mysql</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="320" y="586" width="80" height="28"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="320" y="586" width="80" height="28"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="360" y="604.45">
+    <tspan x="360" y="604.45">postgresql</tspan>
+  </text>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="170,88 170,114 200,114 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="230,128 230,154 260,154 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="230,128 230,194 260,194 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="230,128 230,234 260,234 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="290,248 290,274 320,274 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="290,248 290,314 320,314 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="170,88 170,354 200,354 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="230,368 230,400 258.995,400 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="300,414 300,440 320,440 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="300,414 300,480 320,480 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="230,368 230,520 260,520 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="290,534 290,560 320,560 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="290,534 290,600 320,600 "/>
+  <polyline style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="170,88 170,644 200,644 "/>
+</svg>
