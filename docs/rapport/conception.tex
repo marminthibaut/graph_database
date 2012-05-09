@@ -2,9 +2,6 @@
 
 \section{Le modèle}
 \subsection{Modèle réellement rencontré}
-
-Lors de l'étude des métadonnées stockées par les différents SGBD, nous avons remarqué quelque divergences par rapport au modèle fournit avec le sujet (figure~\ref{figure:diag_classe_fournit} page~\pageref{figure:diag_classe_fournit}). La figure~\ref{figure:diag_classe_reel} présente un diagramme de classe construit suite à nos recherches.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{files/diag_class_ameliore}
@@ -37,6 +34,7 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
 \section{Générateur de graphes}
   \subsection{différentes librairies}
 		\paragraph{jung}
+				JUNG (the Java Universal Network/Graph Framework) est une API java. C'est un logiciel libre, sous licence BSD.
 				entrée : un fichier dot\\
 				inconvénients : dernières fonctionnalités dot non prise en charqe.
 		\paragraph{grappa}
@@ -46,6 +44,7 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
 				
   \subsection{Notre choix}
 		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
+
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
@@ -61,4 +60,3 @@ une interface graphique proposant une fenêtre de configuration puis un affichag
 			
 	\subsection{Notre choix}
 		Nous avons choisi pour notre logiciel, d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédement en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
-
