@@ -39,6 +39,7 @@ public class CommandLineInterface
   private static String host = "";
   private static String port = null;
   private static String output = null;
+  private static String type = null;
   private static boolean opt_show = false;
   private static GraphvizCmd gv_cmd = GraphvizCmd.DOT;
 
@@ -93,8 +94,8 @@ public class CommandLineInterface
               {
 
                 // System call to graphviz
-                if (ToDotUtil.dotToSvg(gv_cmd, url_dot_file, url_image) != 0)
-                  LOGGER.error("Erreur lors de la génération du svg.");
+                if (ToDotUtil.graphviz(gv_cmd, url_dot_file, url_image, type) != 0)
+                  LOGGER.error("Erreur lors de la génération de la sortie.");
 
               }
             if (opt_show)
@@ -168,14 +169,15 @@ public class CommandLineInterface
                 else if (param.equals("dbname"))
                   db_name = value;
                 else if (param.equals("sgbd_type"))
-                  {
-                  }
+                  sgbd_type = value;
                 else if (param.equals("port"))
                   port = value;
                 else if (param.equals("cmd") || param.equals("c"))
                   gv_cmd = GraphvizCmd.getInstance(value);
                 else if (param.equals("output") || param.equals("o"))
                   output = value;
+                else if (param.equals("type") || param.equals("T"))
+                  type = value;
                 else if (param.equals("show"))
                   opt_show = true;
                 else if (param.equals("help"))
@@ -217,7 +219,7 @@ public class CommandLineInterface
             + "    --port <PORT>\n"
             + "        use this port.\n"
             + "    -o, --output <FILE_NAME>\n"
-            + "        generate a png image with graphviz\n"
+            + "        name of the output file\n"
             + "    -T, --type <type> \n"
             + "        the output format : svg, ps, png, gif, dia… \n"
             + "        See graphviz output formats for more formats.\n"
