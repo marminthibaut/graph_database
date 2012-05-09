@@ -36,8 +36,19 @@ Trois paquets principaux se distinguent :
 \subsubsection{Utilisation}
 
 \subsection{Paquet \texttt{app.model}}
+C'est ici que sont définies les classes \emph{POJO} du modèle de donnée correspondant au modèle relationnel. On y trouve donc classes \texttt{Column}, \texttt{Constraint} et \texttt{Table}, enrichies de quelques méthodes :
+
+\begin{description}
+
+\item[Column] Ajout d'un méthode \texttt{\underline{bool isPk()}} permettant de savoir si la colonne est inclue dans la clé primaire de la table à laquelle elle appartient. Une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaine de caractères, le type générique de la colonne est également définie.
+
+\item[Constraint] Ajout des méthodes \texttt{\underline{bool isPk()}}, \texttt{\underline{bool isFk()}} et \texttt{\underline{bool isCheck()}} permettant de savoir respectivement si la contrainte est de type clé primaire, clé étrangère, ou check. Une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaine de caractères, le type générique de la contrainte est également définie.
+\end{description}
+
+Les types génériques sont définies dans les énumérations \texttt{ColumnType} et \texttt{ConstraintType}. Les conversions de types se font en fonction du SGBD sélectionné grâce au paquet \texttt{app.util} (cf. \ref{subsection:app.util}) aux fichiers de conversions stockés dans le paquet \texttt{conf.types} (cf. \ref{subsection:conf.types}).
 
 \subsection{Paquet \texttt{app.util}}
+\label{subsection:app.util}
 \subsubsection{Génération de graphe}
 
 \subsection{Paquet \texttt{conf.hibernate}}
@@ -45,6 +56,7 @@ Trois paquets principaux se distinguent :
 \subsubsection{Subselect}
 
 \subsection{Paquet \texttt{conf.types}}
+\label{subsection:conf.types}
 
 
 \section{Utilisation de \emph{graphviz}}
