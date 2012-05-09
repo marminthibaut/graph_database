@@ -1,30 +1,39 @@
 \textit{Nous avons fait le choix de débuter notre travail en rédigeant un cahier des charges sommaire. Ce premier travail, réalisé en équipe, nous a permis de cerner le sujet et de lister les besoins ainsi que les contraintes imposées. Le modèle de données proposé sera également exposé.}
 
+
+L’objectif de l'application est de permettre une visualisation de schémas relationnels de bases de données hébergées sous des serveurs de données hétérogènes.
+A cet effet, les fonctions principales attendues sont : 
+\begin{itemize}
+  \item Capacité de fournir des renseignements d'un schéma de BDD
+  \item Visualisation de ce schéma de manière à pouvoir dresser le schéma
+  qui permettra de décrire l'organisation des données dans la base données en question. Dans le cas des bases de données fragmentées, ceci servira de base pour décrire l'organisation complète.
+\end{itemize}
+
+
 \section{Fonctions principales}
-		\subsubsection{Fournir des renseignements d'un schéma de BDD}
+		\subsubsection{Renseignements d'un schéma de BDD}
 			\paragraph{tables}
 				\begin{itemize}
 					\item NAME
 				\end{itemize}
-			\paragraph{attributs}
+			\paragraph{attributs des tables}
 				\begin{itemize}
 					\item NAME
 					\item TYPE
 				\end{itemize}
-			\paragraph{contraintes}
+			\paragraph{contraintes portant sur ces attributs}
 				\begin{itemize}
-					\item PK
-					\item FK
-					\item UNIQUE
-			  	\item CHECK + CHECK\_CLAUSE
+					\item contraintes d'unicité qui permettent d'identifier de manière unique un enregistrement dans les tables : PRIMARY KEY (clé primaire), UNIQUE  
+					\item contraintes référentielles qui servent à établir des relations entre les tables : FOREIGN KEY (clé étrangère)
+					\item contraintes de vérification de la validité des données : CHECK + CHECK\_CLAUSE
 				\end{itemize} 
 		\subsubsection{Visualisation graphique}
 
 \section{Fonctions contraintes}
 	\subsection{Compatibilité \& extensibilité}
-	L'outil développé devra être compatible avec les SGBDR les plus populaires (\emph{Mysql}, \emph{Postgresql}, \emph{Oracle}, etc.). L'architecture de l'application devra être pensée de manière à pouvoir étendre facilement la compatibilité avec de nouveaux SGBDR en utilisant, par exmple, des fichiers de configuration.
+	L'outil développé devra être compatible avec les SGBDR les plus populaires (\emph{Mysql}, \emph{Postgresql}, \emph{Oracle}, etc.). L'architecture de l'application devra être pensée de manière à pouvoir étendre facilement la compatibilité avec de nouveaux SGBDR en utilisant, par exmple, des fichiers de configuration. De plus, les schémas relationnels étant associés logiquement, elle devra être capable de composer de l’information provenant de l’intégration de ces différents schémas.
 	\subsection{Utilisation d'Hibernate}
-	L'objectif de ce projet étant l'application des outils vus pendant les cours de l'UE Gestion de données distribuées (GMIN210), l'outil développé devra utiliser l'ORM \emph{Hibernate} (librairie Java de mapping Object-Relationnel). Cette contrainte est imposée par le sujet.
+	L'objectif de ce projet étant l'application des outils vus pendant les cours de l'UE Gestion de données distribuées (GMIN210), l'outil développé devra utiliser l'ORM \emph{Hibernate} (librairie Java de mapping Object-Relationnel). Cette contrainte est imposée par le sujet. L'exploitation de la solution de projection Objet-Relationnel Hibernate se fera par définition des fichiers de mapping nécessaires et des classes applicatives qui permettront de manipuler les objets Table, Attribut ou Contrainte.
 	\subsection{Lecture des Métadonnées}
 	Les métadonnées devront être chargées directement à partir des vues proposées par les différents SGBDR, via un connecteur. L'ORM \emph{Hibernate} étant imposé, le connecteur utilisé sera probablement \emph{JDBC}.
 
