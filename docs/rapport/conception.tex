@@ -45,12 +45,13 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 \section{Générateur de graphes}
   \subsection{différentes librairies}
 		\paragraph{JUNG} Java Universal Network/Graph Framework\\
-				JUNG est une API java permettant la visualisation de graphes
+				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{http://jung.sourceforge.net/license.txt} développé par l'université de Californie.
 				inconvénients : dernières fonctionnalités dot non prise en charqe.
-		\paragraph{grappa}
+		\paragraph{Grappa} A Java \texttt{gra}ph \texttt{pa}ckage\\
+			Grappa est une API java de visualisation et manipulation de graphes. C'est un logiciel libre sous CPL\footnote{CPL, Common Public Licence} développé par John Mocenigo d'AT\&T.
 				 entrée : fichier dot
-		\paragraph{graphviz}
-			GraphViz est un ensemble de logiciel libre développé par AT\&T pour la visualisation de graphes. Il introduit le langage de description de graphe DOT.
+		\paragraph{graphviz} Graph Visualization Software\\
+			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence} développé par AT\&T et les laboratoirs Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe \og DOT \fg{}. Il offre une interface en ligne de commande\footnote{man graphviz}.
 				
   \subsection{Notre choix}
 		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
