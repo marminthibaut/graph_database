@@ -12,7 +12,7 @@ cu.`column_name` as `column`,
 c.`constraint_type` as `type`,
 cu.`referenced_column_name` as `references_column`,
 cu.`referenced_table_name` as `references_table`,
-NULL as `references_constraint_name`,
+CONCAT('PRIMARY_',cu.`referenced_table_name`) as `references_constraint_name`,
 NULL as `check_clause`
 FROM information_schema.table_constraints c
 INNER JOIN information_schema.key_column_usage cu ON
@@ -22,8 +22,6 @@ WHERE c.table_schema=database()
         <composite-id>
             <key-property name="name" type="java.lang.String"
                 column="NAME" />
-            <!-- <key-many-to-one name="column" class="gd.app.model.Column" column="COLUMN" 
-                /> -->
             <key-many-to-one name="column" class="gd.app.model.Column">
                 <column name="COLUMN" />
                 <column name="TABLE" />
