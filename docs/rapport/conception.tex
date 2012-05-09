@@ -1,4 +1,4 @@
-\textit{Cette phase d'analyse est un élément indispensable à la bonne réalisation du projet. Dans un premier temps, un modèle plus fidèle à la réalité des schémas stockés dans les SGBDR est présenté. Cette partie est suivit d'une petite réflexion sur l'utilisation des ORM. Sont ensuite parcourus les solutions de génération de graphes pour la représentation des données. Les choic concernant l'interface utilisateur seront également exposés.}
+\textit{Cette phase d'analyse est un élément indispensable à la bonne réalisation du projet. Dans un premier temps, un modèle plus fidèle à la réalité des schémas stockés dans les SGBDR est présenté. Cette partie est suivit d'une petite réflexion sur l'utilisation des ORM. Sont ensuite parcourus les solutions de génération de graphes pour la représentation des données. Les choix concernant l'interface utilisateur seront également exposés.}
 
 \section{Le modèle}
 \subsection{Modèle réellement rencontré}
@@ -23,9 +23,11 @@ La principale différence réside dans la classification des contraintes. Cette 
 \paragraph*{NB}
 Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont ignorées.
 
-	\subsection{Attributs}
-		Gestion des types génériques
 	\subsection{Tables}
+		Une table (relation) est identifiée par son nom et le schéma auquel elle appartient. Elle possède un ensemble de colonnes (attributs) et un ensemble de contraintes.
+	\subsection{Colonne}
+		Une colonne (attribut) est identifiée par son nom et la table à laquelle elle appartient. Elle possède un type, et éventuellement une précision. 
+		Gestion des types génériques
 	\subsection{Contraintes}
 	
 \section{ORM}
