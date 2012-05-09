@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import gd.app.model.*;
-import gd.util.ConvertTypeUtilException;
+import gd.app.util.ConvertTypeUtilException;
 
 /**
  * 

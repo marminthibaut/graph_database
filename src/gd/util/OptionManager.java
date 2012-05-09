@@ -7,26 +7,26 @@ package gd.util;
  * @version 0.1
  * 
  */
-public class ArgsManager {
+public class OptionManager {
 
-    private String[] args;
+    private String[] options;
     private int cursor;
 
     /**
-     * @param args
+     * @param options
      *            the array of arguments to manage
      */
-    public ArgsManager(String[] args) {
+    public OptionManager(String[] options) {
         this.cursor = -1;
-        this.args = args;
+        this.options = options;
     }
 
     /**
      * @return the next parameter
      */
     public String getNextParam() {
-        if (++this.cursor < this.args.length)
-            return this.args[this.cursor];
+        if (++this.cursor < this.options.length)
+            return this.options[this.cursor];
 
         return null;
     }

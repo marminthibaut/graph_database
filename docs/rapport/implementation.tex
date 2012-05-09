@@ -34,9 +34,11 @@ Trois paquets principaux se distinguent :
 
 \subsection{Paquet \texttt{app.cli}}
 
-Ce paquet implémente l'interface en ligne de commande, celle-ci permettra notamment la configuration de la connexion au SGBD ainsi que le format de sortie.
+Ce paquet implémente l'interface en ligne de commande, celle-ci permettra notamment la configuration de la connexion au SGBD ainsi que le format de sortie. Il est composé exclusivement de la classe \texttt{CommandLineInterface}.
 
-\subsubsection{Utilisation}
+\begin{description}
+\item[CommandLineInterface] Cette classe défini la fonction \texttt{main} de notre application. Elle utilise la classe \texttt{OptionManager} décrit en \ref{subsection:util} page \pageref{subsection:util} afin d'interpréter les options de la ligne de commande.  
+\end{description}
 
 \begin{verbatim}
 Usage:
@@ -54,7 +56,8 @@ Options:
     -o, --output <FILE_NAME>
         generate a png image with graphviz
     -T, --type <type>
-    		the output format : svg, ps, png, gif, dia… See graphviz output formats for more formats.
+        the output format : svg, ps, png, gif, dia… 
+        See graphviz output formats for more formats.
     -c, --cmd <GRAPHVIZ_CMD>
         choose your graphviz command (man graphviz).
     --show 
@@ -82,10 +85,11 @@ Les types génériques sont définies dans les énumérations \texttt{ColumnType
 Des classes utilitaires sont définies dans ce paquet.
 
 \subsubsection{Génération de graphe avec \texttt{ToDotUtil}}
+\label{section:ToDotUtil}
 Cet utilitaire est définit dans un sous paquet \texttt{todot}. Il contient une succession d'énumérations permettant de lister les commandes \emph{graphviz}, les couleurs, les formes, et les styles propres au langage DOT.
 La classe principale \texttt{ToDotUtil} implémente une méthode permettant, à partir d'une base de données (liste de tables), de générer une chaine de caractère au langage DOT qui décrit cette base de données. Il est possible de définir le style du graphe généré en sortie (couleurs, formes, etc.).
 
-Des méthodes d'export au format \emph{svg} et \emph{png} sont également déclarées.
+Les formats d'export suivant sont reconnus : canon, cmap, cmapx, cmapx\_np, dot, eps, fig, gd, gd2, gif, gv, imap, imap\_np, ismap, jpe, jpeg, jpg, pdf, plain, plain-ext, png, ps, ps2, svg, svgz, tk, vml, vmlz, vrml, wbmp, x11, xdot, xlib.
 
 \subsubsection{Singleton de connexion Hibernate}
 Le sous paquet \texttt{hibernate} contient une classe \texttt{HibernateUtil} respectant le patron de conception \emph{singleton}. Il permet de créer une session \emph{Hibernate} en fournissant le type de SGBD, l'hôte, le nom de la base de données, le nom d'utilisateur, le mot de passe et le port.
@@ -129,5 +133,16 @@ Voici la DTD de ces fichiers de correspondance :
 \end{verbatim}
 
 
-\section{Utilisation de \emph{graphviz}}
-dot, neato, etc.
+\subsection{Paquet \texttt{util}}
+\label{subsection:util}
+
+Dans ce paquet sont regroupé toutes les classes utilitaires non spécifique à l'application. 
+
+\begin{description}
+\item[OptionManager] Cette classe aide à la gestion des paramètres passé à une application.
+
+\item[ImageFrame] Permet d'ouvrir facilement une fenêtre contenant une image.
+
+\item[XmlUtil] Fournit une méthode pour parser des fichiers XML.
+\end{description}
+

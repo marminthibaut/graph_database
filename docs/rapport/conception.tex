@@ -67,19 +67,19 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 		
 				
   \subsection{Notre choix}
-		Notre choix s'est porté sur GraphViz, et plus particulièrement sur la commande \texttt{dot} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente le principal avantage d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande.
+		Notre choix s'est porté sur GraphViz, et plus particulièrement sur la commande \texttt{dot} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente les principaux avantages d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande et d'offrir la possibilité de généré des nœuds de forme complexe ce qui nous permettra de nous rapprocher d'une représentation d'une entité du formalisme E/A\footnote{Entité/Association}.
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
 	\label{ihm_choix_possibles}
-		Une Interface Homme-Machine peut être conçue de deux manières. La première solution consiste en la création d'une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. Le second est orienté ligne de commande générant une image. 	
+		Notre Interface Homme-Machine peut être conçue de deux manières. La première solution consiste en la création d'une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. La seconde est orienté ligne de commande générant une image représentant le résultat. 	
 	
 		\subsubsection{GUI : \og Graphical User Interface \fg{}}
 			Une interface utilisateur graphique permet une prise en main rapide et intuitive d'un logiciel mais ne permet pas une grande interopérabilité. En effet, il est compliqué de demandé à un programme de configurer un autre programme via une interface graphique.
 			
 		\subsubsection{CLI : \og Command Line Interface \fg{}}
-			La conception d'une interface en ligne de commande entre dans la philosophie KISS, \og Keep it simple, Stupid! \fg{}. Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Cette vision à l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
+			La conception d'une interface en ligne de commande entre dans la philosophie KISS, \og Keep it simple, Stupid! \fg{}. Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Le choix d'une interface en ligne de commande permet de ce concentrer sur les cœur de l'application, aussi appelé \og processus métier \fg{}. Cette vision a aussi l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel tiers et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
 			
 	\subsection{Notre choix}
-		Nous avons choisi pour notre application d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédemment en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
+		Nous avons choisi pour notre application d'implémenter une interface en ligne de commande pour les avantages détaillés précédemment en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, si le besoin d'une interface graphique ce fait sentir, pour toucher un public moins averti par exemple, nous pourrons toujours, à partir de l'interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsulera notre logiciel, alors que l'inverse serait bien entendu beaucoup moins évident.
 

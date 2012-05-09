@@ -2,20 +2,17 @@ package gd.app.cli;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import gd.app.model.Table;
 import gd.util.ImageFrame;
-import gd.util.ArgsManager;
+import gd.util.OptionManager;
 import gd.app.util.todot.GraphvizCmd;
 import gd.app.util.todot.ToDotUtil;
-import gd.app.util.todot.ToDotUtilException;
-import gd.hibernate.util.HibernateUtil;
+import gd.app.util.hibernate.HibernateUtil;
 
 /**
  * Command Line Interface class, this class contains the main function to
@@ -126,27 +123,27 @@ public class CommandLineInterface
 
   private static void manageParams(String args[])
   {
-    ArgsManager param_manager = new ArgsManager(args);
+    OptionManager param_manager = new OptionManager(args);
     String arg;
 
     try
       {
         while ((arg = param_manager.getNextParam()) != null)
           {
-            if (!ArgsManager.isAnOptionName(arg))
+            if (!OptionManager.isAnOptionName(arg))
               {
                 if (sgbd_type == null)
                   {
-                    sgbd_type = ArgsManager.getOptionName(arg);
+                    sgbd_type = OptionManager.getOptionName(arg);
                   }
                 else
                   {
-                    db_name = ArgsManager.getOptionName(arg);
+                    db_name = OptionManager.getOptionName(arg);
                   }
               }
             else
               {
-                String param = ArgsManager.getOptionName(arg);
+                String param = OptionManager.getOptionName(arg);
                 // @todo manage this next line width ArgsManager
                 String value = "";
 
@@ -155,7 +152,7 @@ public class CommandLineInterface
                     value = param_manager.getNextParam();
                     if (value == null)
                       throw new Exception("wrong option : " + param);
-                    else if (ArgsManager.isAnOptionName(value))
+                    else if (OptionManager.isAnOptionName(value))
                       throw new Exception("wrong value for " + param
                           + " option");
                   }
