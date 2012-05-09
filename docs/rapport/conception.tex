@@ -40,10 +40,12 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
 En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
 \section{Compatibilité avec les SGBD}
+	\subsection{Fichiers de configuration}
+	Dans un but d'extensibilité et de simplicité de configuration, l'application configurera la manière de se connecter au SGBD via des fichiers de configuration externes. Les paramètres ne seront pas définis dans le code source, et chaque SGBD disposera de son répertoire stockant les fichiers nécessaires à la configuration de l'application et au mapping d'\emph{Hibernate}.
 
 	\subsection{Gestion des types génériques}
 	\label{section:generic_types}
-
+	L'application se trouve confronté à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement identiques, les SGBD ne suivent pas de norme pour le nommage de ces types. Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBD compatible, chaque type générique est associé à un ou plusieurs types réels du SGBD.
 
 \section{Visualisation de graphes}
 	
