@@ -1,8 +1,8 @@
 package gd.app.model;
 
-import gd.util.ConvertTypeUtil;
-import gd.util.ConvertTypeUtil.Thing;
-import gd.util.ConvertTypeUtilException;
+import gd.app.util.ConvertTypeUtil;
+import gd.app.util.ConvertTypeUtilException;
+import gd.app.util.ConvertTypeUtil.Thing;
 
 import java.io.Serializable;
 import java.util.Set;

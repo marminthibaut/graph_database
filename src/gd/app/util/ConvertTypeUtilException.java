@@ -1,4 +1,4 @@
-package gd.util;
+package gd.app.util;
 
 /**
  * Classe exception personnalisée pour l'utilitaire de conversion des types

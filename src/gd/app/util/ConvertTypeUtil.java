@@ -1,4 +1,6 @@
-package gd.util;
+package gd.app.util;
+
+import gd.util.XmlUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
