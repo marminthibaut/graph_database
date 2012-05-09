@@ -33,7 +33,36 @@ Trois paquets principaux se distinguent :
 \end{description}
 
 \subsection{Paquet \texttt{app.cli}}
+
+Ce paquet implémente l'interface en ligne de commande, celle-ci permettra notamment la configuration de la connexion au SGBD ainsi que le format de sortie.
+
 \subsubsection{Utilisation}
+
+\begin{verbatim}
+Usage:
+gd SGBD_NAME DATABASE_NAME [OPTION]...
+
+Options:
+    -u, --user <USERNAME>
+        use this username.
+    -p, --password [PASSWORD]
+        use this password.
+    -h, --host <HOST>
+        use this host.
+    --port <PORT>
+        use this port.
+    -o, --output <FILE_NAME>
+        generate a png image with graphviz
+    -T, --type <type>
+    		the output format : svg, ps, png, gif, dia… See graphviz output formats for more formats.
+    -c, --cmd <GRAPHVIZ_CMD>
+        choose your graphviz command (man graphviz).
+    --show 
+        open a window with graph representation.
+    --help
+        print this message.
+\end{verbatim}
+
 
 \subsection{Paquet \texttt{app.model}}
 C'est ici que sont définies les classes \emph{POJO} du modèle de donnée correspondant au modèle relationnel. On y trouve donc classes \texttt{Column}, \texttt{Constraint} et \texttt{Table}, enrichies de quelques méthodes :

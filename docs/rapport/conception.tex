@@ -28,7 +28,8 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
 	\subsection{Colonne}
 		Une colonne est identifiée par son nom et la table à laquelle elle appartient. Elle possède un type, et éventuellement une précision. 
 	\subsection{Contraintes}
-		Une contrainte est identifié par un nom, sur certain SGBD il faut lui adjoindre le nom de la table sur laquelle elle est appliquée pour avoir une identification unique (notamment MySQL). Une contrainte possède un type et s'applique sur une ou plusieurs colonne d'une table. Elle peut être de type \og primary key \fg{}, \og foreign key \fg{}, \og unique \fg{} ou \og check \fg. Les contraintes de type \og foreign key \fg{} référence en plus une contrainte de type unique compatible, c'est à dire que les colonnes sur lesquelles s'applique la \og foreign key \fg{} et les colonnes sur lesquelles s'applique la contrainte référencée sont au même nombres et de même types. 
+		Une contrainte est identifié par un nom, sur certain SGBD il faut lui adjoindre le nom de la table sur laquelle elle est appliquée pour avoir une identification unique (notamment MySQL). Une contrainte possède un type et s'applique sur une ou plusieurs colonne d'une table. Elle peut être de type clé primaire, clé étrangère, contrainte d'unicité ou \emph{check}. Les contraintes d'intégrité référentielle référence une contrainte de type unique compatible, c'est à dire que les colonnes sur lesquelles s'applique la clé étrangère et les colonnes sur lesquelles s'applique la contrainte référencée sont au même nombres et de même types.
+		
 \section{ORM}
 
 	\subsection{Qu'est qu'un ORM?}
@@ -40,39 +41,45 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
 En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
 \section{Compatibilité avec les SGBD}
+	\subsection{Fichiers de configuration}
+	Dans un but d'extensibilité et de simplicité de configuration, l'application configurera la manière de se connecter au SGBD via des fichiers de configuration externes. Les paramètres ne seront pas définis dans le code source, et chaque SGBD disposera de son répertoire stockant les fichiers nécessaires à la configuration de l'application et au mapping d'\emph{Hibernate}.
 
 	\subsection{Gestion des types génériques}
 	\label{section:generic_types}
-
+	L'application se trouve confrontée à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement identiques, les SGBD ne suivent pas de norme pour le nommage de ces types. Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBD compatible, chaque type générique est associé à un ou plusieurs types réels du SGBD.
+	
+	Cela permet, pour un même schéma relationnel, d'obtenir le même résultat quelque soit le SGBD à partir duquel est chargé le schéma.
 
 \section{Visualisation de graphes}
 	
-	Pour cette visualisation, nous souhaitons avoir une représentation la plus proche possible d'une représentation connue de schéma de base de données afin que celle-ci soit rapidement compréhensible par des personnes averties. Pour ce faire nous avons à notre dispositions plusieurs librairie permettant l'organisation et la visualisation de graphe.
+	Nous souhaitons avoir une représentation la plus proche possible d'une représentation connue de schéma de base de données afin que celle-ci soit rapidement compréhensible par des personnes averties. Pour ce faire nous avons à notre dispositions plusieurs librairie permettant l'organisation et la visualisation de graphe.
 
   \subsection{différentes librairies}
-  	\paragraph{graphviz} Graph Visualization Software\\
-			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence} développé par AT\&T et les laboratoirs Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe \og DOT \fg{}. C'est un des logiciel les plus utilisé pour l'affichage de graphes, il permet notamment de représenter des nœuds présentant une forme complexe. De plus, il offre une interface en ligne de commande\footnote{man graphviz} aisément utilisable par un programme tierce.
-		\paragraph{JUNG} Java Universal Network/Graph Framework\\
-				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{http://jung.sourceforge.net/license.txt} développé par l'université de Californie. Cette API semble bien fourni et documentée, mais ne semble pas être en mesure d'afficher des nœuds aux formats complexes. 
-		\paragraph{Grappa} A Java \texttt{gra}ph \texttt{pa}ckage\\
-			Grappa est une API java de visualisation et manipulation de graphes. C'est un logiciel libre sous CPL\footnote{CPL, Common Public Licence} développé par John Mocenigo d'AT\&T. Cette API se base sur le langage de description de graphe \og DOT \fg{} et semble pouvoir afficher des nœuds de formes complexes.
+  	\subsubsection{graphviz} \textit{Graph Visualization Software}
+  	
+			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence.} développé par AT\&T et les laboratoirs Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe DOT. C'est un des logiciel les plus utilisé pour l'affichage de graphes, il permet notamment de l'affichage de nœuds représenté sous une forme complexe. De plus, il offre une interface en ligne de commande\footnote{voir \texttt{man graphviz}} aisément utilisable par un programme tierce.
+		\subsubsection{JUNG} \textit{Java Universal Network/Graph Framework}
+		
+				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{voir http://jung.sourceforge.net/license.txt} et est développé par l'université de Californie. Cette API semble bien fournie et documentée, mais ne semble pas être en mesure d'afficher des nœuds aux formes complexes. 
+		\subsubsection{Grappa} \textit{A Java \texttt{gra}ph \texttt{pa}ckage}
+		
+			Grappa est une API java de visualisation et manipulation de graphes. C'est un logiciel libre sous CPL\footnote{CPL, Common Public Licence.} développé par John Mocenigo d'AT\&T. Cette API se base sur le langage de description de graphe DOT et est partiellement compatible pour l'affichage des nœuds de formes complexes.
 		
 				
   \subsection{Notre choix}
-		Notre choix c'est porté sur GraphViz, et plus particulièrement sur la commande \og DOT \fg{} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente le principale avantage d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande.
+		Notre choix s'est porté sur GraphViz, et plus particulièrement sur la commande \texttt{dot} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente le principal avantage d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande.
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
 	\label{ihm_choix_possibles}
-		Concernant la conception de l'interface utilisateur, deux choix principaux s'offrent à nous. Le premier est de concevoir
-une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. Le second est de concevoir 	une interface en ligne de commande générant une image. 	
+		Une Interface Homme-Machine peut être conçue de deux manières. La première solution consiste en la création d'une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. Le second est orienté ligne de commande générant une image. 	
 	
 		\subsubsection{GUI : \og Graphical User Interface \fg{}}
 			Une interface utilisateur graphique permet une prise en main rapide et intuitive d'un logiciel mais ne permet pas une grande interopérabilité. En effet, il est compliqué de demandé à un programme de configurer un autre programme via une interface graphique.
 			
 		\subsubsection{CLI : \og Command Line Interface \fg{}}
-			La conception d'une interface en ligne de commande entre dans la philosophie KISS, « Keep it simple, Stupid! ». Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Cette vision à l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
+			La conception d'une interface en ligne de commande entre dans la philosophie KISS, \og Keep it simple, Stupid! \fg{}. Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Cette vision à l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
 			
 	\subsection{Notre choix}
-		Nous avons choisi pour notre logiciel, d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédement en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
+		Nous avons choisi pour notre application d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédemment en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
 
