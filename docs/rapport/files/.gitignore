@@ -1,2 +1,6 @@
 *~
 !*.pdf
+!*.svg
+!*.png
+!*.jpg
+!*.dia
