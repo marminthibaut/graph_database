@@ -8,6 +8,9 @@ La définition des entités dans \emph{Hibernate} à l'aide de classes \emph{POJ
 Le mapping consiste, comme son nom l'indique, à faire la liaison entre les entités définies (classes \emph{POJO}) et les tables en base de données. En règle générale, un objet $x$ est mappé avec une table relationnelle $table-x$, est les attributs $x_1$, $x_2$, \ldots, $x_n$ avec les attributs $tables-x.x_1$, $tables-x.x_1$, \ldots, $tables-x.x_1$. Il est également possible d'ajouter des relations entre attributs (One-to-One, One-to-Many, Many-to-Many), de déclarer des \emph{id}, etc.
 
 \emph{Hibernate} permet de définir le mapping via des annotations directement au sein des classes, ou via des fichiers de configuration xml \texttt{hbm}. C'est cette deuxième méthode que nous avons choisie, et qui sera décrite dans la partie~\ref{section:structure_de_lapplication}.
+\subsection{Subselect}
+
+\subparagraph{\ldots}
 
 \section{Structure de l'application}
 \label{section:structure_de_lapplication}
@@ -30,7 +33,36 @@ Trois paquets principaux se distinguent :
 \end{description}
 
 \subsection{Paquet \texttt{app.cli}}
+
+Ce paquet implémente l'interface en ligne de commande, celle-ci permettra notamment la configuration de la connexion au SGBD ainsi que le format de sortie.
+
 \subsubsection{Utilisation}
+
+\begin{verbatim}
+Usage:
+gd SGBD_NAME DATABASE_NAME [OPTION]...
+
+Options:
+    -u, --user <USERNAME>
+        use this username.
+    -p, --password [PASSWORD]
+        use this password.
+    -h, --host <HOST>
+        use this host.
+    --port <PORT>
+        use this port.
+    -o, --output <FILE_NAME>
+        generate a png image with graphviz
+    -T, --type <type>
+    		the output format : svg, ps, png, gif, dia… See graphviz output formats for more formats.
+    -c, --cmd <GRAPHVIZ_CMD>
+        choose your graphviz command (man graphviz).
+    --show 
+        open a window with graph representation.
+    --help
+        print this message.
+\end{verbatim}
+
 
 \subsection{Paquet \texttt{app.model}}
 C'est ici que sont définies les classes \emph{POJO} du modèle de donnée correspondant au modèle relationnel. On y trouve donc classes \texttt{Column}, \texttt{Constraint} et \texttt{Table}, enrichies de quelques méthodes :
