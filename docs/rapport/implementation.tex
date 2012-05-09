@@ -63,12 +63,41 @@ Le sous paquet \texttt{hibernate} contient une classe \texttt{HibernateUtil} res
 
 La création de la session s'effectue en chargeant le fichier de configuration \emph{Hibernate} correspondant au type de SGBD passé en paramètre, et renvoie une exception si celui-ci est inexistant ou inaccessible.
 
+\subsubsection{Types génériques}
+Comme décrit dans la section~\ref{section:generic_types}, nous avons fait le choix de généraliser les types de colonnes et de contraintes. Cette classe utilitaire fournit une unique méthode permettant, à partir du type de SGBD, du type non générique, et du type d'objet (colonne ou contrainte), de retourner le type générique. La méthode procède en chargeant le fichier de correspondance des types du SGBD passé en paramètre. Ces fichiers sont décrits dans la section~\ref{subsection:conf.types}.
+
 \subsection{Paquet \texttt{conf.hibernate}}
+Les fichiers de configurations d'\emph{Hibernate} propre à chaque SGBD sont stocké ici. Il faut créer un sous paquet au nom du SGBD (en respectant le nom du driver JDBC).
+
+Chaque SGBD doit posséder quatre fichiers de configuration. Le de configuration principal déclare le driver et le dialecte à utiliser, ainsi que les chemin vers les trois fichiers de Mapping décrits ci-après.
 \subsubsection{Fichiers de mapping}
-\subsubsection{Subselect}
+\paragraph{Le \emph{subselect}} Le subselect permet d'associer non pas une entité du modèle à une table réellement stockée en  base de données, mais à un table virtuelle créée via un requête de sélection. Nous avons donc pu généraliser notre modèle de données en adaptant les clauses \emph{subselect} pour chaque SGBD, afin de sélectionner, à partir des vues proposées par les différents systèmes, les données nécessaires.
+
+\paragraph{Problématique de la relation \emph{Many-to-Many}}
+Lors de la construction de nos fichiers de mapping, nous avons rencontré un problème au niveau du modèle de données auquel nous étions confrontés (cf. figure~\ref{figure:diag_classe_reel}, page \pageref{figure:diag_classe_reel}). D'après ce modèle, l'entité contrainte est en relation \emph{Many-to-Many} avec l'entité colonne. Dans le modèle relationnel, une telle relation nécessite la création d'une table d'association, permettant la jointure entre ces deux entités. Étant donné que nous travaillons avec des \emph{subselect}, nous ne pouvons pas créer de telle table. La solution a donc consisté en adaptant le schéma réel afin de pallier à cet imprévu.
+
+L'idée est donc de transformer cette relation problématique en une relation \emph{Many-to-One} (plusieurs relations peuvent être en relation avec une seule colonne). Pour cela, il faut utiliser des id composés (\emph{composite-id}) en identifiant une contrainte non plus uniquement pas sa table et son nom, mais pas sa table, son nom, et le nom de la colonne. Ainsi, une clé s'appliquant sur deux colonnes sera présente deux fois dans notre modèle.
+
+\begin{figure}[H]
+\includegraphics[width=0.6\textwidth]{files/diag_class_final}
+\centering
+\caption{Diagramme de classe représentant le modèle \emph{Hibernate}.}
+\label{figure:diag_class_model_hibernate}
+\end{figure}
 
 \subsection{Paquet \texttt{conf.types}}
 \label{subsection:conf.types}
+
+Les types génériques sont définis dans des fichiers xml placés dans des sous paquets. A chaque type générique définis dans l'application, il suffit d'associer les types réels propres au SGBD. 
+
+Voici la DTD de ces fichiers de correspondance : 
+\begin{verbatim}
+<!ELEMENT genericTypes (genericType*)>
+<!ELEMENT genericType (type*)>
+<!ELEMENT type (#PCDATA) >
+
+<!ATTLIST genericType name CDATA #REQUIRED>
+\end{verbatim}
 
 
 \section{Utilisation de \emph{graphviz}}
