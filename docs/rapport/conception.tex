@@ -5,14 +5,30 @@
 \subsection{Pourquoi ?}
 
 \section{Le modèle}
-\verb+// Diag de classe :)+
-\subsection{Colonnes}
-\subsection{Tables}
-\subsection{Contraintes}
+	\verb+// Diag de classe :)+
+	\subsection{Attributs}
+		Gestion des types génériques
+	\subsection{Tables}
+	\subsection{Contraintes}
 
 \section{Compatibilité avec les SGBD}
 
 \section{Générateur de graphes}
-\verb+// Le langage DOT+
+  \subsection{différentes librairies}
+		\begin{itemize}
+			\item jung
+				entrée : un fichier dot\\
+				inconvénients : dernières fonctionnalités dot non prise en charqe.
+			\item grappa
+				 entrée : fichier dot
+			\item graphviz
+		\end{itemize}	
+  \subsection{Notre choix}
+		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
 
-\section{L'IHM}
+
+\section{L'IHM}	
+	\subsection{les choix possibles}
+			\subsubsection{GUI : \og Graphical User Interface \fg{}}
+			\subsubsection{CLI : \og Command Line Interface \fg{}}
+				philosophie KISS « Keep it simple, Stupid! »

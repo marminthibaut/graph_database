@@ -6,10 +6,11 @@
 	<class name="gd.app.model.Table" table="TABLE">
 		<subselect>
 			SELECT `table_name` as `name`, `table_catalog` as
-			`catalog`, 'mysql'
-			as sgbdtype
-			FROM information_schema.tables
-			WHERE table_schema=database()
+			`catalog`, 'mysql' as sgbdtype
+			FROM 
+			     information_schema.tables
+			WHERE 
+			     table_schema = database()
 		</subselect>
 		<id name="name" type="java.lang.String">
 			<column name="NAME" />
@@ -20,7 +21,7 @@
 		<property name="sgbdtype" type="java.lang.String">
 			<column name="SGBDTYPE" />
 		</property>
-		<set name="columns" inverse="true">
+		<set name="columns" inverse="true" order-by="position asc">
 			<key>
 				<column name="table" />
 			</key>

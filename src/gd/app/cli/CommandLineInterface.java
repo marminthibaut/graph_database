@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -26,6 +27,9 @@ import gd.hibernate.util.HibernateUtil;
 public class CommandLineInterface
 {
 
+  private static final Logger LOGGER = Logger.getLogger(CommandLineInterface.class);
+
+  
   private static final String TITLE = "db2graph";
 
   private static String username = "";
@@ -79,16 +83,14 @@ public class CommandLineInterface
 
                     // System call to graphviz
                     if (ToDotUtil.dotToSvg(gv_cmd, url_dot_file, url_image) != 0)
-                        System.err
-                                .println("Erreur lors de la génération du svg.");
+                        LOGGER.error("Erreur lors de la génération du svg.");
 
                 }
                 if (opt_show) {
                     String png_image = dir + racine_file + ".png";
                     // System call to graphviz
                     if (ToDotUtil.dotToPng(gv_cmd, url_dot_file, png_image) != 0)
-                        System.err
-                                .println("Erreur lors de la génération du png.");
+                      LOGGER.error("Erreur lors de la génération du png.");
 
                     new ImageFrame(png_image, TITLE);
                 }
@@ -98,7 +100,7 @@ public class CommandLineInterface
             session.close();
 
         } catch (Exception e) {
-          System.err.println(e.getMessage());
+          LOGGER.warn(e);
         } finally {
         }
 
@@ -176,7 +178,7 @@ public class CommandLineInterface
       }
     catch (Exception e)
       {
-        System.err.println(e.getMessage());
+        LOGGER.error(e);
         printHelp();
         System.exit(1);
       }
