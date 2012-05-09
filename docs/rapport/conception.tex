@@ -24,19 +24,19 @@ La principale différence réside dans la classification des contraintes. Cette 
 Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont ignorées.
 
 	\subsection{Tables}
-		Une table (relation) est identifiée par son nom et le schéma auquel elle appartient. Elle possède un ensemble de colonnes (attributs) et un ensemble de contraintes.
+		Une table est identifiée par son nom et le schéma auquel elle appartient. Elle possède un ensemble de colonnes et un ensemble de contraintes.
 	\subsection{Colonne}
-		Une colonne (attribut) est identifiée par son nom et la table à laquelle elle appartient. Elle possède un type, et éventuellement une précision. 
-		Gestion des types génériques
+		Une colonne est identifiée par son nom et la table à laquelle elle appartient. Elle possède un type, et éventuellement une précision. 
+		\paragraph{Gestion des types génériques}
 	\subsection{Contraintes}
-	
+		Une contrainte est identifié par un nom, sur certain SGBD il faut lui adjoindre le nom de la table sur laquelle elle est appliquée pour avoir une identification unique (notamment MySQL). Une contrainte possède un type et s'applique sur une ou plusieurs colonne d'une table. Elle peut être de type \og primary key \fg{}, \og foreign key \fg{}, \og unique \fg{} ou \og check \fg. Les contraintes de type \og foreign key \fg{} référence en plus une contrainte de type unique compatible, c'est à dire que les colonnes sur lesquelles s'applique la \og foreign key \fg{} et les colonnes sur lesquelles s'applique la contrainte référencée sont au même nombres et de même types. 
 \section{ORM}
 
 	\subsection{Qu'est qu'un ORM?}
     Un ORM ou \emph{mapping objet-relationnel} (en anglais \emph{object-relational mapping}) est une méthode de programmation qui consiste à donner l'illusion d'une base de données orientée objet à partir d'une base de données relationnelle en implémentant une interface entre celle-ci et le code de l'application. Il permet donc de palier aux problèmes d'adaptation entre le paradigme objet et les SGBDR en remplaçant les accès à la base de données par des appels à des méthodes objet de haut niveau.
    
 	\subsection{Pourquoi?}
-    Les systèmes de gestion de bases de données orientées objet étant actuellement peu nombreux et la norme SQL3 étant que partiellement implémentée, la plupart des applications développées avec un modèle Object utilise des ORM pour gérer la persistance des données.
+    Les systèmes de gestion de bases de données orientées objet étant actuellement peu nombreux et la norme SQL3 étant que partiellement implémentée, les ORM offre à ce jour le meilleur compromis entre la performance des SGBDR et le pouvoir expressif de la modélisation objet.
     
 En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
@@ -44,8 +44,8 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 
 \section{Générateur de graphes}
   \subsection{différentes librairies}
-		\paragraph{jung}
-				entrée : un fichier dot\\
+		\paragraph{JUNG} Java Universal Network/Graph Framework\\
+				JUNG est une API java permettant la visualisation de graphes
 				inconvénients : dernières fonctionnalités dot non prise en charqe.
 		\paragraph{grappa}
 				 entrée : fichier dot
