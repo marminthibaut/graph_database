@@ -49,7 +49,19 @@ Les types génériques sont définies dans les énumérations \texttt{ColumnType
 
 \subsection{Paquet \texttt{app.util}}
 \label{subsection:app.util}
-\subsubsection{Génération de graphe}
+
+Des classes utilitaires sont définies dans ce paquet.
+
+\subsubsection{Génération de graphe avec \texttt{ToDotUtil}}
+Cet utilitaire est définit dans un sous paquet \texttt{todot}. Il contient une succession d'énumérations permettant de lister les commandes \emph{graphviz}, les couleurs, les formes, et les styles propres au langage DOT.
+La classe principale \texttt{ToDotUtil} implémente une méthode permettant, à partir d'une base de données (liste de tables), de générer une chaine de caractère au langage DOT qui décrit cette base de données. Il est possible de définir le style du graphe généré en sortie (couleurs, formes, etc.).
+
+Des méthodes d'export au format \emph{svg} et \emph{png} sont également déclarées.
+
+\subsubsection{Singleton de connexion Hibernate}
+Le sous paquet \texttt{hibernate} contient une classe \texttt{HibernateUtil} respectant le patron de conception \emph{singleton}. Il permet de créer une session \emph{Hibernate} en fournissant le type de SGBD, l'hôte, le nom de la base de données, le nom d'utilisateur, le mot de passe et le port.
+
+La création de la session s'effectue en chargeant le fichier de configuration \emph{Hibernate} correspondant au type de SGBD passé en paramètre, et renvoie une exception si celui-ci est inexistant ou inaccessible.
 
 \subsection{Paquet \texttt{conf.hibernate}}
 \subsubsection{Fichiers de mapping}
