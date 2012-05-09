@@ -1,22 +1,48 @@
-\textit{Petite intro :)}
-
-\section{ORM}
-\subsection{Qu'est-ce qu'un ORM ?}
-\subsection{Pourquoi ?}
+\textit{Cette phase d'analyse est un élément indispensable à la bonne réalisation du projet. Dans un premier temps, un modèle plus fidèle à la réalité des schémas stockés dans les SGBDR est présenté. Cette partie est suivit d'une petite réflexion sur l'utilisation des ORM. Sont ensuite parcourus les solutions de génération de graphes pour la représentation des données. Les choic concernant l'interface utilisateur seront également exposés.}
 
 \section{Le modèle}
-	\verb+// Diag de classe :)+
+\subsection{Modèle réellement rencontré}
+
+Lors de l'étude des métadonnées stockées par les différents SGBD, nous avons remarqué quelque divergences par rapport au modèle fournit avec le sujet (figure~\ref{figure:diag_classe_fournit} page~\pageref{figure:diag_classe_fournit}). La figure~\ref{figure:diag_classe_reel} présente un diagramme de classe construit suite à nos recherches.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{files/diag_class_ameliore}
+\caption{Diagramme de classe réellement rencontré.}
+\label{figure:diag_classe_reel}
+\end{figure}
+
+La principale différence réside dans la classification des contraintes. Cette classification permet de distinguer trois types de contraintes :
+
+\begin{itemize}
+\item Les contraintes d'unicité : elles contraignent l'unicité d'un ou plusieurs attributs au sein d'une même table. Les contraintes de clé primaire sont des contraintes d'unicité.
+\item Les contraintes d'intégrité référentielle : elles identifient un ou plusieurs attributs d'une table comme référençant un ou plusieurs attributs d'une autre table, au travers d'une contrainte d'unicité. Notons que ce type de contrainte permet de \textbf{référencer une contrainte d'unicité et non plus une contrainte de clé primaire} comme proposé dans le modèle original.
+\item Les contraintes de type \emph{Check} : qui s'appliquent à un ou plusieurs attributs d'une table. Elles contiennent une clause de vérification \texttt{check\_clause}.
+\end{itemize}
+
+\paragraph*{NB}
+Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont ignorées.
+
 	\subsection{Attributs}
 		Gestion des types génériques
 	\subsection{Tables}
 	\subsection{Contraintes}
+	
+\section{ORM}
+
+	\subsection{Qu'est qu'un ORM?}
+    Un ORM ou \emph{mapping objet-relationnel} (en anglais \emph{object-relational mapping}) est une méthode de programmation qui consiste à donner l'illusion d'une base de données orientée objet à partir d'une base de données relationnelle en implémentant une interface entre celle-ci et le code de l'application.
+   
+	\subsection{Pourquoi?}
+    Les systèmes de gestion de bases de données orientées objet étant actuellement peu nombreux et la norme SQL3 étant que partiellement implémentée, la plupart des applications développées avec un modèle Object utilise des ORM pour gérer la persistance des données.
+    
+En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
 \section{Compatibilité avec les SGBD}
 
 \section{Générateur de graphes}
   \subsection{différentes librairies}
 		\paragraph{jung}
-				JUNG (the Java Universal Network/Graph Framework) est une API java. C'est un logiciel libre, sous licence BSD.
 				entrée : un fichier dot\\
 				inconvénients : dernières fonctionnalités dot non prise en charqe.
 		\paragraph{grappa}
@@ -26,7 +52,6 @@
 				
   \subsection{Notre choix}
 		\verb+//Notre choix c'est porté sur la commande DOT fournit par GraphViz+
-
 
 \section{L'IHM}	
 	\subsection{les choix possibles}
@@ -42,3 +67,4 @@ une interface graphique proposant une fenêtre de configuration puis un affichag
 			
 	\subsection{Notre choix}
 		Nous avons choisi pour notre logiciel, d'implémenter une interface en ligne de commande pour les avantages de cette vision, détaillés précédement en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, nous pouvons, à partir d'une interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsule notre logiciel, alors que l'inverse est bien entendu beaucoup moins évident.
+
