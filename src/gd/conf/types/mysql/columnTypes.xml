@@ -1,18 +1,39 @@
 <?xml version="1.0" standalone="no" ?>
 <genericTypes>
 	<genericType name="VARCHAR">
+	   <type>varchar</type>
+	   <type>text</type>
+	   <type>tinytext</type>
 	</genericType>
 	<genericType name="CHAR">
+	   <type>char</type>
 	</genericType>
 	<genericType name="INTEGER">
+	   <type>tinyint</type>
+	   <type>smallint</type>
+	   <type>mediumint</type>
+	   <type>int</type>
+	   <type>bigint</type>
 	</genericType>
 	<genericType name="FLOAT">
+	   <type>decimal</type>
+	   <type>float</type>
+	   <type>double</type>
+	   <type>real</type>
 	</genericType>
 	<genericType name="SERIAL">
+	   <type>serial</type>
 	</genericType>
 	<genericType name="DATE">
+	   <type>date</type>
+	   <type>datetime</type>
+	   <type>timestamp</type>
+	   <type>time</type>
+	   <type>year</type>
 	</genericType>
 	<genericType name="BINARY">
+	   <type>boolean</type>
+	   <type>bit</type>
 	</genericType>
 	<genericType name="VARCHAR BINARY">
 	</genericType>
