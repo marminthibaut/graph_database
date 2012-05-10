@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="21cm" height="30cm" viewBox="259 148 420 587" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <line style="fill: none; fill-opacity:0; stroke-width: 20; stroke: #7c333b" x1="310" y1="280" x2="310" y2="610"/>
+  <g>
+    <g>
+      <rect style="fill: #ffffff" x="320" y="150" width="80" height="80"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #e1e1e1" x="320" y="150" width="80" height="80"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff" x="300" y="170" width="80" height="80"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #c2c2c2" x="300" y="170" width="80" height="80"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff" x="280" y="190" width="80" height="80"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #868686" x="280" y="190" width="80" height="80"/>
+    </g>
+    <g>
+      <rect style="fill: #ffffff" x="260" y="210" width="80" height="80"/>
+      <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="260" y="210" width="80" height="80"/>
+    </g>
+    <text style="fill: #000000;text-anchor:middle;font-size:22.5774;font-family:sanserif;font-style:normal;font-weight:normal" x="300" y="257.825">
+      <tspan x="300" y="257.825">POJO</tspan>
+    </text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 20; stroke-dasharray: 20; stroke: #c7ffb6" x1="320" y1="440" x2="560" y2="440"/>
+  <g>
+    <polygon style="fill: #ffffff" points="301,340 301,540 431,440 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="301,340 301,540 431,440 "/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:16.9331;font-family:sanserif;font-style:normal;font-weight:normal" x="368" y="445.875">
+    <tspan x="368" y="445.875">HIBERNATE</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="260" y="614.853" width="101" height="89.1176"/>
+    <ellipse style="fill: #ffffff" cx="310.5" cy="703.971" rx="50.5" ry="14.8529"/>
+    <ellipse style="fill: #ffffff" cx="310.5" cy="614.853" rx="50.5" ry="14.8529"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="310.5" cy="614.853" rx="50.5" ry="14.8529"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 361 614.853 L 361,703.971 C 361,712.174 338.39,718.824 310.5,718.824 C 282.61,718.824 260,712.174 260,703.971 L 260,614.853"/>
+    <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="310.5" y="730.824">
+      <tspan x="310.5" y="730.824"></tspan>
+    </text>
+  </g>
+  <g>
+    <g>
+      <polygon style="fill: #ffffff" points="590,320 665.3,320 677.3,332 677.3,418 590,418 "/>
+      <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #e1e1e1" points="590,320 665.3,320 677.3,332 677.3,418 590,418 "/>
+      <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #e1e1e1" points="665.3,320 665.3,332 677.3,332 "/>
+      <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="597" y="344.9">
+        <tspan x="597" y="344.9"></tspan>
+        <tspan x="597" y="360.9"></tspan>
+        <tspan x="597" y="376.9"> Mapping </tspan>
+        <tspan x="597" y="392.9"></tspan>
+        <tspan x="597" y="408.9"></tspan>
+      </text>
+    </g>
+    <g>
+      <polygon style="fill: #ffffff" points="570,360 645.3,360 657.3,372 657.3,458 570,458 "/>
+      <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #c2c2c2" points="570,360 645.3,360 657.3,372 657.3,458 570,458 "/>
+      <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #c2c2c2" points="645.3,360 645.3,372 657.3,372 "/>
+      <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="577" y="384.9">
+        <tspan x="577" y="384.9"></tspan>
+        <tspan x="577" y="400.9"></tspan>
+        <tspan x="577" y="416.9"> Mapping </tspan>
+        <tspan x="577" y="432.9"></tspan>
+        <tspan x="577" y="448.9"></tspan>
+      </text>
+    </g>
+    <g>
+      <polygon style="fill: #ffffff" points="550,400 625.3,400 637.3,412 637.3,498 550,498 "/>
+      <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #868686" points="550,400 625.3,400 637.3,412 637.3,498 550,498 "/>
+      <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #868686" points="625.3,400 625.3,412 637.3,412 "/>
+      <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="557" y="424.9">
+        <tspan x="557" y="424.9"></tspan>
+        <tspan x="557" y="440.9"></tspan>
+        <tspan x="557" y="456.9"> Mapping </tspan>
+        <tspan x="557" y="472.9"></tspan>
+        <tspan x="557" y="488.9"></tspan>
+      </text>
+    </g>
+    <g>
+      <polygon style="fill: #ffffff" points="530,440 605.3,440 617.3,452 617.3,538 530,538 "/>
+      <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="530,440 605.3,440 617.3,452 617.3,538 530,538 "/>
+      <polyline style="fill: none; fill-opacity:0; stroke-width: 1; stroke: #000000" points="605.3,440 605.3,452 617.3,452 "/>
+      <text style="fill: #000000;text-anchor:start;font-size:12.7998;font-family:monospace;font-style:normal;font-weight:normal" x="537" y="464.9">
+        <tspan x="537" y="464.9"></tspan>
+        <tspan x="537" y="480.9"></tspan>
+        <tspan x="537" y="496.9"> Mapping </tspan>
+        <tspan x="537" y="512.9"></tspan>
+        <tspan x="537" y="528.9"></tspan>
+      </text>
+    </g>
+  </g>
+</svg>

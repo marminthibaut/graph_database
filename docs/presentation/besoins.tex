@@ -1,9 +1,39 @@
 \subsection{Fonctionnalités}
 \begin{frame}{Besoins}{Fonctionnalités}
-
+\begin{block}{Donnée du schéma}
+	\begin{itemize}
+	\item Table
+	\item Colonnes
+	\item Contraintes
+	\end{itemize}
+\end{block}
+\begin{block}{Visualisation graphique}
+Export sous la forme d'une représentation aisément compréhensible.
+\end{block}
 \end{frame}
 
 \subsection{Contraintes}
 \begin{frame}{Besoins}{Contraintes}
 
+ \begin{columns}[t]
+  \begin{column}{0.5\textwidth}
+	\begin{alertblock}{Compatibilité / Extensibilité}
+		\begin{itemize}
+		\item Postgresql,
+		\item Mysql,
+		\item Oracle,
+		\item \ldots
+		\end{itemize}
+	\end{alertblock}
+  \end{column}
+  
+  \begin{column}{0.5\textwidth}
+	\begin{alertblock}{Hibernate}
+	Imposé par le sujet
+	\end{alertblock}
+	\begin{alertblock}{Connexion}
+	Chargement des métadonnées via un connecteur
+	\end{alertblock}
+  \end{column}
+ \end{columns}  
 \end{frame}

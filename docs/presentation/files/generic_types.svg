@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="19cm" height="7cm" viewBox="225 58 379 121" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 20; stroke: #c7ffb6" x1="359.861" y1="95" x2="470.139" y2="95"/>
+    <polygon style="fill: #c7ffb6" points="352.361,95 362.361,90 359.861,95 362.361,100 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 20; stroke: #c7ffb6" points="352.361,95 362.361,90 359.861,95 362.361,100 "/>
+    <polygon style="fill: #c7ffb6" points="477.639,95 467.639,100 470.139,95 467.639,90 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 20; stroke: #c7ffb6" points="477.639,95 467.639,100 470.139,95 467.639,90 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="227" y="59.5" width="100" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #e1e1e1" x="227" y="59.5" width="100" height="70"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="277" y="90.95">
+    <tspan x="277" y="90.95">Types</tspan>
+    <tspan x="277" y="106.95">génériques</tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:middle;font-size:7.90222;font-family:sanserif;font-style:italic;font-weight:normal" x="277" y="136.85">
+    <tspan x="277" y="136.85">INTEGER</tspan>
+    <tspan x="277" y="146.728">VARCHAR</tspan>
+    <tspan x="277" y="156.606">FLOAT</tspan>
+    <tspan x="277" y="166.483">SERIAL</tspan>
+    <tspan x="277" y="176.361">...</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="503" y="60" width="100" height="70"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #e1e1e1" x="503" y="60" width="100" height="70"/>
+  </g>
+  <text style="fill: #000000;text-anchor:middle;font-size:12.7998;font-family:sanserif;font-style:normal;font-weight:normal" x="553" y="91.2637">
+    <tspan x="553" y="91.2637">Types</tspan>
+    <tspan x="553" y="107.264">réels</tspan>
+  </text>
+  <text style="fill: #000000;text-anchor:middle;font-size:7.90222;font-family:sanserif;font-style:italic;font-weight:normal" x="553" y="137.58">
+    <tspan x="553" y="137.58">character varying</tspan>
+    <tspan x="553" y="147.458">text</tspan>
+    <tspan x="553" y="157.336">int</tspan>
+    <tspan x="553" y="167.213">smallint</tspan>
+    <tspan x="553" y="177.091">...</tspan>
+  </text>
+</svg>
