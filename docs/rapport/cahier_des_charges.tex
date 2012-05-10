@@ -3,7 +3,8 @@
 
 \section{Fonctions principales}
 		\subsubsection{Données d'un schéma de base de données}
-		La fonction principale de l'application est de fournir les données d'un schéma d'une base de données. Un schéma est composé de tables, de colonne et de contraintes. Les informations qui doivent être fournies sont décrites ci-après.
+		La fonction principale de l'application est de fournir les données d'un schéma
+		d'une base de données. Un schéma est composé de tables, de colonnes et de contraintes. Les informations qui doivent être fournies sont décrites ci-après.
 		
 			\paragraph{tables}
 			Une table est contenue dans un schéma (base de données)
@@ -11,25 +12,25 @@
 					\item NAME, nom de la table
 				\end{itemize}
 				
-			\paragraph{colonne}
+			\paragraph{colonnes}
 			Une colonne est contenue dans une table.
 				\begin{itemize}
 					\item NAME, nom de la colonne
-					\item TYPE, type représentant le domaine de valeur accepté
+					\item TYPE, type représentant le domaine de valeurs acceptées
 					\item PRECISION, précision du type de la colonne
 				\end{itemize}
 				
 			\paragraph{contraintes}
-			Une contrainte s'applique sur une ou plusieurs colonnes d'une table.
+			Une contrainte s'applique sur une ou plusieures colonnes d'une table.
 				\begin{itemize}
 					\item NAME, nom de la contrainte
 					\item TYPE, type de la contrainte
 				\end{itemize} 
 				
-				Les contraintes suivante doivent être gérées : 
+				Les contraintes suivantes doivent être gérées : 
 				
 				\begin{itemize}
-				\item Contrainte d'unicité : qui permettent d'identifier de manière unique un enregistrement dans les tables (UNIQUE, PRIMARY KEY).
+				\item Contraintes d'unicité : qui permettent d'identifier de manière unique un enregistrement dans les tables (UNIQUE, PRIMARY KEY).
 				\item Contraintes référentielles : qui servent à établir des relations entre les tables (FOREIGN KEY).
 				\item Contraintes de vérification de la validité des données (CHECK)
 				\end{itemize}
@@ -48,7 +49,7 @@
 \section{Modélisation proposée}
 \label{section:modelisation_proposee}
 
-La figure~\ref{figure:diag_classe_fournit} présente le modèle de donnée de l'application, décrit dans le sujet. Il présente les éléments qui composent une base de données.
+La figure~\ref{figure:diag_classe_fournit} présente le modèle de données de l'application, décrit dans le sujet. Il présente les éléments qui composent une base de données.
 
 \begin{figure}[H]
 \centering
