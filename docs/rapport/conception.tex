@@ -1,4 +1,4 @@
-\textit{Cette phase d'analyse est un élément indispensable à la bonne réalisation du projet. Dans un premier temps, un modèle plus fidèle à la réalité des schémas stockés dans les SGBDR est présenté. Cette partie est suivit d'une petite réflexion sur l'utilisation des ORM. Sont ensuite parcourus les solutions de génération de graphes pour la représentation des données. Les choix concernant l'interface utilisateur seront également exposés.}
+\textit{Cette phase de conception est un élément indispensable à la bonne réalisation du projet. Dans un premier temps, un modèle plus fidèle à la réalité des schémas stockés dans les SGBDR est présenté. Cette partie est suivit d'une petite réflexion sur l'utilisation des ORM. Sont ensuite parcourus les solutions de génération de graphes pour la représentation des données. Les choix concernant l'interface utilisateur seront également exposés.}
 
 \section{Le modèle}
 \subsection{Modèle réellement rencontré}
@@ -17,11 +17,11 @@ La principale différence réside dans la classification des contraintes. Cette 
 \begin{itemize}
 \item Les contraintes d'unicité : elles contraignent l'unicité d'un ou plusieurs attributs au sein d'une même table. Les contraintes de clé primaire sont des contraintes d'unicité.
 \item Les contraintes d'intégrité référentielle : elles identifient un ou plusieurs attributs d'une table comme référençant un ou plusieurs attributs d'une autre table, au travers d'une contrainte d'unicité. Notons que ce type de contrainte permet de \textbf{référencer une contrainte d'unicité et non plus une contrainte de clé primaire} comme proposé dans le modèle original.
-\item Les contraintes de type \emph{Check} : qui s'appliquent à un ou plusieurs attributs d'une table. Elles contiennent une clause de vérification \texttt{check\_clause}.
+\item Les contraintes de vérification : qui s'appliquent à un ou plusieurs attributs d'une table. Elles contiennent une clause de vérification \texttt{check\_clause}.
 \end{itemize}
 
 \paragraph*{NB}
-Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont ignorées.
+Les autres types de contraintes (\emph{NULL}, \emph{NOT NULL}, \emph{DEFAULT}, etc.) sont ignorés.
 
 	\subsection{Tables}
 		Une table est identifiée par son nom et le schéma auquel elle appartient. Elle possède un ensemble de colonnes et un ensemble de contraintes.
@@ -72,14 +72,14 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 \section{L'IHM}	
 	\subsection{Les choix possibles}
 	\label{ihm_choix_possibles}
-		Notre Interface Homme-Machine peut être conçue de deux manières. La première solution consiste en la création d'une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. La seconde est orienté ligne de commande générant une image représentant le résultat. 	
+		Notre Interface Homme-Machine peut être conçue de deux manières. La première solution consiste en la création d'une interface graphique proposant une fenêtre de configuration puis un affichage du résultat obtenu. La seconde est orientée ligne de commande générant une image représentant le résultat. 	
 	
 		\subsubsection{GUI : \og Graphical User Interface \fg{}}
-			Une interface utilisateur graphique permet une prise en main rapide et intuitive d'un logiciel mais ne permet pas une grande interopérabilité. En effet, il est compliqué de demandé à un programme de configurer un autre programme via une interface graphique.
+			Une interface utilisateur graphique permet une prise en main rapide et intuitive d'un logiciel mais ne permet pas une grande interopérabilité. En effet, il est compliqué de demander à un programme de configurer un autre programme via une interface graphique.
 			
 		\subsubsection{CLI : \og Command Line Interface \fg{}}
-			La conception d'une interface en ligne de commande entre dans la philosophie KISS, \og Keep it simple, Stupid! \fg{}. Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Le choix d'une interface en ligne de commande permet de ce concentrer sur les cœur de l'application, aussi appelé \og processus métier \fg{}. Cette vision a aussi l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel tiers et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
+			La conception d'une interface en ligne de commande entre dans la philosophie KISS, \og Keep it simple, Stupid! \fg{}. Cette philosophie préconise la recherche de simplicité dans la conception et insiste sur le fait que toute complexité non nécessaire devrait être évitée. Le choix d'une interface en ligne de commande permet de se concentrer sur le cœur de l'application, aussi appelé \og processus métier \fg{}. Cette vision a aussi l'avantage d'offrir une grande interopérabilité, il est en effet aisé d'exécuter une ligne de commande depuis un logiciel tiers et d'en récupérer la sortie. Par contre, une interface en ligne de commande est plus difficile à prendre en main pour un utilisateur non averti.  
 			
 	\subsection{Notre choix}
-		Nous avons choisi pour notre application d'implémenter une interface en ligne de commande pour les avantages détaillés précédemment en \ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, si le besoin d'une interface graphique ce fait sentir, pour toucher un public moins averti par exemple, nous pourrons toujours, à partir de l'interface en ligne de commande, créer une interface graphique dans un langage quelconque qui encapsulera notre logiciel, alors que l'inverse serait bien entendu beaucoup moins évident.
+		Nous avons choisi pour notre application d'implémenter une interface en ligne de commande pour les avantages détaillés précédemment dans la section~\ref{ihm_choix_possibles}, à savoir sa simplicité et sa grande interopérabilité. De plus, si le besoin d'une interface graphique se fait sentir, pour toucher un public moins averti par exemple, il est toujours possible, à partir de l'interface en ligne de commande, de créer une interface graphique dans un langage quelconque qui encapsulera notre logiciel, alors que l'inverse serait bien entendu beaucoup moins évident.
 
