@@ -1,9 +1,9 @@
-\textit{Cette partie commence par présenter \emph{Hibernate}, l'ORM que nous avons du utiliser pour gérer l'accès aux données. Elle détaille également les différents paquets de l'application, la manière dont ont été mappées les informations, celle adoptée pour la génération du graphe, ainsi que la mise en place de l'outil développé en ligne de commande. Notons que l'utilisation du langage Java ne sera pas justifié étant donné qu'il s'agit d'une contrainte induite pas le fait que le framework \emph{Hibernate} devait être utilisé.}
+\textit{Cette partie commence par présenter \emph{Hibernate}, l'ORM que nous avons dû utiliser pour gérer l'accès aux données. Elle détaille également les différents paquets de l'application, la manière dont ont été mappées les informations, celle adoptée pour la génération du graphe, ainsi que la mise en place de l'outil développé en ligne de commande. Notons que l'utilisation du langage Java ne sera pas justifié étant donné qu'il s'agit d'une contrainte induite pas le fait que le framework \emph{Hibernate} devait être utilisé.}
 
 \section{L'ORM \emph{Hibernate}}
 \emph{Hibernate} est un framework Java de type ORM. Bien qu'il permette la gestion de la persistance des données (écriture), \emph{Hibernate} sera utilisé ici uniquement dans le but d'accéder aux métadonnées des SGBD (lecture) via des configurations de Mapping.
 \subsection{POJO}
-La définition des entités dans \emph{Hibernate} à l'aide de classes \emph{POJO}. Cet acronyme signifiant \og Plain Old Java Object \fg{} fait référence à de simples classes ayant comme principale caractéristique de n'implémenter aucune interface, et de posséder un \emph{getter} et un \emph{setter} par attribut.
+La définition des entités dans \emph{Hibernate} s'effectue à l'aide de classes \emph{POJO}. Cet acronyme signifiant \og Plain Old Java Object \fg{} fait référence à de simples classes ayant comme principale caractéristique de n'implémenter aucune interface, et de posséder un \emph{getter} et un \emph{setter} par attribut.
 \subsection{Mapping}
 Le mapping consiste, comme son nom l'indique, à faire la correspondance entre les entités définies (classes \emph{POJO}) et les tables en base de données. En règle générale, un objet $x$ est mappé avec une table relationnelle $table\_x$, est les attributs $x_1$, $x_2$, \ldots, $x_n$ avec les attributs $tables\_x.x_1$, $tables\_x.x_2$, \ldots, $tables\_x.x_n$. Il est également possible d'ajouter des relations entre attributs (One-to-One, One-to-Many, Many-to-Many), de déclarer des \emph{id}, etc.
 
@@ -24,9 +24,9 @@ Dans le but de faciliter la réutilisation du code et l'extension de sa compatib
 Trois paquets principaux se distinguent :
 
 \begin{description}
-\item[\texttt{app}] : dans ce paquet sont regroupés toutes les classes Java nécessaires au fonctionnement interne de l'outil. On y trouve les sous paquets \texttt{cli}, \texttt{model} et \texttt{util} qui seront détaillés par la suite.
+\item[\texttt{app}] : dans ce paquet sont regroupées toutes les classes Java nécessaires au fonctionnement interne de l'outil. On y trouve les sous paquets \texttt{cli}, \texttt{model} et \texttt{util} qui seront détaillés par la suite.
 \item[\texttt{conf}] : ce paquet permet d'externaliser les fichiers de configuration. Il a la particularité de ne stocker aucune classe Java.
-\item[\texttt{util}] : ici sont regroupés des classes java utilisées par l'application mais qui ne sont pas propre à l'exécution de ses fonctions initiales. Elle stocke notamment des classes permettant la gestion du CLI.
+\item[\texttt{util}] : ici sont regroupées des classes java utilisées par l'application mais qui ne sont pas propre à l'exécution de ses fonctions initiales. Il stocke notamment des classes permettant la gestion du CLI.
 \end{description}
 
 \subsection{Paquet \texttt{app.cli}}
@@ -34,7 +34,7 @@ Trois paquets principaux se distinguent :
 Ce paquet implémente l'interface en ligne de commande, celle-ci permettra notamment la configuration de la connexion au SGBDR ainsi que le format de sortie. Il est composé exclusivement de la classe \texttt{CommandLineInterface}.
 
 \begin{description}
-\item[CommandLineInterface] Cette classe défini la fonction \texttt{main} de notre application. Elle utilise la classe \texttt{OptionManager} décrite en \ref{subsection:util} page \pageref{subsection:util} afin d'interpréter les options de la ligne de commande.  
+\item[CommandLineInterface] Cette classe définit la fonction \texttt{main} de notre application. Elle utilise la classe \texttt{OptionManager} décrite en \ref{subsection:util} page \pageref{subsection:util} afin d'interpréter les options de la ligne de commande.  
 \end{description}
 
 \begin{verbatim}
@@ -74,7 +74,7 @@ C'est ici que sont définies les classes \emph{POJO} du modèle de données corr
 \item[Constraint] Ajout des méthodes \texttt{\underline{bool isPk()}}, \texttt{\underline{bool isFk()}} et \texttt{\underline{bool isCheck()}} permettant de savoir respectivement si la contrainte est de type clé primaire, clé étrangère, ou contrainte de vérification. Est également définie une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaîne de caractères, le type générique de la contrainte.
 \end{description}
 
-Les types génériques sont définies dans les énumérations \texttt{ColumnType} et \texttt{ConstraintType}. Les conversions de types se font en fonction du SGBDR sélectionné grâce au paquet \texttt{app.util} (cf. \ref{subsection:app.util}) et aux fichiers de conversions stockés dans le paquet \texttt{conf.types} (cf. \ref{subsection:conf.types}).
+Les types génériques sont définis dans les énumérations \texttt{ColumnType} et \texttt{ConstraintType}. Les conversions de types se font en fonction du SGBDR sélectionné grâce au paquet \texttt{app.util} (cf. \ref{subsection:app.util}) et aux fichiers de conversions stockés dans le paquet \texttt{conf.types} (cf. \ref{subsection:conf.types}).
 
 \subsection{Paquet \texttt{app.util}}
 \label{subsection:app.util}
@@ -83,13 +83,13 @@ Des classes utilitaires sont définies dans ce paquet.
 
 \subsubsection{Génération de graphe avec \texttt{ToDotUtil}}
 \label{section:ToDotUtil}
-Cet utilitaire est définit dans un sous paquet \texttt{todot}. Il contient une succession d'énumérations permettant de lister les commandes \emph{graphviz}, les couleurs, les formes, et les styles propres au langage DOT.
+Cet utilitaire est défini dans un sous paquet \texttt{todot}. Il contient une succession d'énumérations permettant de lister les commandes \emph{graphviz}, les couleurs, les formes, et les styles propres au langage DOT.
 La classe principale \texttt{ToDotUtil} implémente une méthode permettant, à partir d'une base de données (liste de tables), de générer une chaîne de caractères au langage DOT qui décrit cette base de données. Il est possible de définir le style du graphe généré en sortie (couleurs, formes, etc.).
 
-Les formats d'exportation suivant sont reconnus : 
+Les formats d'exportation suivants sont reconnus : 
 
 \begin{center}
-\begin{tabular}{c c c c c c}
+\begin{tabular}{l l l l l l}
 canon&cmap&cmapx&cmapx\_np&dot&eps \\
 fig & gd & gd2 & gif & gv & imap \\
 imap\_np & ismap & jpe & jpeg & jpg & pdf \\
@@ -100,7 +100,7 @@ x11 & xdot & xlib & & & \\
 \end{center}
 
 \subsubsection{Connexion Hibernate}
-Le sous paquet \texttt{hibernate} contient une classe \texttt{HibernateUtil} respectant le patron de conception \emph{factory}. Il permet de créer une session \emph{Hibernate} en fournissant le type de SGBD, l'hôte, le nom de la base de données, le nom d'utilisateur, le mot de passe et le port.
+Le sous-paquet \texttt{hibernate} contient une classe \texttt{HibernateUtil} respectant le patron de conception \emph{factory}. Il permet de créer une session \emph{Hibernate} en fournissant le type de SGBD, l'hôte, le nom de la base de données, le nom d'utilisateur, le mot de passe et le port.
 
 La création de la session s'effectue en chargeant le fichier de configuration \emph{Hibernate} correspondant au type de SGBD passé en paramètre, et renvoie une exception si celui-ci est inexistant ou inaccessible.
 
@@ -108,28 +108,28 @@ La création de la session s'effectue en chargeant le fichier de configuration \
 Comme décrit dans la section~\ref{section:generic_types}, nous avons fait le choix de généraliser les types de colonnes et de contraintes. Cette classe utilitaire fournit une unique méthode permettant, à partir du type de SGBD, du type non générique, et du type d'objet (colonne ou contrainte), de retourner le type générique. La méthode procède en chargeant le fichier de correspondance des types du SGBD passé en paramètre. Ces fichiers sont décrits dans la section~\ref{subsection:conf.types}.
 
 \subsection{Paquet \texttt{conf.hibernate}}
-Les fichiers de configurations d'\emph{Hibernate} propre à chaque SGBDR sont stockés ici. Il faut créer un sous paquet au nom du SGBDR (en respectant le nom du driver JDBC).
+Les fichiers de configurations d'\emph{Hibernate} propres à chaque SGBDR sont stockés ici. Il faut créer un sous-paquet au nom du SGBDR (en respectant le nom du driver JDBC).
 
-Chaque SGBDR doit posséder quatre fichiers de configuration. La configuration principale déclare le driver et le dialecte à utiliser, ainsi que les chemin vers les trois fichiers de Mapping décrits ci-après.
+Chaque SGBDR doit posséder quatre fichiers de configuration. La configuration principale déclare le driver et le dialecte à utiliser, ainsi que les chemins vers les trois fichiers de Mapping décrits ci-après.
 \subsubsection{Fichiers de mapping}
-\paragraph{Le \emph{subselect}} Le subselect permet d'associer non pas une entité du modèle à une table réellement stockée en  base de données, mais à un table virtuelle créée via un requête de sélection. Nous avons donc pu généraliser notre modèle de données en adaptant les clauses \emph{subselect} pour chaque SGBD, afin de sélectionner, à partir des vues proposées par les différents systèmes, les données nécessaires.
+\paragraph{Le \emph{subselect}} Le subselect permet d'associer non pas une entité du modèle à une table réellement stockée en  base de données, mais à une table virtuelle créée via une requête de sélection. Nous avons donc pu généraliser notre modèle de données en adaptant les clauses \emph{subselect} pour chaque SGBD, afin de sélectionner, à partir des vues proposées par les différents systèmes, les données nécessaires.
 
 \paragraph{Problématique de la relation \emph{Many-to-Many}}
-Lors de la construction de nos fichiers de mapping, nous avons rencontré un problème au niveau du modèle de données auquel nous étions confrontés (cf. figure~\ref{figure:diag_classe_reel}, page \pageref{figure:diag_classe_reel}). D'après ce modèle, l'entité contrainte est en relation \emph{Many-to-Many} avec l'entité colonne. Dans le modèle relationnel, une telle relation nécessite la création d'une table d'association, permettant la jointure entre ces deux entités. Étant donné que nous travaillons avec des \emph{subselect}, nous ne pouvons pas créer de telle table. La solution a donc consisté en adaptant le schéma réel afin de pallier à cet imprévu.
+Lors de la construction de nos fichiers de mapping, nous avons rencontré un problème au niveau du modèle de données auquel nous étions confrontés (cf. figure~\ref{figure:diag_classe_reel}, page \pageref{figure:diag_classe_reel}). D'après ce modèle, l'entité contrainte est en relation \emph{Many-to-Many} avec l'entité colonne. Dans le modèle relationnel, une telle relation nécessite la création d'une table d'association, permettant la jointure entre ces deux entités. Étant donné que nous travaillons avec des \emph{subselect}, nous ne pouvons pas créer de telles tables. La solution a donc consisté en l'adaptatation du schéma réel afin de pallier à cet imprévu.
 
-L'idée est donc de transformer cette relation problématique en une relation \emph{Many-to-One} (plusieurs relations peuvent être en relation avec une seule colonne). Pour cela, il faut utiliser des id composés (\emph{composite-id}) en identifiant une contrainte non plus uniquement pas sa table et son nom, mais pas sa table, son nom, et le nom de la colonne. Ainsi, une contrainte s'appliquant sur deux colonnes sera représentée par deux instances de la classe contrainte.
+L'idée est donc de transformer cette relation problématique en une relation \emph{Many-to-One} (plusieures relations peuvent être en relation avec une seule colonne). Pour cela, il faut utiliser des id composés (\emph{composite-id}) en identifiant une contrainte non plus uniquement pas sa table et son nom, mais par sa table, son nom, et le nom de la colonne. Ainsi, une contrainte s'appliquant sur deux colonnes sera représentée par deux instances de la classe contrainte.
 
 \begin{figure}[H]
 \includegraphics[width=0.6\textwidth]{files/diag_class_final}
 \centering
-\caption{Diagramme de classe représentant le modèle \emph{Hibernate}.}
+\caption{Diagramme de classes représentant le modèle \emph{Hibernate}.}
 \label{figure:diag_class_model_hibernate}
 \end{figure}
 
 \subsection{Paquet \texttt{conf.types}}
 \label{subsection:conf.types}
 
-Les types génériques sont définis dans des fichiers xml placés dans des sous paquets. A chaque type générique définis dans l'application, il suffit d'associer les types réels propres au SGBDR. 
+Les types génériques sont définis dans des fichiers xml placés dans des sous-paquets. A chaque type générique défini dans l'application, il suffit d'associer les types réels propres au SGBDR. 
 
 Voici la DTD de ces fichiers de correspondance : 
 \begin{verbatim}
@@ -144,10 +144,10 @@ Voici la DTD de ces fichiers de correspondance :
 \subsection{Paquet \texttt{util}}
 \label{subsection:util}
 
-Dans ce paquet sont regroupé toutes les classes utilitaires non spécifique à l'application. 
+Dans ce paquet sont regroupées toutes les classes utilitaires non spécifiques à l'application. 
 
 \begin{description}
-\item[OptionManager] Cette classe aide à la gestion des paramètres passé à une application.
+\item[OptionManager] Cette classe aide à la gestion des paramètres passés à une application.
 
 \item[ImageFrame] Permet d'ouvrir facilement une fenêtre contenant une image.
 
