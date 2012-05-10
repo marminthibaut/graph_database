@@ -9,6 +9,22 @@
 %\setbeameroption{show notes on second screen=left}
 \usetheme{Singapore}
 
+
+\setbeamertemplate{footline}{
+\leavevmode%
+\hbox{
+\hspace*{-0.06cm}
+\begin{beamercolorbox}[wd=.8\paperwidth,dp=1ex,left]{section in head/foot}%
+	\usebeamerfont{section in head/foot}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
+	\insertframenumber{}\hspace*{2ex}
+\end{beamercolorbox}}%
+\vskip0pt%
+}
+
+\setbeamertemplate{navigation symbols}{}
+
 %\usetheme{Frankfurt}
 
 
@@ -83,7 +99,7 @@ morekeywords=true
 \section{Conception}
 \input{conception}
 
-\section{implementation}
+\section{Implementation}
 \input{implementation}
 
 \section{Résultat}
