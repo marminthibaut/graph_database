@@ -28,9 +28,6 @@
 
 \subsection{Paquets}
 \begin{frame}{Implémentation}{Paquets}
-	\begin{block}{\texttt{app.cli}}
-	Gestion de l'interface en ligne de commande.
-	\end{block}
 	\begin{block}{\texttt{app.model}}
 	Définition des classes POJO enrichies :
 	\begin{itemize}
@@ -80,3 +77,36 @@
 	\end{center}
 	\end{block}
 \end{frame}
+
+\begin{frame}[containsverbatim]{Implémentation}{Paquets}
+	\begin{block}{\texttt{app.cli}}
+	Gestion de l'interface en ligne de commande.
+	\tiny
+		\begin{verbatim}
+		Usage:
+gd SGBD\_NAME DATABASE\_NAME [OPTION]...
+
+Options:
+    -u, --user <USERNAME>
+        use this username.
+    -p, --password [PASSWORD]
+        use this password.
+    -h, --host <HOST>
+        use this host.
+    --port <PORT>
+        use this port.
+    -o, --output <FILE_NAME>
+        generate a png image with graphviz
+    -T, --type <type>
+        the output format : svg, ps, png, gif, dia… 
+        See graphviz output formats for more formats.
+    -c, --cmd <GRAPHVIZ_CMD>
+        choose your graphviz command (man graphviz).
+    --show 
+        open a window with graph representation.
+    --help
+        print this message.
+	\end{verbatim}
+	\end{block}
+\end{frame}
+
