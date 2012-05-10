@@ -40,9 +40,9 @@ Les contraintes de type \emph{NULL}, \emph{NOT NULL} et \emph{DEFAULT} sont igno
     
 En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
-\section{Compatibilité avec les SGBD}
+\section{Compatibilité avec les SGBDR}
 	\subsection{Fichiers de configuration}
-	Dans un but d'extensibilité et de simplicité de configuration, l'application configurera la manière de se connecter au SGBD via des fichiers de configuration externes. Les paramètres ne seront pas définis dans le code source, et chaque SGBD disposera de son répertoire stockant les fichiers nécessaires à la configuration de l'application et au mapping d'\emph{Hibernate}.
+	Dans un but d'extensibilité, chaque type de SGBDR possédera un répertoire contenant ses propres fichiers de configurations. Pour chacun, un premier fichier permettra de définir les principaux paramètres pour se connecter et dialoguer avec celui-ci, un second définira les paramètres pour le mapping effectué par \emph{Hibernate} entre le modèle objet et l'organisation des méta-données du SGBDR.
 
 	\subsection{Gestion des types génériques}
 	\label{section:generic_types}
