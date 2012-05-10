@@ -3,7 +3,7 @@
 \section{Le modèle}
 \subsection{Modèle réellement rencontré}
 
-Lors de l'étude des métadonnées stockées par les différents SGBD, nous avons remarqué quelque divergences par rapport au modèle fournit avec le sujet (figure~\ref{figure:diag_classe_fournit} page~\pageref{figure:diag_classe_fournit}). La figure~\ref{figure:diag_classe_reel} présente un diagramme de classe construit suite à nos recherches.
+Lors de l'étude des métadonnées stockées par les différents SGBD, nous avons remarqué quelques divergences par rapport au modèle fourni avec le sujet (figure~\ref{figure:diag_classe_fournit} page~\pageref{figure:diag_classe_fournit}). La figure~\ref{figure:diag_classe_reel} présente le diagramme de classes construit suite à nos recherches.
 
 \begin{figure}[H]
 \centering
@@ -21,22 +21,22 @@ La principale différence réside dans la classification des contraintes. Cette 
 \end{itemize}
 
 \paragraph*{NB}
-Les autres types de contraintes (\emph{NULL}, \emph{NOT NULL}, \emph{DEFAULT}, etc.) sont ignorés.
+Les autres types de contraintes (\emph{NULL}, \emph{NOT NULL}, \emph{DEFAULT}, etc.) sont ignorées.
 
 	\subsection{Tables}
 		Une table est identifiée par son nom et le schéma auquel elle appartient. Elle possède un ensemble de colonnes et un ensemble de contraintes.
 	\subsection{Colonnes}
 		Une colonne est identifiée par son nom et la table à laquelle elle appartient. Elle possède un type, et éventuellement une précision. 
 	\subsection{Contraintes}
-		Une contrainte est identifiée par un nom, sur certains SGBDR il faut lui adjoindre le nom de la table sur laquelle elle est appliquée pour avoir une identification unique (notamment MySQL). Une contrainte possède un type et s'applique sur une ou plusieurs colonnes d'une table. Elle peut être de type clé primaire, clé étrangère, contrainte d'unicité ou contrainte de vérification. Les contraintes d'intégrité référentielle référencent une contrainte de type unique compatible, c'est à dire que les colonnes sur lesquelles s'applique la clé étrangère et les colonnes sur lesquelles s'applique la contrainte référencée sont au même nombre et de mêmes types.
+		Une contrainte est identifiée par un nom, sur certains SGBDR il faut lui adjoindre le nom de la table sur laquelle elle est appliquée pour avoir une identification unique (notamment MySQL). Une contrainte possède un type et s'applique sur une ou plusieurs colonnes d'une table. Elle peut être de type clé primaire, clé étrangère, contrainte d'unicité ou contrainte de vérification. Les contraintes d'intégrité référentielles référencent une contrainte de type unique compatible, c'est à dire que les colonnes sur lesquelles s'applique la clé étrangère et les colonnes sur lesquelles s'applique la contrainte référencée sont au même nombre et de mêmes types.
 		
 \section{ORM}
 
-	\subsection{Qu'est qu'un ORM?}
+	\subsection{Qu'est-ce qu'un ORM?}
     Un ORM ou \emph{mapping objet-relationnel} (en anglais \emph{object-relational mapping}) est une méthode de programmation qui consiste à donner l'illusion d'une base de données orientée objet à partir d'une base de données relationnelle en implémentant une interface entre celle-ci et le code de l'application. Il permet donc de palier aux problèmes d'adaptation entre le paradigme objet et les SGBDR en remplaçant les accès à la base de données par des appels à des méthodes objet de haut niveau.
    
 	\subsection{Pourquoi?}
-    Les systèmes de gestion de bases de données orientées objet étant actuellement peu nombreux et la norme SQL3 étant que partiellement implémentée, les ORM offre à ce jour le meilleur compromis entre la performance des SGBDR et le pouvoir expressif de la modélisation objet.
+    Les systèmes de gestion de bases de données orientées objet étant actuellement peu nombreux et la norme SQL3 n'étant que partiellement implémentée, les ORM offrent à ce jour le meilleur compromis entre la performance des SGBDR et le pouvoir expressif de la modélisation objet.
     
 En revanche, cette méthode d'abstraction présente l'inconvénient de générer un schéma différent de la vision objet avec laquelle est modélisée l'application. Il peut parfois être nécessaire d'intervenir directement sur la base de données (développement de TRIGGERS, dump SQL, \ldots), ce qui nécessite alors un effort d'analyse et de compréhension.
 
@@ -46,18 +46,18 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 
 	\subsection{Gestion des types génériques}
 	\label{section:generic_types}
-	L'application se trouve confrontée à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement normé, certains types de données fournit par les SGBDR n'appartiennent pas à la norme \texttt{SQL} . Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBDR compatible, chaque type générique est associé à un ou plusieurs types réels du SGBDR.
+	L'application se trouve confrontée à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement normés, certains types de données fournis par les SGBDR n'appartiennent pas à la norme \texttt{SQL} . Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBDR compatible, chaque type générique est associé à un ou plusieurs types réels du SGBDR.
 	
-	Cela permet, pour un même schéma relationnel, d'obtenir le même résultat quelque soit le SGBD à partir duquel est chargé le schéma.
+	Cela permet, pour un même schéma relationnel, d'obtenir le même résultat quel que soit le SGBD à partir duquel est chargé le schéma.
 
 \section{Visualisation de graphes}
 	
-	Nous souhaitons avoir une représentation la plus proche possible d'une représentation connue de schéma de base de données afin que celle-ci soit rapidement compréhensible par des personnes averties. Pour ce faire nous avons à notre dispositions plusieurs librairie permettant l'organisation et la visualisation de graphe.
+	Nous souhaitons avoir une représentation la plus proche possible d'une représentation connue de schéma de base de données afin que celle-ci soit rapidement compréhensible par des personnes averties. Pour ce faire nous avons à notre disposition plusieures librairies permettant l'organisation et la visualisation de graphes.
 
-  \subsection{Différentes librairies}
-  	\subsubsection{graphviz} \textit{Graph Visualization Software}
+  \subsection{Librairies possibles}
+  	\subsubsection{Graphviz} \textit{Graph Visualization Software}
   	
-			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence.} développé par AT\&T et les laboratoires Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe DOT. C'est un des logiciel les plus utilisé pour l'affichage de graphes, il permet notamment l'affichage de nœuds représenté sous une forme complexe. De plus, il offre une interface en ligne de commande\footnote{voir \texttt{man graphviz}} aisément utilisable par un programme tiers.
+			GraphViz est un logiciel de visualisation de graphes écrit en C. C'est un logiciel libre sous EPL\footnote{EPL, Eclipse Public Licence.} développé par AT\&T et les laboratoires Bell. Il offre différents algorithmes de spatialisation. Il est à l'origine du langage de description de graphe DOT. C'est un des logiciels les plus utilisés pour l'affichage de graphes, il permet notamment l'affichage de nœuds représentés sous une forme complexe. De plus, il offre une interface en ligne de commande\footnote{voir \texttt{man graphviz}} aisément utilisable par un programme tiers.
 		\subsubsection{JUNG} \textit{Java Universal Network/Graph Framework}
 		
 				JUNG est une API java permettant la modélisation, l'analyse et la visualisation de graphes. C'est un logiciel libre sous licence BSD\footnote{voir http://jung.sourceforge.net/license.txt} qui est développé par l'université de Californie. Cette API semble bien fournie et documentée, mais ne semble pas être en mesure d'afficher des nœuds aux formes complexes. 
@@ -67,7 +67,7 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 		
 				
   \subsection{Notre choix}
-		Notre choix s'est porté sur GraphViz, et plus particulièrement sur la commande \texttt{dot} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente les principaux avantages d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande et d'offrir la possibilité de générer des nœuds de forme complexe ce qui nous permettra de nous rapprocher d'une représentation d'une entité du formalisme E/A\footnote{Entité/Association}.
+		Notre choix s'est porté sur GraphViz, et plus particulièrement sur la commande \texttt{dot} qui offre un algorithme de spatialisation hiérarchique. GraphViz présente les principaux avantages d'être extrêmement simple d'utilisation grâce à son interface en ligne de commande et d'offrir la possibilité de générer des nœuds de formes complexes ce qui nous permettra de nous rapprocher d'une représentation d'une entité du formalisme E/A\footnote{Entité/Association}.
 
 \section{L'IHM}	
 	\subsection{Les choix possibles}
