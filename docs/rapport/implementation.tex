@@ -69,9 +69,9 @@ C'est ici que sont définies les classes \emph{POJO} du modèle de données corr
 
 \begin{description}
 
-\item[Column] Ajout d'un méthode \texttt{\underline{bool isPk()}} permettant de savoir si la colonne est inclue dans la clé primaire de la table à laquelle elle appartient. Est également définie une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaine de caractères, le type générique de la colonne.
+\item[Column] Ajout d'un méthode \texttt{\underline{bool isPk()}} permettant de savoir si la colonne est inclue dans la clé primaire de la table à laquelle elle appartient. Est également définie une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaîne de caractères, le type générique de la colonne.
 
-\item[Constraint] Ajout des méthodes \texttt{\underline{bool isPk()}}, \texttt{\underline{bool isFk()}} et \texttt{\underline{bool isCheck()}} permettant de savoir respectivement si la contrainte est de type clé primaire, clé étrangère, ou contrainte de vérification. Est également définie une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaine de caractères, le type générique de la contrainte.
+\item[Constraint] Ajout des méthodes \texttt{\underline{bool isPk()}}, \texttt{\underline{bool isFk()}} et \texttt{\underline{bool isCheck()}} permettant de savoir respectivement si la contrainte est de type clé primaire, clé étrangère, ou contrainte de vérification. Est également définie une méthode \texttt{\underline{String getGenericType()}} qui retourne, sous la forme d'une chaîne de caractères, le type générique de la contrainte.
 \end{description}
 
 Les types génériques sont définies dans les énumérations \texttt{ColumnType} et \texttt{ConstraintType}. Les conversions de types se font en fonction du SGBDR sélectionné grâce au paquet \texttt{app.util} (cf. \ref{subsection:app.util}) et aux fichiers de conversions stockés dans le paquet \texttt{conf.types} (cf. \ref{subsection:conf.types}).
@@ -84,7 +84,7 @@ Des classes utilitaires sont définies dans ce paquet.
 \subsubsection{Génération de graphe avec \texttt{ToDotUtil}}
 \label{section:ToDotUtil}
 Cet utilitaire est définit dans un sous paquet \texttt{todot}. Il contient une succession d'énumérations permettant de lister les commandes \emph{graphviz}, les couleurs, les formes, et les styles propres au langage DOT.
-La classe principale \texttt{ToDotUtil} implémente une méthode permettant, à partir d'une base de données (liste de tables), de générer une chaine de caractères au langage DOT qui décrit cette base de données. Il est possible de définir le style du graphe généré en sortie (couleurs, formes, etc.).
+La classe principale \texttt{ToDotUtil} implémente une méthode permettant, à partir d'une base de données (liste de tables), de générer une chaîne de caractères au langage DOT qui décrit cette base de données. Il est possible de définir le style du graphe généré en sortie (couleurs, formes, etc.).
 
 Les formats d'exportation suivant sont reconnus : 
 
