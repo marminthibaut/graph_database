@@ -46,7 +46,7 @@ En revanche, cette méthode d'abstraction présente l'inconvénient de générer
 
 	\subsection{Gestion des types génériques}
 	\label{section:generic_types}
-	L'application se trouve confrontée à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement identiques, les SGBD ne suivent pas de norme pour le nommage de ces types. Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBD compatible, chaque type générique est associé à un ou plusieurs types réels du SGBD.
+	L'application se trouve confrontée à deux sortes de types : les types de données (attributs), et les types de contraintes. Bien qu'étant globalement normé, certains types de données fournit par les SGBDR n'appartiennent pas à la norme \texttt{SQL} . Nous avons donc choisi de mettre en place une stratégie de déclaration de types génériques. Pour chaque SGBDR compatible, chaque type générique est associé à un ou plusieurs types réels du SGBDR.
 	
 	Cela permet, pour un même schéma relationnel, d'obtenir le même résultat quelque soit le SGBD à partir duquel est chargé le schéma.
 
