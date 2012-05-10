@@ -1,33 +1,41 @@
-\textit{Nous avons fait le choix de débuter notre travail en rédigeant un cahier des charges sommaire. Ce premier travail, réalisé en équipe, nous a permis de cerner le sujet et de lister les besoins ainsi que les contraintes imposées. Le modèle de données proposé sera également exposé.}
-
-
-L’objectif de l'application est de permettre une visualisation de schémas relationnels de bases de données hébergées sous des serveurs de données hétérogènes.
-A cet effet, les fonctions principales attendues sont : 
-\begin{itemize}
-  \item Capacité de fournir des renseignements d'un schéma de BDD
-  \item Visualisation de ce schéma de manière à pouvoir dresser le schéma
-  qui permettra de décrire l'organisation des données dans la base données en question. Dans le cas des bases de données fragmentées, ceci servira de base pour décrire l'organisation complète.
-\end{itemize}
+\textit{Nous avons fait le choix de débuter notre travail en rédigeant un cahier des charges sommaire. Ce premier travail, réalisé en équipe, nous a permis de cerner le sujet et de lister les besoins ainsi que les contraintes imposées. Le modèle de données proposé sera également exposé. L’objectif de l'application est de permettre une visualisation de schémas relationnels de bases de données hébergées sous des serveurs de données hétérogènes.}
 
 
 \section{Fonctions principales}
-		\subsubsection{Renseignements d'un schéma de BDD}
+		\subsubsection{Données d'un schéma de base de données}
+		La fonction principale de l'application est de fournir les données d'un schéma d'une base de données. Un schéma est composé de tables, de colonne et de contraintes. Les informations qui doivent être fournies sont décrites ci-après.
+		
 			\paragraph{tables}
+			Une table est contenue dans un schéma (base de données)
 				\begin{itemize}
-					\item NAME
+					\item NAME, nom de la table
 				\end{itemize}
-			\paragraph{attributs des tables}
+				
+			\paragraph{colonne}
+			Une colonne est contenue dans une table.
 				\begin{itemize}
-					\item NAME
-					\item TYPE
+					\item NAME, nom de la colonne
+					\item TYPE, type représentant le domaine de valeur accepté
+					\item PRECISION, précision du type de la colonne
 				\end{itemize}
-			\paragraph{contraintes portant sur ces attributs}
+				
+			\paragraph{contraintes}
+			Une contrainte s'applique sur une ou plusieurs colonnes d'une table.
 				\begin{itemize}
-					\item contraintes d'unicité qui permettent d'identifier de manière unique un enregistrement dans les tables : PRIMARY KEY (clé primaire), UNIQUE  
-					\item contraintes référentielles qui servent à établir des relations entre les tables : FOREIGN KEY (clé étrangère)
-					\item contraintes de vérification de la validité des données : CHECK + CHECK\_CLAUSE
+					\item NAME, nom de la contrainte
+					\item TYPE, type de la contrainte
 				\end{itemize} 
+				
+				Les contraintes suivante doivent être gérées : 
+				
+				\begin{itemize}
+				\item Contrainte d'unicité : qui permettent d'identifier de manière unique un enregistrement dans les tables (UNIQUE, PRIMARY KEY).
+				\item Contraintes référentielles : qui servent à établir des relations entre les tables (FOREIGN KEY).
+				\item Contraintes de vérification de la validité des données (CHECK)
+				\end{itemize}
+				
 		\subsubsection{Visualisation graphique}
+		Dans le but d'assurer une représentation aisément compréhensible, l'application doit permettre la visualisation du schéma de manière graphique.
 
 \section{Fonctions contraintes}
 	\subsection{Compatibilité \& extensibilité}
@@ -35,7 +43,7 @@ A cet effet, les fonctions principales attendues sont :
 	\subsection{Utilisation d'Hibernate}
 	L'objectif de ce projet étant l'application des outils vus pendant les cours de l'UE Gestion de données distribuées (GMIN210), l'outil développé devra utiliser l'ORM \emph{Hibernate} (librairie Java de mapping Object-Relationnel). Cette contrainte est imposée par le sujet. L'exploitation de la solution de projection Objet-Relationnel Hibernate se fera par définition des fichiers de mapping nécessaires et des classes applicatives qui permettront de manipuler les objets Table, Attribut ou Contrainte.
 	\subsection{Lecture des Métadonnées}
-	Les métadonnées devront être chargées directement à partir des vues proposées par les différents SGBDR, via un connecteur. L'ORM \emph{Hibernate} étant imposé, le connecteur utilisé sera probablement \emph{JDBC}.
+	La lecture des métadonnées s'effectuera à partir d'une connexion à \textbf{une base de données}. Les métadonnées devront être chargées directement à partir des vues proposées par les différents SGBDR, via un connecteur. L'ORM \emph{Hibernate} étant imposé, le connecteur utilisé sera probablement \emph{JDBC}.
 
 \section{Modélisation proposée}
 \label{section:modelisation_proposee}
